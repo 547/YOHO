@@ -1,27 +1,23 @@
-
 //
-//  LanguageTableViewController.m
+//  ContentTableViewController.m
 //  YOHo
 //
-//  Created by mac on 16/3/30.
+//  Created by mac on 16/3/31.
 //  Copyright © 2016年 Seven. All rights reserved.
 //
 
-#import "LanguageTableViewController.h"
-#import <RESideMenu.h>
-#import "MainViewController.h"
-@interface LanguageTableViewController ()
+#import "ContentTableViewController.h"
+#import <SDCycleScrollView.h>
+#import "Data.h"
+@interface ContentTableViewController ()<SDCycleScrollViewDelegate>
 
 @end
 
-@implementation LanguageTableViewController
-{
-    NSArray *languages;
-    int selectedRow;
-}
+@implementation ContentTableViewController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    languages = @[@"简体中文",@"繁體中文"];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -30,28 +26,48 @@
     [self initUI];
 }
 
-#pragma mark ==初始化UI
+
+-(void)setBanners:(NSMutableArray *)banners
+{
+    _banners = banners;
+    self.tableView.tableHeaderView = [self setTableHeaderView];
+}
+
+#pragma mark==初始化UI
 -(void)initUI
 {
-    self.title = @"语言";
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(backMian)];
-    self.automaticallyAdjustsScrollViewInsets = YES;
-
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    self.tableView.scrollEnabled = NO;
-    self.tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+    
     
 }
 
 
-#pragma mark===返回主页
--(void)backMian
+#pragma mark== 设置表头
+-(SDCycleScrollView *)setTableHeaderView
 {
-    MainViewController *main = [[MainViewController alloc]init];
-    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc]initWithRootViewController:main ] animated:YES];
+
+    NSMutableArray *imageUrls = [[NSMutableArray alloc]init];
+    for (BannerClass *banner in _banners) {
+        NSString *url = banner.image;
+        [imageUrls addObject:url];
+    }
+    
+    SDCycleScrollView *cycle = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH, self.view.frame.size.height*0.5) delegate:self placeholderImage:nil];
+    cycle.imageURLStringsGroup = imageUrls;
+    
+    cycle.showPageControl = YES;
+    cycle.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
+    cycle.delegate = self;
+    
+    return cycle;
+
 }
 
+#pragma mark==SDCycleScrollViewDelegate
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    NSLog(@"点击SDCycleScrollView");
+}
 
 
 - (void)didReceiveMemoryWarning {
@@ -62,34 +78,22 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return languages.count;
+    return _items.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-   
-    cell.textLabel.text = languages[indexPath.row];
-    if (indexPath.row == selectedRow) {
-         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }else{
     
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+    cell.textLabel.text = @"4454";
     
     return cell;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    selectedRow = indexPath.row;
-    [self.tableView reloadData];
 }
 
 

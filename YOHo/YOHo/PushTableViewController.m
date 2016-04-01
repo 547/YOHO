@@ -1,27 +1,27 @@
-
 //
-//  LanguageTableViewController.m
+//  PushTableViewController.m
 //  YOHo
 //
-//  Created by mac on 16/3/30.
+//  Created by mac on 16/3/31.
 //  Copyright © 2016年 Seven. All rights reserved.
 //
 
-#import "LanguageTableViewController.h"
-#import <RESideMenu.h>
+#import "PushTableViewController.h"
 #import "MainViewController.h"
-@interface LanguageTableViewController ()
+#import <RESideMenu.h>
+@interface PushTableViewController ()
 
 @end
 
-@implementation LanguageTableViewController
+@implementation PushTableViewController
 {
-    NSArray *languages;
-    int selectedRow;
+    NSArray *pushItems;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    languages = @[@"简体中文",@"繁體中文"];
+    
+    pushItems = @[@"杂志",@"资讯"];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -30,6 +30,7 @@
     [self initUI];
 }
 
+
 #pragma mark ==初始化UI
 -(void)initUI
 {
@@ -37,7 +38,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(backMian)];
     self.automaticallyAdjustsScrollViewInsets = YES;
-
+    
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     self.tableView.scrollEnabled = NO;
     self.tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
@@ -52,8 +53,6 @@
     [self.sideMenuViewController setContentViewController:[[UINavigationController alloc]initWithRootViewController:main ] animated:YES];
 }
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -62,34 +61,25 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return languages.count;
+    return 2;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-   
-    cell.textLabel.text = languages[indexPath.row];
-    if (indexPath.row == selectedRow) {
-         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }else{
+    cell.textLabel.text = pushItems[indexPath.row];
+    UISwitch *openSwitch = [[UISwitch alloc]init];
     
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    
+    openSwitch.on = YES;
+    cell.accessoryView = openSwitch;
     return cell;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    selectedRow = indexPath.row;
-    [self.tableView reloadData];
 }
 
 

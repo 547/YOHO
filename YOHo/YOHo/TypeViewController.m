@@ -82,6 +82,31 @@
     
 }
 
+
+#pragma mark===添加假导航
+/**添加假导航*/
+-(void)addBar
+{
+    
+    UIView *barView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 64)];
+    barView.backgroundColor = [UIColor whiteColor];
+    
+    UIButton *leftButton = [[UIButton alloc]init];
+    leftButton.center = CGPointMake(20+17.5, barView.center.y+5);
+    leftButton.bounds = CGRectMake(0, 0, 35, 35);
+    
+    [leftButton setBackgroundImage:[UIImage imageNamed:@"navIcon"] forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(goToTypeVC) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(0, BARHEIGHT-0.5, WIDTH, 0.5)];
+    line.backgroundColor = [UIColor lightGrayColor];
+    [barView addSubview:line];
+    
+    [barView addSubview:leftButton];
+    [self.view addSubview:barView];
+}
+
+
 /**添加底部按钮栏*/
 -(void)addBottomView
 {

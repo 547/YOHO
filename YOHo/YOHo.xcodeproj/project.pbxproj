@@ -507,13 +507,16 @@
 		04360AF61CA96C1C0008E496 /* TypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04360AF51CA96C1C0008E496 /* TypeViewController.m */; };
 		04360AF91CA97FA20008E496 /* CustomizationNavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 04360AF81CA97FA20008E496 /* CustomizationNavBar.m */; };
 		04403AFC1CAC22FF00942D17 /* LanguageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04403AFB1CAC22FF00942D17 /* LanguageTableViewController.m */; };
+		045A1EFE1CAD171100CB2646 /* ContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045A1EFD1CAD171100CB2646 /* ContentTableViewController.m */; };
+		0477494A1CAD09B500392233 /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047749491CAD09B500392233 /* ContentView.m */; };
 		04AA0FA21CABD701008EB2AB /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA0FA11CABD701008EB2AB /* SettingViewController.m */; };
 		04E6FB771CAA252B00A4B13A /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6FB761CAA252B00A4B13A /* BannerView.m */; };
-		04E6FB7A1CAA265B00A4B13A /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6FB791CAA265B00A4B13A /* ContentViewController.m */; };
 		04E6FB7D1CAA356F00A4B13A /* RequestBannerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6FB7C1CAA356F00A4B13A /* RequestBannerInfo.m */; };
 		04E6FB831CAA62C700A4B13A /* BannerClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6FB821CAA62C700A4B13A /* BannerClass.m */; };
 		04E6FB861CAA882C00A4B13A /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6FB851CAA882C00A4B13A /* MainTableViewCell.m */; };
 		04E6FB941CAAB2E200A4B13A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6FB931CAAB2E200A4B13A /* LoginViewController.m */; };
+		04E9EEEA1CACB1A20093D963 /* PushTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9EEE91CACB1A20093D963 /* PushTableViewController.m */; };
+		04E9EEF01CACBE0D0093D963 /* OpinionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9EEEF1CACBE0D0093D963 /* OpinionViewController.m */; };
 		A45A00A9B7BEFE0C763D7BA6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60C07CFE788FAC738CF794EE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -1058,12 +1061,14 @@
 		04360AF81CA97FA20008E496 /* CustomizationNavBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizationNavBar.m; sourceTree = "<group>"; };
 		04403AFA1CAC22FF00942D17 /* LanguageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageTableViewController.h; sourceTree = "<group>"; };
 		04403AFB1CAC22FF00942D17 /* LanguageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageTableViewController.m; sourceTree = "<group>"; };
+		045A1EFC1CAD171100CB2646 /* ContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentTableViewController.h; sourceTree = "<group>"; };
+		045A1EFD1CAD171100CB2646 /* ContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentTableViewController.m; sourceTree = "<group>"; };
+		047749481CAD09B500392233 /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
+		047749491CAD09B500392233 /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
 		04AA0FA01CABD701008EB2AB /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		04AA0FA11CABD701008EB2AB /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		04E6FB751CAA252B00A4B13A /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
 		04E6FB761CAA252B00A4B13A /* BannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
-		04E6FB781CAA265B00A4B13A /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
-		04E6FB791CAA265B00A4B13A /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		04E6FB7B1CAA356F00A4B13A /* RequestBannerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestBannerInfo.h; sourceTree = "<group>"; };
 		04E6FB7C1CAA356F00A4B13A /* RequestBannerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestBannerInfo.m; sourceTree = "<group>"; };
 		04E6FB811CAA62C700A4B13A /* BannerClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerClass.h; sourceTree = "<group>"; };
@@ -1072,6 +1077,10 @@
 		04E6FB851CAA882C00A4B13A /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
 		04E6FB921CAAB2E200A4B13A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		04E6FB931CAAB2E200A4B13A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		04E9EEE81CACB1A20093D963 /* PushTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushTableViewController.h; sourceTree = "<group>"; };
+		04E9EEE91CACB1A20093D963 /* PushTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTableViewController.m; sourceTree = "<group>"; };
+		04E9EEEE1CACBE0D0093D963 /* OpinionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionViewController.h; sourceTree = "<group>"; };
+		04E9EEEF1CACBE0D0093D963 /* OpinionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpinionViewController.m; sourceTree = "<group>"; };
 		330FD07CAA36DD43392C0121 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		60C07CFE788FAC738CF794EE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		79244A71F3C28396610E930B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1690,22 +1699,11 @@
 		04360ACB1CA921560008E496 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				04360ACC1CA922150008E496 /* SplashViewController.h */,
-				04360ACD1CA922150008E496 /* SplashViewController.m */,
-				04360AF11CA967AF0008E496 /* MainViewController.h */,
-				04360AF21CA967AF0008E496 /* MainViewController.m */,
-				04360AF41CA96C1C0008E496 /* TypeViewController.h */,
-				04360AF51CA96C1C0008E496 /* TypeViewController.m */,
-				04E6FB781CAA265B00A4B13A /* ContentViewController.h */,
-				04E6FB791CAA265B00A4B13A /* ContentViewController.m */,
-				04E6FB921CAAB2E200A4B13A /* LoginViewController.h */,
-				04E6FB931CAAB2E200A4B13A /* LoginViewController.m */,
-				0401BDBF1CABB10E008B8E3A /* SelectCountryViewController.h */,
-				0401BDC01CABB10E008B8E3A /* SelectCountryViewController.m */,
-				04AA0FA01CABD701008EB2AB /* SettingViewController.h */,
-				04AA0FA11CABD701008EB2AB /* SettingViewController.m */,
-				04403AFA1CAC22FF00942D17 /* LanguageTableViewController.h */,
-				04403AFB1CAC22FF00942D17 /* LanguageTableViewController.m */,
+				045A1EFB1CAD128E00CB2646 /* 类型页 */,
+				045A1EFA1CAD127C00CB2646 /* 欢迎页 */,
+				04E9EEED1CACBDBE0093D963 /* 主页面 */,
+				04E9EEEC1CACBD9B0093D963 /* 登录 */,
+				04E9EEEB1CACBD470093D963 /* 设置 */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1750,6 +1748,63 @@
 				04360AE71CA944370008E496 /* Data.h */,
 			);
 			name = Head;
+			sourceTree = "<group>";
+		};
+		045A1EFA1CAD127C00CB2646 /* 欢迎页 */ = {
+			isa = PBXGroup;
+			children = (
+				04360ACC1CA922150008E496 /* SplashViewController.h */,
+				04360ACD1CA922150008E496 /* SplashViewController.m */,
+			);
+			name = "欢迎页";
+			sourceTree = "<group>";
+		};
+		045A1EFB1CAD128E00CB2646 /* 类型页 */ = {
+			isa = PBXGroup;
+			children = (
+				04360AF41CA96C1C0008E496 /* TypeViewController.h */,
+				04360AF51CA96C1C0008E496 /* TypeViewController.m */,
+			);
+			name = "类型页";
+			sourceTree = "<group>";
+		};
+		04E9EEEB1CACBD470093D963 /* 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				04AA0FA01CABD701008EB2AB /* SettingViewController.h */,
+				04AA0FA11CABD701008EB2AB /* SettingViewController.m */,
+				04403AFA1CAC22FF00942D17 /* LanguageTableViewController.h */,
+				04403AFB1CAC22FF00942D17 /* LanguageTableViewController.m */,
+				04E9EEE81CACB1A20093D963 /* PushTableViewController.h */,
+				04E9EEE91CACB1A20093D963 /* PushTableViewController.m */,
+				04E9EEEE1CACBE0D0093D963 /* OpinionViewController.h */,
+				04E9EEEF1CACBE0D0093D963 /* OpinionViewController.m */,
+			);
+			name = "设置";
+			sourceTree = "<group>";
+		};
+		04E9EEEC1CACBD9B0093D963 /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				04E6FB921CAAB2E200A4B13A /* LoginViewController.h */,
+				04E6FB931CAAB2E200A4B13A /* LoginViewController.m */,
+				0401BDBF1CABB10E008B8E3A /* SelectCountryViewController.h */,
+				0401BDC01CABB10E008B8E3A /* SelectCountryViewController.m */,
+			);
+			name = "登录";
+			sourceTree = "<group>";
+		};
+		04E9EEED1CACBDBE0093D963 /* 主页面 */ = {
+			isa = PBXGroup;
+			children = (
+				04360AF11CA967AF0008E496 /* MainViewController.h */,
+				04360AF21CA967AF0008E496 /* MainViewController.m */,
+				047749481CAD09B500392233 /* ContentView.h */,
+				047749491CAD09B500392233 /* ContentView.m */,
+				045A1EFC1CAD171100CB2646 /* ContentTableViewController.h */,
+				045A1EFD1CAD171100CB2646 /* ContentTableViewController.m */,
+			);
+			name = "主页面";
 			sourceTree = "<group>";
 		};
 		52DE6795639085AD15BE44A1 /* Frameworks */ = {
@@ -2430,16 +2485,18 @@
 				04E6FB831CAA62C700A4B13A /* BannerClass.m in Sources */,
 				04360ADE1CA936780008E496 /* RequestSplashImage.m in Sources */,
 				04AA0FA21CABD701008EB2AB /* SettingViewController.m in Sources */,
+				04E9EEF01CACBE0D0093D963 /* OpinionViewController.m in Sources */,
 				043606E01CA90E8F0008E496 /* AppDelegate.m in Sources */,
 				04E6FB941CAAB2E200A4B13A /* LoginViewController.m in Sources */,
 				04403AFC1CAC22FF00942D17 /* LanguageTableViewController.m in Sources */,
+				045A1EFE1CAD171100CB2646 /* ContentTableViewController.m in Sources */,
 				0401BDC11CABB10E008B8E3A /* SelectCountryViewController.m in Sources */,
-				04E6FB7A1CAA265B00A4B13A /* ContentViewController.m in Sources */,
 				04E6FB7D1CAA356F00A4B13A /* RequestBannerInfo.m in Sources */,
 				04360AEA1CA95A7B0008E496 /* RequestSettinginfo.m in Sources */,
 				04360AF91CA97FA20008E496 /* CustomizationNavBar.m in Sources */,
 				04360ADB1CA931550008E496 /* JsonHelper.m in Sources */,
 				04360AE51CA93AC30008E496 /* NSString+More.m in Sources */,
+				0477494A1CAD09B500392233 /* ContentView.m in Sources */,
 				04E6FB861CAA882C00A4B13A /* MainTableViewCell.m in Sources */,
 				04360AED1CA95BF10008E496 /* RequestChannelInfo.m in Sources */,
 				043606DD1CA90E8F0008E496 /* main.m in Sources */,
@@ -2450,6 +2507,7 @@
 				04360AE11CA938020008E496 /* EasyDownloadTool.m in Sources */,
 				04360AF31CA967AF0008E496 /* MainViewController.m in Sources */,
 				04E6FB771CAA252B00A4B13A /* BannerView.m in Sources */,
+				04E9EEEA1CACB1A20093D963 /* PushTableViewController.m in Sources */,
 				04360AD51CA926C40008E496 /* RequestAppInfo.m in Sources */,
 				04360AD81CA92FC60008E496 /* SaveToUserDefault.m in Sources */,
 			);

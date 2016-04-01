@@ -43,13 +43,16 @@
             NSArray *subNav = [dic objectForKey:@"subNav"];
            NSMutableArray *channel_name_cnArray = [[NSMutableArray alloc]init];
            NSMutableArray *channel_name_enArray = [[NSMutableArray alloc]init];
+            NSMutableArray *channel_name_idArray = [[NSMutableArray alloc]init];
             for (NSDictionary *dic in subNav) {
                 NSString *channel_name_cn = [dic objectForKey:@"channel_name_cn"];
                 NSString *channel_name_en = [dic objectForKey:@"channel_name_en"];
+                NSString *channel_name_id = [dic objectForKey:@"id"];
                 [channel_name_enArray addObject:channel_name_en];
                 [channel_name_cnArray addObject:channel_name_cn];
+                [channel_name_idArray addObject:channel_name_id];
             }
-            [channelDic setObject:@[channel_name_cnArray,channel_name_enArray,channelId] forKey:superName];
+            [channelDic setObject:@[channel_name_cnArray,channel_name_enArray,channel_name_idArray,channelId] forKey:superName];
 
         }
         success(channelDic);

@@ -11,12 +11,16 @@
 #import <RESideMenu.h>
 #import "MainViewController.h"
 #import "LanguageTableViewController.h"
+#import "PushTableViewController.h"
+#import "OpinionViewController.h"
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
 
 @implementation SettingViewController
-
+{
+    UITableView *table;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initUI];
@@ -32,7 +36,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 
     
-    UITableView *table = [[UITableView alloc]initWithFrame:CGRectMake(0, BARHEIGHT, WIDTH, HEIGHT-BARHEIGHT) style:UITableViewStylePlain];
+    table = [[UITableView alloc]initWithFrame:CGRectMake(0, BARHEIGHT, WIDTH, HEIGHT-BARHEIGHT) style:UITableViewStylePlain];
     [self.view addSubview:table];
     [table registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     table.delegate = self;
@@ -154,7 +158,10 @@
                 {
                     cell.textLabel.text = @"清除缓存";
                     
-                    cell.detailTextLabel.text = @"0.0M";
+                  long long allBety = [self getCacheSizeWithFile:@"Documents"]+ [self getCacheSizeWithFile:@"tmp"];
+                    CGFloat size = [self sizeFormatterWithByte:allBety];
+                    
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%0.2fM",size];
                 }
                     break;
                 case 4:
@@ -225,9 +232,12 @@
         {
             if (indexPath.row == 2) {
                 //推送设置
+                PushTableViewController *push = [[PushTableViewController alloc]init];
+                [self pushView:push];
             }
             if (indexPath.row == 3) {
                 //清除缓存
+                [self showAlterViewWithTitle:@"确定要清除缓存？"];
             }
         }
             break;
@@ -235,6 +245,8 @@
         {
             if (indexPath.row == 0) {
                 //意见反馈
+                OpinionViewController *opinion = [[OpinionViewController alloc]init];
+                [self pushView:opinion];
             }
             if (indexPath.row == 1) {
                 //关于我们
@@ -252,6 +264,27 @@
 {
     [self.sideMenuViewController setContentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:YES];
     [self.sideMenuViewController hideMenuViewController];
+}
+
+#pragma mark==alterView
+/**alterView*/
+-(void)showAlterViewWithTitle:(NSString *)title
+{
+    UIAlertController *alter = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *actionSure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //清除缓存
+        [self clearCacheWithFile:@"tmp"];
+        [self clearCacheWithFile:@"Documents"];
+        NSIndexPath *index = [NSIndexPath indexPathForRow:3 inSection:1];
+        [table reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
+    }];
+    [alter addAction:actionCancel];
+    [alter addAction:actionSure];
+    [self presentViewController:alter animated:YES completion:nil];
+    
+    
+    
 }
 
 #pragma mark==设置底部自定义的cell的View
@@ -287,6 +320,45 @@
     }
     return view;
 }
+
+#pragma mark === 清除缓存
+/**清除缓存**/
+-(void)clearCacheWithFile:(NSString *)file
+{
+
+    //先删除文件夹
+    [[NSFileManager defaultManager]removeItemAtPath:[NSHomeDirectory() stringByAppendingPathComponent:file] error:nil];
+    //在创建文件夹
+    [[NSFileManager defaultManager]createDirectoryAtPath:[NSHomeDirectory() stringByAppendingPathComponent:file] withIntermediateDirectories:YES attributes:nil error:nil];
+}
+
+
+#pragma mark === 获取缓存的大小
+-(long long)getCacheSizeWithFile:(NSString *)file
+{
+    //获取下载的所有文件的大小
+    //Enumerator==计数器
+    long long size=0;
+    NSDirectoryEnumerator *enumer= [[NSFileManager defaultManager]enumeratorAtPath:[NSHomeDirectory() stringByAppendingPathComponent:file]];
+    while ([enumer nextObject]) {
+        size +=  enumer.fileAttributes.fileSize;
+    }
+
+    return size;
+
+}
+
+#pragma mark====缓存大小转换器
+/**大小转换器**/
+-(float)sizeFormatterWithByte:(long long)byte;
+{
+   
+    
+    float length=(float)byte;
+    return length/1024.0/1024.0;
+}
+
+
 
 #pragma mark==设置自动下载
 /**设置自动下载*/
