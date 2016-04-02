@@ -26,13 +26,13 @@
 }
 
 
--(void)setBanners:(NSMutableArray *)banners
+-(void)setBanners:(NSArray *)banners
 {
     _banners = banners;
     self.tableView.tableHeaderView = [self setTableHeaderView];
 }
 
--(void)setContents:(NSMutableArray *)contents
+-(void)setContents:(NSArray *)contents
 {
     _contents = contents;
     [self.tableView reloadData];
@@ -55,10 +55,16 @@
 {
 
     NSMutableArray *imageUrls = [[NSMutableArray alloc]init];
-    for (BannerClass *banner in _banners) {
+//    for (BannerClass *banner in _banners) {
+//        NSString *url = banner.image;
+//        [imageUrls addObject:url];
+//    }
+    
+    for (BannerData *banner in _banners) {
         NSString *url = banner.image;
         [imageUrls addObject:url];
     }
+    
     
     SDCycleScrollView *cycle = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH, self.view.frame.size.height*0.5) delegate:self placeholderImage:nil];
     cycle.imageURLStringsGroup = imageUrls;
@@ -75,7 +81,10 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     NSLog(@"点击SDCycleScrollView");
-    BannerClass *ba = _banners[index];
+    
+    BannerData *ba = _banners[index];
+    
+//    BannerClass *ba = _banners[index];
     [self getContentDetailWithCIdOrLink:ba.link];
 }
 
@@ -118,8 +127,10 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ContentClass *content = _contents[indexPath.row];
+    VideoContent *content = _contents[indexPath.row];
+//    ContentClass *content = _contents[indexPath.row];
     CGFloat height = [self.tableView cellHeightForIndexPath:indexPath model:content keyPath:@"contentModel" cellClass:[MainTableViewCell class] contentViewWidth:WIDTH];
+    
     
     return 400;
     
@@ -147,7 +158,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ContentClass *content = _contents[indexPath.row];
+    VideoContent *content = _contents[indexPath.row];
+//    ContentClass *content = _contents[indexPath.row];
     NSString *cId = content.cid;
     [self getContentDetailWithCIdOrLink:cId];
 }

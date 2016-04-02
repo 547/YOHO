@@ -12,20 +12,28 @@
 #import <RESideMenu.h>
 #import "CustomizationNavBar.h"
 #import "RequestChannelInfo.h"
-#import "RequestBannerInfo.h"
-#import "BannerClass.h"
+#import "MagazineCollectionViewController.h"
 #import "Data.h"
-#import "ContentView.h"
 #import <SDCycleScrollView.h>
 #import "ContentTableViewController.h"
-#import "RequestContentInfo.h"
 #import "ContentDetailTableViewController.h"
-@interface MainViewController ()<SDCycleScrollViewDelegate,UIScrollViewDelegate,ContentTableViewControllerDelegate>
+#import "DataModels.h"
+#import "RequestVideo.h"
+#import "RequestMagazine.h"
 
+
+
+
+@interface MainViewController ()<SDCycleScrollViewDelegate,UIScrollViewDelegate,ContentTableViewControllerDelegate>
+@property(nonatomic,strong)ContentTableViewController *contentOther;
+@property(nonatomic,strong)MagazineCollectionViewController *magazineViewC;
+@property(nonatomic,strong)UIView *topButtonView;
 @end
 
 @implementation MainViewController
 {
+    NSMutableArray *magazineButtons;
+    int selectedButton;
     NSMutableArray *largeBanners;
     NSMutableArray *banners;
     UIScrollView *contentScrollView;
@@ -53,6 +61,7 @@
        contentVCs = [[NSMutableArray alloc]init];
        markButtons = [[NSMutableArray alloc]init];
         channelIds = [[NSMutableArray alloc]init];
+       magazineButtons = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -99,6 +108,16 @@
             [weakSelf addTopScrollView];
             [weakSelf addContentScrollView];
         }
+        if ([_selectChannel isEqualToString:@"视频"]||[_selectChannel isEqualToString:@"专题"]) {
+            NSLog(@"是视频和专题");
+            [weakSelf getBannerDataWithChannelId:channelId];
+            [weakSelf getContentDataWithChannelId:channelId];
+        }
+        if ([_selectChannel isEqualToString:@"杂志"]||[_selectChannel isEqualToString:@"壁纸"]) {
+            NSLog(@"是杂志和壁纸");
+            
+        }
+        
         //将所有的banner取出来装到数组里largebanners
 //        for (NSString *chId in channelIds) {
 //             [weakSelf getBannerDataWithChannelId:chId];
@@ -116,20 +135,132 @@
     
 }
 
+#pragma mark==懒加载视频等channel的ViewControll
+/**ContentTableViewController的懒加载
+ 1.懒加载基本
+ 
+ 懒加载——也称为延迟加载，即在需要的时候才加载（效率低，占用内存小）。所谓懒加载，写的是其get方法.
+ 
+ 注意：如果是懒加载的话则一定要注意先判断是否已经有了，如果没有那么再去进行实例化
+ 
+ 2.使用懒加载的好处：
+ 
+ （1）不必将创建对象的代码全部写在viewDidLoad方法中，代码的可读性更强
+ 
+ （2）每个控件的getter方法中分别负责各自的实例化处理，代码彼此之间的独立性强，松耦合
+ **/
+-(ContentTableViewController *)contentOther
+{
+//判断是否已经有了，若没有，则进行实例化
+    if (!_contentOther) {
+        _contentOther = [[ContentTableViewController alloc]init];
+        _contentOther.view.frame = CGRectMake(0, BARHEIGHT, WIDTH, HEIGHT-BARHEIGHT);
+        [self.view addSubview:_contentOther.view];
+    }
+    return _contentOther;
+    
+}
+
+#pragma mark==懒加载杂志VC
+/**懒加载杂志VC**/
+-(MagazineCollectionViewController *)magazineViewC
+{
+    if (!_magazineViewC) {
+        _magazineViewC = [[MagazineCollectionViewController alloc]init];
+//        _magazineViewC.view.frame = CGRectMake(0, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
+        [self.view addSubview:_magazineViewC.view];
+    }
+    return _magazineViewC;
+}
+
+#pragma mark==懒加载TopButtonView
+/**TopButtonView**/
+-(UIView *)topButtonView
+{
+
+    if (!_topButtonView) {
+        _topButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, BARHEIGHT, WIDTH, sH)];
+        [self addTopButtonToView];
+        [self.view addSubview:_topButtonView];
+    }
+    return _topButtonView;
+}
+
+#pragma mark ==杂志类型的按钮被选中
+/**杂志类型的按钮被选中*/
+-(void)selectEdMagazineMarkButton:(UIButton *)button
+{
+
+    int rTag = button.tag-2000;
+    
+    if (selectedButton != 0) {
+        
+    }
+    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    button.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    selectedButton = rTag;
+    
+}
+
+-(void)
+
+#pragma mark ===添加顶部button
+/**添加顶部button*/
+-(void)addTopButtonToView
+{
+    NSArray *titles = @[@"BOYS",@"GIRLS",@"MINE"];
+    int count = titles.count;
+    CGFloat leftSpace = 20;
+    CGFloat betweenSpace = 25*WIDTHMULTIPLE;
+    CGFloat wid = (WIDTH -(2*leftSpace+(count-1)*betweenSpace))/3;
+    for (int i=0; i<count; i++) {
+        UIButton *button = [[UIButton alloc]init];
+        int h = i%count;
+        CGFloat x = leftSpace+(betweenSpace+wid)*h;
+        button.frame = CGRectMake(x, 0, wid, _topButtonView.frame.size.height);
+        [_topButtonView addSubview:button];
+        [button setTitle:titles[i] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        button.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        button.layer.borderWidth = 0.5;
+        [button addTarget:self action:@selector(selectEdMagazineMarkButton:) forControlEvents:UIControlEventTouchUpInside];
+        button.tag = 2000+i;
+        [magazineButtons addObject:button];
+        if (i == 0) {
+            [self selectEdMagazineMarkButton:button];
+        }
+    }
+
+    
+}
+
+
 #pragma mark ===获取轮播的数据
 /**获取轮播的数据*/
 -(void)getBannerDataWithChannelId:(NSString *)channId
 {
 
-    [RequestBannerInfo getBannerLinkAndImageWithChannelId:channId Success:^(NSMutableArray *bannerArray) {
-        [largeBanners addObject:bannerArray];
-//        for (BannerClass *banner in bannerArray) {
-//            NSLog(@"------%@",banner.link);
-//        }
-    
-        ContentTableViewController *con = contentVCs[tag];
-        con.banners = bannerArray;
+    [RequestVideo getVideoBannersWithChannelId:channelId Success:^(NSArray *videoBanners) {
+        if ([_selectChannel isEqualToString:@"最新"]||[_selectChannel isEqualToString:@"男生资讯"]||[_selectChannel isEqualToString:@"女生资讯"]) {
+            ContentTableViewController *con = contentVCs[tag];
+            con.banners = videoBanners;
+        }
+        if ([_selectChannel isEqualToString:@"视频"]||[_selectChannel isEqualToString:@"专题"]) {
+            self.contentOther.banners = videoBanners;
+        }
+
+
     }];
+    
+//    [RequestBannerInfo getBannerLinkAndImageWithChannelId:channId Success:^(NSMutableArray *bannerArray) {
+//        [largeBanners addObject:bannerArray];
+////        for (BannerClass *banner in bannerArray) {
+////            NSLog(@"------%@",banner.link);
+////        }
+//    
+//        ContentTableViewController *con = contentVCs[tag];
+//        con.banners = bannerArray;
+//    }];
 }
 
 #pragma mark ===获取表的数据
@@ -138,16 +269,28 @@
 {
     NSLog(@"mark=====%@",channId);
     
-    [RequestContentInfo getContentinfoWithChannelId:channId Success:^(NSMutableArray *contentArray) {
+    [RequestVideo getVideoSummeryWithChannelId:channelId Success:^(NSArray *videoSummeries) {
         
-        for (ContentClass *co in contentArray) {
-            NSLog(@"====%@",co.title);
+        if ([_selectChannel isEqualToString:@"最新"]||[_selectChannel isEqualToString:@"男生资讯"]||[_selectChannel isEqualToString:@"女生资讯"]) {
+            ContentTableViewController *con = contentVCs[tag];
+            con.contents = videoSummeries;
         }
         
-        ContentTableViewController *con = contentVCs[tag];
-        con.contents = contentArray;
-
+        if ([_selectChannel isEqualToString:@"视频"]||[_selectChannel isEqualToString:@"专题"]) {
+            self.contentOther.contents = videoSummeries;
+        }
     }];
+    
+//    [RequestContentInfo getContentinfoWithChannelId:channId Success:^(NSMutableArray *contentArray) {
+//        
+//        for (ContentClass *co in contentArray) {
+//            NSLog(@"====%@",co.title);
+//        }
+//        
+//        ContentTableViewController *con = contentVCs[tag];
+//        con.contents = contentArray;
+//
+//    }];
 }
 
 #pragma mark===初始化UI
@@ -228,48 +371,48 @@
 
 #pragma mark===添加添加主要内容
 /**添加主要内容*/
--(UITableView *)addContentViewWithFram:(CGRect)frame
-{
-    UITableView *table = [[UITableView alloc]initWithFrame:frame];
-    table.tableHeaderView = [self setTableHeaderView];
-    return table;
-}
+//-(UITableView *)addContentViewWithFram:(CGRect)frame
+//{
+//    UITableView *table = [[UITableView alloc]initWithFrame:frame];
+//    table.tableHeaderView = [self setTableHeaderView];
+//    return table;
+//}
 
 #pragma mark== 设置表头
--(SDCycleScrollView *)setTableHeaderView
-{
-    
-    NSMutableArray *imageUrls = [[NSMutableArray alloc]init];
-    for (BannerClass *banner in banners) {
-        NSString *url = banner.image;
-        [imageUrls addObject:url];
-    }
-    
-    SDCycleScrollView *cycle = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH, 150*HEIGHTMULTIPLE) delegate:self placeholderImage:nil];
-    cycle.imageURLStringsGroup = imageUrls;
-    cycle.showPageControl = YES;
-    cycle.delegate = self;
-    
-    return cycle;
-    
-}
+//-(SDCycleScrollView *)setTableHeaderView
+//{
+//    
+//    NSMutableArray *imageUrls = [[NSMutableArray alloc]init];
+//    for (BannerClass *banner in banners) {
+//        NSString *url = banner.image;
+//        [imageUrls addObject:url];
+//    }
+//    
+//    SDCycleScrollView *cycle = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH, 150*HEIGHTMULTIPLE) delegate:self placeholderImage:nil];
+//    cycle.imageURLStringsGroup = imageUrls;
+//    cycle.showPageControl = YES;
+//    cycle.delegate = self;
+//    
+//    return cycle;
+//    
+//}
 
 #pragma mark++++添加轮播视图
 /**添加轮播视图*/
--(SDCycleScrollView *)addCycleScrollView
-{
-    NSMutableArray *imageUrls = [[NSMutableArray alloc]init];
-    for (BannerClass *banner in largeBanners) {
-        NSString *url = banner.image;
-        [imageUrls addObject:url];
-    }
-    
-    SDCycleScrollView *cycle = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH, 150*HEIGHTMULTIPLE) delegate:self placeholderImage:nil];
-    cycle.imageURLStringsGroup = imageUrls;
-    cycle.showPageControl = YES;
-    cycle.delegate = self;
-    return cycle;
-}
+//-(SDCycleScrollView *)addCycleScrollView
+//{
+//    NSMutableArray *imageUrls = [[NSMutableArray alloc]init];
+//    for (BannerClass *banner in largeBanners) {
+//        NSString *url = banner.image;
+//        [imageUrls addObject:url];
+//    }
+//    
+//    SDCycleScrollView *cycle = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH, 150*HEIGHTMULTIPLE) delegate:self placeholderImage:nil];
+//    cycle.imageURLStringsGroup = imageUrls;
+//    cycle.showPageControl = YES;
+//    cycle.delegate = self;
+//    return cycle;
+//}
 
 #pragma mark==SDCycleScrollViewDelegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index

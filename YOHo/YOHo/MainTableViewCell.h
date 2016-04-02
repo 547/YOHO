@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ContentClass.h"
-
+#import "DataModels.h"
 @interface MainTableViewCell : UITableViewCell
-@property(nonatomic,strong)ContentClass *contentModel;
+@property(nonatomic,strong)VideoContent *contentModel;
 @property(nonatomic,strong)UIImageView *topImage;
 @property(nonatomic,strong)UILabel *titleLabel;
 @property(nonatomic,strong)UILabel *timeLabel;

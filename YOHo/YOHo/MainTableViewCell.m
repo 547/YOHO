@@ -118,19 +118,20 @@
     
 }
 
--(void)setContentModel:(ContentClass *)contentModel
+-(void)setContentModel:(VideoContent *)contentModel
 {
 
     _contentModel = contentModel;
 //    [_topImage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:contentModel.image]]];
     [_topImage sd_setImageWithURL:[NSURL URLWithString:contentModel.image]];
-    if ([contentModel.channel.channel_name_cn isEqualToString:@"时尚"]) {
+
+    if ([contentModel.channel.channelNameCn isEqualToString:@"时尚"]) {
         _channelLabel.backgroundColor = [UIColor magentaColor];
         _titleLabel.textColor = [UIColor blackColor];
         _nextTitleLabel.textColor = [UIColor blackColor];
         _summaryLabel.textColor = [UIColor blackColor];
     }
-    _channelLabel.text = contentModel.channel.channel_name_cn;
+    _channelLabel.text = contentModel.channel.channelNameCn;
     _titleLabel.text = contentModel.title;
     _timeLabel.text =contentModel.publishTime;
     [_timeLabel sizeToFit];// 防止单行文本label在重用时宽度计算不准的问题
