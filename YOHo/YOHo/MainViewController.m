@@ -18,7 +18,9 @@
 #import "ContentView.h"
 #import <SDCycleScrollView.h>
 #import "ContentTableViewController.h"
-@interface MainViewController ()<SDCycleScrollViewDelegate,UIScrollViewDelegate>
+#import "RequestContentInfo.h"
+#import "ContentDetailTableViewController.h"
+@interface MainViewController ()<SDCycleScrollViewDelegate,UIScrollViewDelegate,ContentTableViewControllerDelegate>
 
 @end
 
@@ -89,13 +91,13 @@
         _scrollArray = channel[0];
         
         channelIds = channel[2];//id数组
-        channelId = channelIds[0];//默认选中第0个
+        channelId = channel[3];//默认选中第0个
         NSLog(@"00000");
         
         if (_scrollArray.count>0) {
             NSLog(@"22222");
-            [self addTopScrollView];
-            [self addContentScrollView];
+            [weakSelf addTopScrollView];
+            [weakSelf addContentScrollView];
         }
         //将所有的banner取出来装到数组里largebanners
 //        for (NSString *chId in channelIds) {
@@ -127,12 +129,26 @@
     
         ContentTableViewController *con = contentVCs[tag];
         con.banners = bannerArray;
-        
     }];
-
-    
 }
 
+#pragma mark ===获取表的数据
+/**获取表的数据*/
+-(void)getContentDataWithChannelId:(NSString *)channId
+{
+    NSLog(@"mark=====%@",channId);
+    
+    [RequestContentInfo getContentinfoWithChannelId:channId Success:^(NSMutableArray *contentArray) {
+        
+        for (ContentClass *co in contentArray) {
+            NSLog(@"====%@",co.title);
+        }
+        
+        ContentTableViewController *con = contentVCs[tag];
+        con.contents = contentArray;
+
+    }];
+}
 
 #pragma mark===初始化UI
 /**初始化UI*/
@@ -170,6 +186,8 @@
     
     [barView addSubview:midlleButton];
     [barView addSubview:leftButton];
+    
+    
     [self.view addSubview:barView];
 }
 
@@ -190,7 +208,7 @@
     for (int i=0; i<_scrollArray.count; i++) {
         
         ContentTableViewController *content = [[ContentTableViewController alloc]init];
-        
+        content.delegate = self;
         int x = i%_scrollArray.count;
         
         CGRect frame = CGRectMake(x*WIDTH, 0, WIDTH, contentScrollView.frame.size.height);
@@ -323,9 +341,9 @@
     
     CGFloat offSetX = tag*WIDTH;
     contentScrollView.contentOffset = CGPointMake(offSetX, 0);
-    
+    NSLog(@"channelId====%@",channelIds[tag]);
     [self getBannerDataWithChannelId:channelIds[tag]];
-    
+    [self getContentDataWithChannelId:channelIds[tag]];
 }
 
 #pragma mark ==UIScrollViewDelegate
@@ -348,6 +366,13 @@
     [self.sideMenuViewController presentLeftMenuViewController];
 }
 
+#pragma mark==ContentTableViewControllerDelegate
+-(void)contentGetContentDetail:(ContentENSObject *)contentDetail
+{
+    ContentDetailTableViewController *detail = [[ContentDetailTableViewController alloc]init];
+    detail.contentDetail = contentDetail;
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:detail] animated:YES];
+}
 
 
 

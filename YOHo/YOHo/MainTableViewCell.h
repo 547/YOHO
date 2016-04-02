@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ContentClass.h"
 
 @interface MainTableViewCell : UITableViewCell
+@property(nonatomic,strong)ContentClass *contentModel;
 @property(nonatomic,strong)UIImageView *topImage;
 @property(nonatomic,strong)UILabel *titleLabel;
 @property(nonatomic,strong)UILabel *timeLabel;
 @property(nonatomic,strong)UILabel *nextTitleLabel;
 @property(nonatomic,strong)UILabel *summaryLabel;
+@property(nonatomic,strong)UILabel *channelLabel;
 @end

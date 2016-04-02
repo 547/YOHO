@@ -7,8 +7,7 @@
 //
 
 #import "ContentTableViewController.h"
-#import <SDCycleScrollView.h>
-#import "Data.h"
+
 @interface ContentTableViewController ()<SDCycleScrollViewDelegate>
 
 @end
@@ -33,12 +32,21 @@
     self.tableView.tableHeaderView = [self setTableHeaderView];
 }
 
+-(void)setContents:(NSMutableArray *)contents
+{
+    _contents = contents;
+    [self.tableView reloadData];
+}
+
 #pragma mark==初始化UI
 -(void)initUI
 {
+    self.automaticallyAdjustsScrollViewInsets = YES;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    
-    
+
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[MainTableViewCell class] forCellReuseIdentifier:@"cell"];
+
 }
 
 
@@ -67,7 +75,28 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     NSLog(@"点击SDCycleScrollView");
+    BannerClass *ba = _banners[index];
+    [self getContentDetailWithCIdOrLink:ba.link];
 }
+
+#pragma mark==请求详情数据
+/**请求详情数据*/
+-(void)getContentDetailWithCIdOrLink:(NSString *)cId
+{
+
+    __weak ContentTableViewController *weakSelf = self;
+    
+    [RequestContentDetail getContentDetailWithCIdOrLink:cId Success:^(ContentENSObject *contentDetail) {
+        
+        [weakSelf.delegate contentGetContentDetail:contentDetail];
+        //        UIWebView *web = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 300)];
+        //        [web loadHTMLString:contentDetail.data.contents.content baseURL:nil];
+        //        [self.view addSubview:web];
+    }];
+
+    
+}
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -84,19 +113,44 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return _items.count;
+    return _contents.count;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ContentClass *content = _contents[indexPath.row];
+    CGFloat height = [self.tableView cellHeightForIndexPath:indexPath model:content keyPath:@"contentModel" cellClass:[MainTableViewCell class] contentViewWidth:WIDTH];
+    
+    return 400;
+    
+}
+
+- (CGFloat)cellContentViewWith
+{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
+    // 适配ios7
+    if ([UIApplication sharedApplication].statusBarOrientation != UIInterfaceOrientationPortrait && [[UIDevice currentDevice].systemVersion floatValue] < 8) {
+        width = [UIScreen mainScreen].bounds.size.height;
+    }
+    return width;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
-    cell.textLabel.text = @"4454";
+    MainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+//    cell = [cell initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    cell.contentModel = _contents[indexPath.row];
     
     return cell;
 }
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ContentClass *content = _contents[indexPath.row];
+    NSString *cId = content.cid;
+    [self getContentDetailWithCIdOrLink:cId];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
