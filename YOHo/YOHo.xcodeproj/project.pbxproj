@@ -536,6 +536,8 @@
 		04D7EDBE1CAFB885005DC5E9 /* WallPapersWallpaperList.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D7EDBA1CAFB885005DC5E9 /* WallPapersWallpaperList.m */; };
 		04D7EDC11CAFB9F8005DC5E9 /* RequestWallPaper.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D7EDC01CAFB9F8005DC5E9 /* RequestWallPaper.m */; };
 		04D7EDC41CAFBF8B005DC5E9 /* MagazineCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D7EDC31CAFBF8B005DC5E9 /* MagazineCollectionViewController.m */; };
+		04D8AF261CAFE2FC0088B808 /* CustomerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8AF251CAFE2FC0088B808 /* CustomerCollectionViewCell.m */; };
+		04D8AF291CAFF07F0088B808 /* CustomerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8AF281CAFF07F0088B808 /* CustomerButton.m */; };
 		04DFEF3F1CAE061B004C7F26 /* BLKDelegateSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DFEF321CAE061B004C7F26 /* BLKDelegateSplitter.m */; };
 		04DFEF401CAE061B004C7F26 /* BLKFlexibleHeightBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DFEF341CAE061B004C7F26 /* BLKFlexibleHeightBar.m */; };
 		04DFEF411CAE061B004C7F26 /* BLKFlexibleHeightBarBehaviorDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DFEF361CAE061B004C7F26 /* BLKFlexibleHeightBarBehaviorDefiner.m */; };
@@ -1152,6 +1154,10 @@
 		04D7EDC01CAFB9F8005DC5E9 /* RequestWallPaper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestWallPaper.m; sourceTree = "<group>"; };
 		04D7EDC21CAFBF8B005DC5E9 /* MagazineCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagazineCollectionViewController.h; sourceTree = "<group>"; };
 		04D7EDC31CAFBF8B005DC5E9 /* MagazineCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagazineCollectionViewController.m; sourceTree = "<group>"; };
+		04D8AF241CAFE2FC0088B808 /* CustomerCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerCollectionViewCell.h; sourceTree = "<group>"; };
+		04D8AF251CAFE2FC0088B808 /* CustomerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerCollectionViewCell.m; sourceTree = "<group>"; };
+		04D8AF271CAFF07F0088B808 /* CustomerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerButton.h; sourceTree = "<group>"; };
+		04D8AF281CAFF07F0088B808 /* CustomerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerButton.m; sourceTree = "<group>"; };
 		04DFEF311CAE061B004C7F26 /* BLKDelegateSplitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKDelegateSplitter.h; sourceTree = "<group>"; };
 		04DFEF321CAE061B004C7F26 /* BLKDelegateSplitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKDelegateSplitter.m; sourceTree = "<group>"; };
 		04DFEF331CAE061B004C7F26 /* BLKFlexibleHeightBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKFlexibleHeightBar.h; sourceTree = "<group>"; };
@@ -1797,6 +1803,10 @@
 				04E6FB761CAA252B00A4B13A /* BannerView.m */,
 				04E6FB841CAA882C00A4B13A /* MainTableViewCell.h */,
 				04E6FB851CAA882C00A4B13A /* MainTableViewCell.m */,
+				04D8AF241CAFE2FC0088B808 /* CustomerCollectionViewCell.h */,
+				04D8AF251CAFE2FC0088B808 /* CustomerCollectionViewCell.m */,
+				04D8AF271CAFF07F0088B808 /* CustomerButton.h */,
+				04D8AF281CAFF07F0088B808 /* CustomerButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2765,6 +2775,7 @@
 				04360ADB1CA931550008E496 /* JsonHelper.m in Sources */,
 				04360AE51CA93AC30008E496 /* NSString+More.m in Sources */,
 				0459778F1CAE94CA00E4EF59 /* ContentDetailTableViewController.m in Sources */,
+				04D8AF261CAFE2FC0088B808 /* CustomerCollectionViewCell.m in Sources */,
 				04E6FB861CAA882C00A4B13A /* MainTableViewCell.m in Sources */,
 				04360AED1CA95BF10008E496 /* RequestChannelInfo.m in Sources */,
 				043606DD1CA90E8F0008E496 /* main.m in Sources */,
@@ -2778,6 +2789,7 @@
 				04360AD21CA924A70008E496 /* JudgeLoginClass.m in Sources */,
 				04360AF61CA96C1C0008E496 /* TypeViewController.m in Sources */,
 				04360AE11CA938020008E496 /* EasyDownloadTool.m in Sources */,
+				04D8AF291CAFF07F0088B808 /* CustomerButton.m in Sources */,
 				04D7ED981CAF9886005DC5E9 /* VideoContent.m in Sources */,
 				04360AF31CA967AF0008E496 /* MainViewController.m in Sources */,
 				04D7EDA11CAFA09B005DC5E9 /* BannerData.m in Sources */,

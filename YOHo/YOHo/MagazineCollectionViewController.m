@@ -13,8 +13,21 @@
 @end
 
 @implementation MagazineCollectionViewController
-
+{
+    NSMutableArray *yohoDatas;
+    NSMutableArray *specialDatas;
+}
 static NSString * const reuseIdentifier = @"Cell";
+
+-(id)init
+{
+    self = [super init];
+    if (self) {
+        yohoDatas = [[NSMutableArray alloc]init];
+        specialDatas = [[NSMutableArray alloc]init];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,6 +40,43 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Do any additional setup after loading the view.
 }
+
+-(void)setType:(int)type
+{
+
+    _type = type;
+    if (type != 2) {
+        [self getMagazineDataWithType:_type+1];
+    }else if (type == 2){
+    
+        //查找已经下载、正在下载的数据
+        NSLog(@"查找已经下载、正在下载的数据");
+        
+    }
+    
+    
+}
+
+#pragma mark== 请求杂志数据
+/**请求杂志数据**/
+-(void)getMagazineDataWithType:(int)type
+{
+    NSString *typeStr = [NSString stringWithFormat:@"%d",type];
+    [RequestMagazine getMagazinesSummeryWithWithType:typeStr Success:^(NSArray *magazines) {
+        
+        for (MagazineData *magazine in magazines) {
+            NSString *journal = magazine.journal;
+            if ([journal containsString:@"!"]) {
+                [yohoDatas addObject:magazine];
+            }else{
+                [specialDatas addObject:magazine];
+            }
+        }
+        
+        [self.collectionView reloadData];
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -46,14 +96,13 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+
+    return 2;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 0;
+    return 6;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

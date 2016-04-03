@@ -20,7 +20,7 @@
 #import "DataModels.h"
 #import "RequestVideo.h"
 #import "RequestMagazine.h"
-
+#import "RequestWallPaper.h"
 
 
 
@@ -113,11 +113,15 @@
             [weakSelf getBannerDataWithChannelId:channelId];
             [weakSelf getContentDataWithChannelId:channelId];
         }
-        if ([_selectChannel isEqualToString:@"杂志"]||[_selectChannel isEqualToString:@"壁纸"]) {
-            NSLog(@"是杂志和壁纸");
+        if ([_selectChannel isEqualToString:@"杂志"]) {
+            NSLog(@"是杂志");
+            [self.view addSubview:self.topButtonView];
+            self.magazineViewC.type = selectedButton;
+        }
+        if ([_selectChannel isEqualToString:@"壁纸"]) {
+            NSLog(@"是壁纸");
             
         }
-        
         //将所有的banner取出来装到数组里largebanners
 //        for (NSString *chId in channelIds) {
 //             [weakSelf getBannerDataWithChannelId:chId];
@@ -130,10 +134,8 @@
     
     //等待执行，不会占用资源
 //    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    
-    
-    
 }
+
 
 #pragma mark==懒加载视频等channel的ViewControll
 /**ContentTableViewController的懒加载
@@ -167,7 +169,8 @@
 {
     if (!_magazineViewC) {
         _magazineViewC = [[MagazineCollectionViewController alloc]init];
-//        _magazineViewC.view.frame = CGRectMake(0, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
+        CGFloat y = _topButtonView.frame.size.height+_topButtonView.frame.origin.y;
+        _magazineViewC.view.frame = CGRectMake(0,y,  WIDTH, HEIGHT-y);
         [self.view addSubview:_magazineViewC.view];
     }
     return _magazineViewC;
@@ -181,7 +184,6 @@
     if (!_topButtonView) {
         _topButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, BARHEIGHT, WIDTH, sH)];
         [self addTopButtonToView];
-        [self.view addSubview:_topButtonView];
     }
     return _topButtonView;
 }
@@ -190,19 +192,20 @@
 /**杂志类型的按钮被选中*/
 -(void)selectEdMagazineMarkButton:(UIButton *)button
 {
-
-    int rTag = button.tag-2000;
-    
     if (selectedButton != 0) {
-        
+        UIButton *lastButton = magazineButtons[selectedButton];
+        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        button.layer.borderColor = [UIColor lightGrayColor].CGColor;
     }
-    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    button.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.layer.borderColor = [UIColor blackColor].CGColor;
+    int rTag = button.tag-2000;
+    self.magazineViewC.type = rTag;
     selectedButton = rTag;
     
 }
 
--(void)
+
 
 #pragma mark ===添加顶部button
 /**添加顶部button*/

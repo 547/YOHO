@@ -11,5 +11,6 @@
 @interface NSString (More)
 +(NSString *)getToTmpWithFileName:(NSString *)fileName;
 +(CGSize)getFontSize:(NSString *)str;
-
+/**将文件保存到Documents路径*/
++(NSString *)getToDocumentsWithFileName:(NSString *)fileName;
 @end
