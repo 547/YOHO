@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0401BDC11CABB10E008B8E3A /* SelectCountryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0401BDC01CABB10E008B8E3A /* SelectCountryViewController.m */; };
+		0434C0E11CB528E50086ECDC /* back-reversed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0434C0DE1CB528E50086ECDC /* back-reversed.png */; };
+		0434C0E21CB528E50086ECDC /* back-reversed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0434C0DF1CB528E50086ECDC /* back-reversed@2x.png */; };
+		0434C0E31CB528E50086ECDC /* back-reversed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0434C0E01CB528E50086ECDC /* back-reversed@3x.png */; };
 		043606DD1CA90E8F0008E496 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 043606DC1CA90E8F0008E496 /* main.m */; };
 		043606E01CA90E8F0008E496 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 043606DF1CA90E8F0008E496 /* AppDelegate.m */; };
 		043606E31CA90E8F0008E496 /* YOHo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 043606E11CA90E8F0008E496 /* YOHo.xcdatamodeld */; };
@@ -580,6 +583,9 @@
 /* Begin PBXFileReference section */
 		0401BDBF1CABB10E008B8E3A /* SelectCountryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCountryViewController.h; sourceTree = "<group>"; };
 		0401BDC01CABB10E008B8E3A /* SelectCountryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCountryViewController.m; sourceTree = "<group>"; };
+		0434C0DE1CB528E50086ECDC /* back-reversed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-reversed.png"; sourceTree = "<group>"; };
+		0434C0DF1CB528E50086ECDC /* back-reversed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-reversed@2x.png"; sourceTree = "<group>"; };
+		0434C0E01CB528E50086ECDC /* back-reversed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-reversed@3x.png"; sourceTree = "<group>"; };
 		043606D81CA90E8F0008E496 /* YOHo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YOHo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		043606DC1CA90E8F0008E496 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		043606DE1CA90E8F0008E496 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1308,6 +1314,9 @@
 		0436070B1CA90EF40008E496 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0434C0DE1CB528E50086ECDC /* back-reversed.png */,
+				0434C0DF1CB528E50086ECDC /* back-reversed@2x.png */,
+				0434C0E01CB528E50086ECDC /* back-reversed@3x.png */,
 				0436070C1CA90EF40008E496 /* AppIcon29x29@2x.png */,
 				0436070D1CA90EF40008E496 /* AppIcon29x29@2x~ipad.png */,
 				0436070E1CA90EF40008E496 /* AppIcon29x29@3x.png */,
@@ -2425,6 +2434,7 @@
 				04360A901CA90EF60008E496 /* webView_more_normal@3x.png in Resources */,
 				0436090C1CA90EF60008E496 /* button_home_select@2x.png in Resources */,
 				043609061CA90EF60008E496 /* button_home@2x.png in Resources */,
+				0434C0E21CB528E50086ECDC /* back-reversed@2x.png in Resources */,
 				043609941CA90EF60008E496 /* magazineNavigationBackgroundHD@2x.png in Resources */,
 				04360A531CA90EF60008E496 /* shareMagazineHD.png in Resources */,
 				0436091C1CA90EF60008E496 /* comment_voice_warn@2x.png in Resources */,
@@ -2525,6 +2535,7 @@
 				043609041CA90EF60008E496 /* boy_banner_n@2x.png in Resources */,
 				043609371CA90EF60008E496 /* common_weibo_qq@2x.png in Resources */,
 				0436091B1CA90EF60008E496 /* comment_voice_icon@2x.png in Resources */,
+				0434C0E11CB528E50086ECDC /* back-reversed.png in Resources */,
 				04360AA01CA90EF60008E496 /* yohogirl_logo@3x.png in Resources */,
 				043609831CA90EF60008E496 /* magazineBackShelfHD.png in Resources */,
 				04360A551CA90EF60008E496 /* sinaWeiboCancel.png in Resources */,
@@ -2585,6 +2596,7 @@
 				043609241CA90EF60008E496 /* common_header_background@2x.png in Resources */,
 				04360A701CA90EF60008E496 /* up_arrow@2x.png in Resources */,
 				04360A561CA90EF60008E496 /* sinaWeiboCancel@2x.png in Resources */,
+				0434C0E31CB528E50086ECDC /* back-reversed@3x.png in Resources */,
 				043609F81CA90EF60008E496 /* shared_featuretext@2x.png in Resources */,
 				043609771CA90EF60008E496 /* LaunchImage-700-Portrait~ipad.png in Resources */,
 				04360A171CA90EF60008E496 /* shared_newstext@2x.png in Resources */,

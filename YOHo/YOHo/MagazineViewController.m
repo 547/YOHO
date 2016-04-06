@@ -172,6 +172,11 @@ static NSString * const reuseIdentifier = @"Cell";
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CustomerCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    if (cell != nil) {
+        for (UIView *view in cell.subviews) {
+            [view removeFromSuperview];
+        }
+    }
     cell = [cell init];
     cell.delegate = self;
     if (_type == 2) {

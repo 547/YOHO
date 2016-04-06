@@ -16,12 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self initUI];
 }
 
@@ -55,11 +49,7 @@
 {
 
     NSMutableArray *imageUrls = [[NSMutableArray alloc]init];
-//    for (BannerClass *banner in _banners) {
-//        NSString *url = banner.image;
-//        [imageUrls addObject:url];
-//    }
-    
+
     for (BannerData *banner in _banners) {
         NSString *url = banner.image;
         [imageUrls addObject:url];
@@ -150,7 +140,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-//    cell = [cell initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    if (cell != nil) {
+        for (UIView *view in cell.subviews) {
+            [view removeFromSuperview];
+        }
+    }
+    cell = [cell initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     cell.contentModel = _contents[indexPath.row];
     
     return cell;

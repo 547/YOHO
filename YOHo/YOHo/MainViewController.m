@@ -22,7 +22,7 @@
 #import "RequestMagazine.h"
 #import "RequestWallPaper.h"
 #import "WallPapersViewController.h"
-
+#import "SingWallPaperViewController.h"
 
 @interface MainViewController ()<SDCycleScrollViewDelegate,UIScrollViewDelegate,ContentTableViewControllerDelegate,MagazineViewControllerDelegate,WallPapersViewControllerDelegate>
 @property(nonatomic,strong)ContentTableViewController *contentOther;
@@ -598,7 +598,9 @@
 /**点击图片获取图片的对象*/
 -(void)wallPapersViewControllerGetClickedImage:(WallPapersImages *)image
 {
-
+    SingWallPaperViewController *singWallPaper = [[SingWallPaperViewController alloc]init];
+    singWallPaper.image = image;
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc]initWithRootViewController:singWallPaper] animated:YES];
 }
 
 
