@@ -32,7 +32,7 @@
     if (!isExist) {
         [fileManager createFileAtPath:path contents:nil attributes:nil];
     }
-    NSLog(@"pa tn ==%@",path);
+//    NSLog(@"pa tn ==%@",path);
     return path;
     
 }
@@ -40,7 +40,7 @@
 +(NSString *)getFilePathWitName:(NSString *)name lastName:(NSString *)lastName fileName:(NSString *)fileName
 {
     NSString *path = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/%@/%@/%@",name,lastName,fileName]];
-    NSLog(@"==p ==%@",path);
+//    NSLog(@"==p ==%@",path);
     return path;
 }
 

@@ -10,12 +10,13 @@
 
 @implementation RequestWallPaper
 //http://h5api.myoho.net/index.php?r=Apiemag%2FGetWallpaperListV4
+//http://h5api.myoho.net/index.php?app=efashion&device=2&end=200&r=Apiemag%2FGetWallpaperListV4&scale=2&start=0
 
 +(void)requestWallPapersSummerySuccess:(void(^)(NSDictionary *responseDic))success
 {
     
-    NSString *urlString = [NSString stringWithFormat:@"http://h5api.myoho.net/index.php?r=Apiemag%%2FGetWallpaperListV4"];
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *urlString = [NSString stringWithFormat:@"http://h5api.myoho.net/index.php?app=efashion&device=2&end=200&r=Apiemag%%2FGetWallpaperListV4&scale=2&start=0"];
+//    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     

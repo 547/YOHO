@@ -12,7 +12,7 @@
 #import <RESideMenu.h>
 #import "CustomizationNavBar.h"
 #import "RequestChannelInfo.h"
-#import "MagazineCollectionViewController.h"
+#import "MagazineViewController.h"
 #import "Data.h"
 #import <SDCycleScrollView.h>
 #import "ContentTableViewController.h"
@@ -21,18 +21,19 @@
 #import "RequestVideo.h"
 #import "RequestMagazine.h"
 #import "RequestWallPaper.h"
+#import "WallPapersViewController.h"
 
 
-
-@interface MainViewController ()<SDCycleScrollViewDelegate,UIScrollViewDelegate,ContentTableViewControllerDelegate>
+@interface MainViewController ()<SDCycleScrollViewDelegate,UIScrollViewDelegate,ContentTableViewControllerDelegate,MagazineViewControllerDelegate,WallPapersViewControllerDelegate>
 @property(nonatomic,strong)ContentTableViewController *contentOther;
-@property(nonatomic,strong)MagazineCollectionViewController *magazineViewC;
 @property(nonatomic,strong)UIView *topButtonView;
 @end
 
 @implementation MainViewController
 {
+    NSMutableArray *magazineVCs;
     NSMutableArray *magazineButtons;
+    UIScrollView *mScrollView;
     int selectedButton;
     NSMutableArray *largeBanners;
     NSMutableArray *banners;
@@ -49,7 +50,7 @@
     UIScrollView *markScrollView;
     NSMutableArray *channelIds;//id数值
     int tag;//应该显示的ViewControll
-    
+    UILabel *line;
 }
 -(id)init
 {
@@ -62,6 +63,7 @@
        markButtons = [[NSMutableArray alloc]init];
         channelIds = [[NSMutableArray alloc]init];
        magazineButtons = [[NSMutableArray alloc]init];
+        magazineVCs = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -115,12 +117,15 @@
         }
         if ([_selectChannel isEqualToString:@"杂志"]) {
             NSLog(@"是杂志");
+            line.hidden = YES;
             [self.view addSubview:self.topButtonView];
-            self.magazineViewC.type = selectedButton;
+            NSLog(@"%@",NSStringFromCGRect(_topButtonView.frame));
+            [self addMagazineScrollView];
         }
         if ([_selectChannel isEqualToString:@"壁纸"]) {
+            line.hidden = YES;
             NSLog(@"是壁纸");
-            
+            [self addWallPaper];
         }
         //将所有的banner取出来装到数组里largebanners
 //        for (NSString *chId in channelIds) {
@@ -136,6 +141,28 @@
 //    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 
+
+#pragma mark==添加壁纸视图
+
+-(void)addWallPaper
+{
+    
+    
+    WallPapersViewController *wall = [[WallPapersViewController alloc]init];
+    wall.view.frame = CGRectMake(0, BARHEIGHT, WIDTH, HEIGHT-BARHEIGHT);
+
+    wall.delegate = self;
+    [self.view addSubview:wall.view];
+    /**
+     View Controller中可以添加多个sub view，在需要的时候显示出来；
+     
+     可以通过viewController(parent)中可以添加多个child viewController;来控制页面中的sub view，降低代码耦合度；
+     
+     通过切换，可以显示不同的view；，替代之前的addSubView的管理
+     **/
+    [self addChildViewController:wall];
+
+}
 
 #pragma mark==懒加载视频等channel的ViewControll
 /**ContentTableViewController的懒加载
@@ -156,6 +183,7 @@
 //判断是否已经有了，若没有，则进行实例化
     if (!_contentOther) {
         _contentOther = [[ContentTableViewController alloc]init];
+        
         _contentOther.view.frame = CGRectMake(0, BARHEIGHT, WIDTH, HEIGHT-BARHEIGHT);
         [self.view addSubview:_contentOther.view];
     }
@@ -163,26 +191,40 @@
     
 }
 
-#pragma mark==懒加载杂志VC
-/**懒加载杂志VC**/
--(MagazineCollectionViewController *)magazineViewC
+
+/**添加杂志ScrollVIew*/
+-(void)addMagazineScrollView
 {
-    if (!_magazineViewC) {
-        _magazineViewC = [[MagazineCollectionViewController alloc]init];
-        CGFloat y = _topButtonView.frame.size.height+_topButtonView.frame.origin.y;
-        _magazineViewC.view.frame = CGRectMake(0,y,  WIDTH, HEIGHT-y);
-        [self.view addSubview:_magazineViewC.view];
+    mScrollView = [[UIScrollView alloc]init];
+    CGFloat y = _topButtonView.frame.size.height+_topButtonView.frame.origin.y+20;
+    mScrollView.frame = CGRectMake(0, y, WIDTH, HEIGHT-y);
+    
+    mScrollView.showsHorizontalScrollIndicator = NO;
+    mScrollView.scrollEnabled = NO;
+    mScrollView.contentOffset = CGPointMake(0, 0);
+    [self.view addSubview:mScrollView];
+    for (int i=0; i<3; i++) {
+        MagazineViewController *ma = [[MagazineViewController alloc]init];
+        ma.delegate = self;
+        int h = i%3;
+        CGFloat x = WIDTH*h;
+        ma.view.frame = CGRectMake(x, 0, mScrollView.frame.size.width,mScrollView.frame.size.height);
+        ma.type = i;
+        [magazineVCs addObject:ma];
+        [mScrollView addSubview:ma.view];
     }
-    return _magazineViewC;
+
 }
+
 
 #pragma mark==懒加载TopButtonView
 /**TopButtonView**/
 -(UIView *)topButtonView
 {
-
+    sH = 30*HEIGHTMULTIPLE;
     if (!_topButtonView) {
         _topButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, BARHEIGHT, WIDTH, sH)];
+        _topButtonView.backgroundColor = [UIColor whiteColor];
         [self addTopButtonToView];
     }
     return _topButtonView;
@@ -192,15 +234,22 @@
 /**杂志类型的按钮被选中*/
 -(void)selectEdMagazineMarkButton:(UIButton *)button
 {
-    if (selectedButton != 0) {
+//上次点击的按钮
         UIButton *lastButton = magazineButtons[selectedButton];
-        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        button.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    }
+        [lastButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        lastButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//本次点击的按钮
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     button.layer.borderColor = [UIColor blackColor].CGColor;
+    
     int rTag = button.tag-2000;
-    self.magazineViewC.type = rTag;
+    mScrollView.contentOffset = CGPointMake(WIDTH*rTag, 0);
+    
+    if (rTag == 2) {
+        MagazineViewController *m = magazineVCs[rTag];
+        m.type = rTag;
+    }
+    
     selectedButton = rTag;
     
 }
@@ -219,13 +268,16 @@
     for (int i=0; i<count; i++) {
         UIButton *button = [[UIButton alloc]init];
         int h = i%count;
+        
+
+        
         CGFloat x = leftSpace+(betweenSpace+wid)*h;
-        button.frame = CGRectMake(x, 0, wid, _topButtonView.frame.size.height);
+        button.frame = CGRectMake(x, 1, wid, _topButtonView.frame.size.height-3);
         [_topButtonView addSubview:button];
         [button setTitle:titles[i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         button.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        button.layer.borderWidth = 0.5;
+        button.layer.borderWidth = 1.0;
         [button addTarget:self action:@selector(selectEdMagazineMarkButton:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = 2000+i;
         [magazineButtons addObject:button];
@@ -236,6 +288,8 @@
 
     
 }
+
+
 
 
 #pragma mark ===获取轮播的数据
@@ -300,6 +354,9 @@
 /**初始化UI*/
 -(void)initUI
 {
+    NSLog(@"44444++++++++++%@",NSHomeDirectory());
+    
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.hidden = YES;
     [self addBar];
 
@@ -310,7 +367,7 @@
 -(void)addBar
 {
     
-    UIView *barView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 64)];
+    UIView *barView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, BARHEIGHT)];
     barView.backgroundColor = [UIColor whiteColor];
     
     UIButton *leftButton = [[UIButton alloc]init];
@@ -325,10 +382,12 @@
     midlleButton.bounds = CGRectMake(0, 0, barView.frame.size.width*0.6, barView.frame.size.height*0.7);
     [midlleButton setTitle:_selectChannel forState:UIControlStateNormal];
     [midlleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+   
+        line = [[UILabel alloc]initWithFrame:CGRectMake(0, BARHEIGHT-0.5, WIDTH, 0.5)];
+        line.backgroundColor = [UIColor lightGrayColor];
+        [barView addSubview:line];
     
-    UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(0, BARHEIGHT-0.5, WIDTH, 0.5)];
-    line.backgroundColor = [UIColor lightGrayColor];
-    [barView addSubview:line];
+    
     
     [barView addSubview:midlleButton];
     [barView addSubview:leftButton];
@@ -362,7 +421,6 @@
         
         NSLog(@"====la===%d",largeBanners.count);
         content.banners = largeBanners[i];
-//        content.view.backgroundColor = [UIColor redColor];
         [contentVCs addObject:content];
         [contentScrollView addSubview:content.view];
     }
@@ -520,7 +578,28 @@
     [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:detail] animated:YES];
 }
 
+#pragma mark==MagazineViewControllerDelegate
+-(void)magazineViewCGoToReadingMagazineWithSavePath:(NSString *)savePath
+{
 
+    
+    NSLog(@"前往阅读页-====%@",savePath);
+    
+}
+
+/**把下载好的保存到本地*/
+-(void)saveMagazineToDataBase
+{
+
+}
+
+
+#pragma mark==WallPapersViewControllerDelegate
+/**点击图片获取图片的对象*/
+-(void)wallPapersViewControllerGetClickedImage:(WallPapersImages *)image
+{
+
+}
 
 
 - (void)didReceiveMemoryWarning {

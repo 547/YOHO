@@ -34,28 +34,30 @@
 }
 
 
--(AFHTTPSessionManager *)downLoadManager
-{
-    if (!_downLoadManager) {
-        _downLoadManager = [AFHTTPSessionManager manager];
-    }
-    return _downLoadManager;
-}
+
+//-(AFHTTPSessionManager *)downLoadManager
+//{
+//    if (!_downLoadManager) {
+//        _downLoadManager = [AFHTTPSessionManager manager];
+//    }
+//    return _downLoadManager;
+//}
 
 
 /**开始下载*/
 -(void)startDownLoadWithUrlString:(NSString *)urlString fileName:(NSString *)fileName
 {
-    
+    _downLoadManager = [AFHTTPSessionManager manager];
+    fileName = [NSString stringWithFormat:@"%@.zip",fileName];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     __weak EasyDownloadTool *weakSelf = self;
    _downloadTask = [self.downLoadManager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        //
         [weakSelf.delegate easyDownloadProgress:downloadProgress];
+       [weakSelf.delegate easyDownloadSavePath:[NSString getToDocumentsWithFileName:fileName]];
        if (downloadProgress.fractionCompleted == 1.0) {
            NSLog(@"成功");
-           [weakSelf.delegate easyDownloadFinsh];
+           
        }
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
         //
@@ -69,15 +71,16 @@
             NSLog(@"下载");
         }
     }];
-    
+    [_downloadTask resume];
 }
 
 /**暂停下载*/
 -(void)pauseDownload
 {
-
+    __weak EasyDownloadTool *weakSelf = self;
     [_downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
-        self.savedData = resumeData;
+        weakSelf.savedData = resumeData;
+        [weakSelf.delegate easyDownloadResumeData:resumeData];
     }];
     
 }
@@ -90,7 +93,6 @@
         [weakSelf.delegate easyDownloadProgress:downloadProgress];
         if (downloadProgress.fractionCompleted == 1.0) {
             NSLog(@"成功");
-            [weakSelf.delegate easyDownloadFinsh];
         }
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
         

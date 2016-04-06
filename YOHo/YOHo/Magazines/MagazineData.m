@@ -96,6 +96,7 @@ NSString *const kMagazineDataIsH5 = @"isH5";
 
     }
     
+    
     return self;
     
 }

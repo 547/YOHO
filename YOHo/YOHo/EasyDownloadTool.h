@@ -14,12 +14,18 @@
 @property(nonatomic,strong)NSURLSessionDownloadTask *downloadTask;
 
 @property(nonatomic,strong)NSData *savedData;
+/**开始下载*/
+-(void)startDownLoadWithUrlString:(NSString *)urlString fileName:(NSString *)fileName;
+/**暂停下载*/
+-(void)pauseDownload;
+/**继续下载*/
+-(void)continueDownLoad;
 +(void)downImage:(NSString *)urlString;
 @property(nonatomic,unsafe_unretained)id<EasyDownloadToolDelegate>delegate;
 @end
 @protocol EasyDownloadToolDelegate <NSObject>
-
+-(void)easyDownloadResumeData:(NSData *)reData;
 -(void)easyDownloadProgress:(NSProgress *)progress;
--(void)easyDownloadFinsh;
+-(void)easyDownloadSavePath:(NSString *)path;
 
 @end

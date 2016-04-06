@@ -10,7 +10,8 @@
 
 
 @interface MagazineData : NSObject <NSCoding, NSCopying>
-
+@property (nonatomic,strong)NSData *resumeData;
+@property (nonatomic,copy)NSString *savePath;
 @property (nonatomic, strong) NSString *magId;
 @property (nonatomic, strong) NSString *magType;
 @property (nonatomic, strong) NSString *dataDescription;

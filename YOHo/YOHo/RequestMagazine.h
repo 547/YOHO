@@ -11,5 +11,5 @@
 #import <AFNetworking.h>
 #import "DataModels.h"
 @interface RequestMagazine : NSObject
-+(void)getMagazinesSummeryWithWithType:(NSString *)type Success:(void(^)(NSArray *magazines))success;
++(void)getMagazinesSummeryWithWithType:(NSString *)type isAll:(BOOL)isAll Success:(void(^)(NSArray *magazines))success;
 @end
