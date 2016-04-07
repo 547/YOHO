@@ -554,6 +554,7 @@
 		04DFEF441CAE061B004C7F26 /* SquareCashStyleBehaviorDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DFEF3C1CAE061B004C7F26 /* SquareCashStyleBehaviorDefiner.m */; };
 		04DFEF451CAE061B004C7F26 /* UIView+BLKFlexibleHeightBarSubview.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DFEF3E1CAE061B004C7F26 /* UIView+BLKFlexibleHeightBarSubview.m */; };
 		04DFEF4E1CAE1B9A004C7F26 /* ChannelClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DFEF4D1CAE1B9A004C7F26 /* ChannelClass.m */; };
+		04E0A70A1CB55C83005115A0 /* ScanCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E0A7091CB55C83005115A0 /* ScanCodeViewController.m */; };
 		04E3F4181CB50EE100A857B0 /* SingWallPaperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E3F4171CB50EE100A857B0 /* SingWallPaperViewController.m */; };
 		04E6FB771CAA252B00A4B13A /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6FB761CAA252B00A4B13A /* BannerView.m */; };
 		04E6FB861CAA882C00A4B13A /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6FB851CAA882C00A4B13A /* MainTableViewCell.m */; };
@@ -1196,6 +1197,8 @@
 		04DFEF3E1CAE061B004C7F26 /* UIView+BLKFlexibleHeightBarSubview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BLKFlexibleHeightBarSubview.m"; sourceTree = "<group>"; };
 		04DFEF4C1CAE1B9A004C7F26 /* ChannelClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelClass.h; sourceTree = "<group>"; };
 		04DFEF4D1CAE1B9A004C7F26 /* ChannelClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelClass.m; sourceTree = "<group>"; };
+		04E0A7081CB55C83005115A0 /* ScanCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeViewController.h; sourceTree = "<group>"; };
+		04E0A7091CB55C83005115A0 /* ScanCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeViewController.m; sourceTree = "<group>"; };
 		04E3F4161CB50EE100A857B0 /* SingWallPaperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingWallPaperViewController.h; sourceTree = "<group>"; };
 		04E3F4171CB50EE100A857B0 /* SingWallPaperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingWallPaperViewController.m; sourceTree = "<group>"; };
 		04E6FB751CAA252B00A4B13A /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
@@ -1851,6 +1854,7 @@
 		04360ACB1CA921560008E496 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				04E0A7071CB55C3D005115A0 /* 扫描二维码 */,
 				045A1EFB1CAD128E00CB2646 /* 类型页 */,
 				045A1EFA1CAD127C00CB2646 /* 欢迎页 */,
 				04E9EEED1CACBDBE0093D963 /* 主页面 */,
@@ -2059,6 +2063,15 @@
 				04DFEF3E1CAE061B004C7F26 /* UIView+BLKFlexibleHeightBarSubview.m */,
 			);
 			path = BLKFlexibleHeightBar;
+			sourceTree = "<group>";
+		};
+		04E0A7071CB55C3D005115A0 /* 扫描二维码 */ = {
+			isa = PBXGroup;
+			children = (
+				04E0A7081CB55C83005115A0 /* ScanCodeViewController.h */,
+				04E0A7091CB55C83005115A0 /* ScanCodeViewController.m */,
+			);
+			name = "扫描二维码";
 			sourceTree = "<group>";
 		};
 		04E9EEEB1CACBD470093D963 /* 设置 */ = {
@@ -2804,6 +2817,7 @@
 				04DFD6E91CB3C3B9001DDB67 /* WallPapersViewController.m in Sources */,
 				045977511CAE78B000E4EF59 /* ContentEContents.m in Sources */,
 				04D7ED9A1CAF9886005DC5E9 /* VideoSum.m in Sources */,
+				04E0A70A1CB55C83005115A0 /* ScanCodeViewController.m in Sources */,
 				04403AFC1CAC22FF00942D17 /* LanguageTableViewController.m in Sources */,
 				04D7ED8C1CAF970B005DC5E9 /* RequestVideo.m in Sources */,
 				045A1EFE1CAD171100CB2646 /* ContentTableViewController.m in Sources */,
@@ -2986,8 +3000,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/YOHo/ShareSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/Optional",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/FacebookMessengerSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/KaKaoSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/QQSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/RenRenSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/Required",
+				);
 				INFOPLIST_FILE = YOHo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/APSocialSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/WeChatSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/YiXinSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.SevenDream.YOHo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2999,8 +3030,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/YOHo/ShareSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/Optional",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/FacebookMessengerSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/KaKaoSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/QQSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/RenRenSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/Required",
+				);
 				INFOPLIST_FILE = YOHo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/APSocialSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/WeChatSDK",
+					"$(PROJECT_DIR)/YOHo/ShareSDK/Support/PlatformSDK/YiXinSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.SevenDream.YOHo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -14,31 +14,55 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
+  - LBXScan (1.1.1):
+    - ZXingObjC (~> 3.0)
   - MJRefresh (3.1.0)
+  - MOBFoundation (1.5.1)
   - RESideMenu (4.0.7)
   - SDAutoLayout (1.50)
-  - SDCycleScrollView (1.61):
+  - SDCycleScrollView (1.62):
     - SDWebImage (~> 3.7)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
+  - ShareSDK3 (3.2.5):
+    - ShareSDK3/ShareSDK (= 3.2.5)
+  - ShareSDK3/ShareSDK (3.2.5)
+  - ShareSDK3/ShareSDKPlatforms/QQ (3.2.5)
+  - ShareSDK3/ShareSDKPlatforms/SinaWeibo (3.2.5)
+  - ShareSDK3/ShareSDKPlatforms/WeChat (3.2.5)
+  - ShareSDK3/ShareSDKUI (3.2.5)
   - YLGIFImage (0.11)
+  - ZXingObjC (3.1.0):
+    - ZXingObjC/All (= 3.1.0)
+  - ZXingObjC/All (3.1.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0.4)
+  - LBXScan (~> 1.1.1)
   - MJRefresh (~> 3.1.0)
+  - MOBFoundation
   - RESideMenu (~> 4.0.7)
   - SDAutoLayout (~> 1.50)
   - SDCycleScrollView (~> 1.61)
+  - ShareSDK3
+  - ShareSDK3/ShareSDKPlatforms/QQ
+  - ShareSDK3/ShareSDKPlatforms/SinaWeibo
+  - ShareSDK3/ShareSDKPlatforms/WeChat
+  - ShareSDK3/ShareSDKUI
   - YLGIFImage (~> 0.11)
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  LBXScan: dfb4d8ae8e4cff2aa0c9e1771e43954dce1469a9
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+  MOBFoundation: 79efc94db961fe5a08cf32de69166f6a29a3b2b5
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   SDAutoLayout: 88b539a0c6204787d8e4084ef1b0db250241cc47
-  SDCycleScrollView: a002d85b30cfa9d0ac74069cd3973ca19ff4f22f
+  SDCycleScrollView: ae016cb4cc4036523917f146ede6f7b11d408f6a
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  ShareSDK3: ccdd8ec971044703e7722e19c2f3b38fb03775e2
   YLGIFImage: c0ae132fe80e5282b2762a97d14e23ba71a748ae
+  ZXingObjC: bf15b3814f7a105b6d99f47da2333c93a063650a
 
 COCOAPODS: 0.39.0

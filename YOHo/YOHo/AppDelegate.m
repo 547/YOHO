@@ -10,6 +10,16 @@
 #import "SplashViewController.h"//闪屏页
 #import "RequestSplashImage.h"
 #import "EasyDownloadTool.h"
+
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
+
+//开放平台的SDK文件
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <WXApi.h>
+#import <WeiboSDK.h>
+
 @interface AppDelegate ()
 
 @end
@@ -18,7 +28,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    [self shareSDK];
     [self saveSplashImage];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -26,6 +36,13 @@
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+
+/**分享ShareSDK*/
+-(void)shareSDK
+{
+
 }
 
 

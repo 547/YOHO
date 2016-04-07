@@ -15,6 +15,7 @@
 #import "MainViewController.h"
 #import "LoginViewController.h"
 #import "SettingViewController.h"
+#import "ScanCodeViewController.h"
 @interface TypeViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -143,6 +144,11 @@
             break;
         case 101:
             //扫描
+        {
+            ScanCodeViewController *scan = [[ScanCodeViewController alloc]init];
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:scan] animated:YES];
+            [self.sideMenuViewController hideMenuViewController];
+        }
             break;
         case 102:
             //下载
