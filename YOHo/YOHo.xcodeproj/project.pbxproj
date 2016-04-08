@@ -518,7 +518,6 @@
 		045977521CAE78B000E4EF59 /* ContentEData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459774B1CAE78B000E4EF59 /* ContentEData.m */; };
 		045977531CAE78B000E4EF59 /* ContentEImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459774D1CAE78B000E4EF59 /* ContentEImages.m */; };
 		045977541CAE78B000E4EF59 /* ContentENSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459774F1CAE78B000E4EF59 /* ContentENSObject.m */; };
-		0459778F1CAE94CA00E4EF59 /* ContentDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459778E1CAE94CA00E4EF59 /* ContentDetailTableViewController.m */; };
 		045A1EFE1CAD171100CB2646 /* ContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045A1EFD1CAD171100CB2646 /* ContentTableViewController.m */; };
 		047352F61CB103D200EC4931 /* MagazineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047352F51CB103D200EC4931 /* MagazineViewController.m */; };
 		047352F91CB126B000EC4931 /* HeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047352F81CB126B000EC4931 /* HeaderCollectionReusableView.m */; };
@@ -541,6 +540,9 @@
 		04D7EDC11CAFB9F8005DC5E9 /* RequestWallPaper.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D7EDC01CAFB9F8005DC5E9 /* RequestWallPaper.m */; };
 		04D8AF261CAFE2FC0088B808 /* CustomerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8AF251CAFE2FC0088B808 /* CustomerCollectionViewCell.m */; };
 		04D8AF291CAFF07F0088B808 /* CustomerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8AF281CAFF07F0088B808 /* CustomerButton.m */; };
+		04D9BEA41CB5FE57001B3CFF /* images-metadata.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D9BEA21CB5FE57001B3CFF /* images-metadata.png */; };
+		04D9BEA51CB5FE57001B3CFF /* images-metadata@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D9BEA31CB5FE57001B3CFF /* images-metadata@2x.png */; };
+		04D9BEA81CB62FC2001B3CFF /* ContentdetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9BEA71CB62FC2001B3CFF /* ContentdetailViewController.m */; };
 		04DFD6E51CB39A6B001DDB67 /* Magazines.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DFD6E21CB39A6B001DDB67 /* Magazines.m */; };
 		04DFD6E61CB39A6B001DDB67 /* Magazines+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DFD6E41CB39A6B001DDB67 /* Magazines+CoreDataProperties.m */; };
 		04DFD6E91CB3C3B9001DDB67 /* WallPapersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DFD6E81CB3C3B9001DDB67 /* WallPapersViewController.m */; };
@@ -1125,8 +1127,6 @@
 		0459774E1CAE78B000E4EF59 /* ContentENSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentENSObject.h; sourceTree = "<group>"; };
 		0459774F1CAE78B000E4EF59 /* ContentENSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentENSObject.m; sourceTree = "<group>"; };
 		045977501CAE78B000E4EF59 /* DataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModels.h; sourceTree = "<group>"; };
-		0459778D1CAE94CA00E4EF59 /* ContentDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentDetailTableViewController.h; sourceTree = "<group>"; };
-		0459778E1CAE94CA00E4EF59 /* ContentDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentDetailTableViewController.m; sourceTree = "<group>"; };
 		045A1EFC1CAD171100CB2646 /* ContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentTableViewController.h; sourceTree = "<group>"; };
 		045A1EFD1CAD171100CB2646 /* ContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentTableViewController.m; sourceTree = "<group>"; };
 		047352F41CB103D200EC4931 /* MagazineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagazineViewController.h; sourceTree = "<group>"; };
@@ -1171,6 +1171,10 @@
 		04D8AF251CAFE2FC0088B808 /* CustomerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerCollectionViewCell.m; sourceTree = "<group>"; };
 		04D8AF271CAFF07F0088B808 /* CustomerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerButton.h; sourceTree = "<group>"; };
 		04D8AF281CAFF07F0088B808 /* CustomerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerButton.m; sourceTree = "<group>"; };
+		04D9BEA21CB5FE57001B3CFF /* images-metadata.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "images-metadata.png"; sourceTree = "<group>"; };
+		04D9BEA31CB5FE57001B3CFF /* images-metadata@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "images-metadata@2x.png"; sourceTree = "<group>"; };
+		04D9BEA61CB62FC2001B3CFF /* ContentdetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentdetailViewController.h; sourceTree = "<group>"; };
+		04D9BEA71CB62FC2001B3CFF /* ContentdetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentdetailViewController.m; sourceTree = "<group>"; };
 		04DFD6E11CB39A6B001DDB67 /* Magazines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Magazines.h; sourceTree = "<group>"; };
 		04DFD6E21CB39A6B001DDB67 /* Magazines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magazines.m; sourceTree = "<group>"; };
 		04DFD6E31CB39A6B001DDB67 /* Magazines+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Magazines+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -1317,6 +1321,8 @@
 		0436070B1CA90EF40008E496 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				04D9BEA21CB5FE57001B3CFF /* images-metadata.png */,
+				04D9BEA31CB5FE57001B3CFF /* images-metadata@2x.png */,
 				0434C0DE1CB528E50086ECDC /* back-reversed.png */,
 				0434C0DF1CB528E50086ECDC /* back-reversed@2x.png */,
 				0434C0E01CB528E50086ECDC /* back-reversed@3x.png */,
@@ -1815,8 +1821,6 @@
 				04D7ED9B1CAFA09B005DC5E9 /* Banners */,
 				04D7ED8D1CAF9886005DC5E9 /* Video */,
 				045977461CAE787F00E4EF59 /* ContentDetail */,
-				04DFEF4C1CAE1B9A004C7F26 /* ChannelClass.h */,
-				04DFEF4D1CAE1B9A004C7F26 /* ChannelClass.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1953,6 +1957,8 @@
 			isa = PBXGroup;
 			children = (
 				045977551CAE791500E4EF59 /* big */,
+				04DFEF4C1CAE1B9A004C7F26 /* ChannelClass.h */,
+				04DFEF4D1CAE1B9A004C7F26 /* ChannelClass.m */,
 			);
 			name = ContentDetail;
 			sourceTree = "<group>";
@@ -2107,14 +2113,14 @@
 				04360AF21CA967AF0008E496 /* MainViewController.m */,
 				045A1EFC1CAD171100CB2646 /* ContentTableViewController.h */,
 				045A1EFD1CAD171100CB2646 /* ContentTableViewController.m */,
-				0459778D1CAE94CA00E4EF59 /* ContentDetailTableViewController.h */,
-				0459778E1CAE94CA00E4EF59 /* ContentDetailTableViewController.m */,
 				047352F41CB103D200EC4931 /* MagazineViewController.h */,
 				047352F51CB103D200EC4931 /* MagazineViewController.m */,
 				04DFD6E71CB3C3B9001DDB67 /* WallPapersViewController.h */,
 				04DFD6E81CB3C3B9001DDB67 /* WallPapersViewController.m */,
 				04E3F4161CB50EE100A857B0 /* SingWallPaperViewController.h */,
 				04E3F4171CB50EE100A857B0 /* SingWallPaperViewController.m */,
+				04D9BEA61CB62FC2001B3CFF /* ContentdetailViewController.h */,
+				04D9BEA71CB62FC2001B3CFF /* ContentdetailViewController.m */,
 			);
 			name = "主页面";
 			sourceTree = "<group>";
@@ -2260,6 +2266,7 @@
 				0436098E1CA90EF60008E496 /* magazineDownloadingHD.png in Resources */,
 				04360A811CA90EF60008E496 /* wallpaper_title.png in Resources */,
 				04360AB71CA90EF60008E496 /* zine_webview_toolbar_backButtonItem_normal@2x.png in Resources */,
+				04D9BEA51CB5FE57001B3CFF /* images-metadata@2x.png in Resources */,
 				043606E51CA90E8F0008E496 /* Assets.xcassets in Resources */,
 				04360AA91CA90EF60008E496 /* zine_backButtom_highlighted@2x.png in Resources */,
 				043609311CA90EF60008E496 /* common_send_voice@2x.png in Resources */,
@@ -2470,6 +2477,7 @@
 				043609ED1CA90EF60008E496 /* shared_download_normalEMG@3x.png in Resources */,
 				04360A381CA90EF60008E496 /* shared_qq_normalHD@2x.png in Resources */,
 				043609BD1CA90EF60008E496 /* setting_aboutBackground.png in Resources */,
+				04D9BEA41CB5FE57001B3CFF /* images-metadata.png in Resources */,
 				043609261CA90EF60008E496 /* common_like_icon.png in Resources */,
 				04360A491CA90EF60008E496 /* shared_wxFriend_normalHD@3x.png in Resources */,
 				0436090F1CA90EF60008E496 /* cancelBtn@3x.png in Resources */,
@@ -2800,6 +2808,7 @@
 				047352F61CB103D200EC4931 /* MagazineViewController.m in Sources */,
 				04D7EDAD1CAFB2EA005DC5E9 /* MagazineSum.m in Sources */,
 				04D7ED991CAF9886005DC5E9 /* VideoData.m in Sources */,
+				04D9BEA81CB62FC2001B3CFF /* ContentdetailViewController.m in Sources */,
 				04DFEF401CAE061B004C7F26 /* BLKFlexibleHeightBar.m in Sources */,
 				04360ADE1CA936780008E496 /* RequestSplashImage.m in Sources */,
 				04AA0FA21CABD701008EB2AB /* SettingViewController.m in Sources */,
@@ -2832,7 +2841,6 @@
 				04D7EDBE1CAFB885005DC5E9 /* WallPapersWallpaperList.m in Sources */,
 				04360AF91CA97FA20008E496 /* CustomizationNavBar.m in Sources */,
 				04360AE51CA93AC30008E496 /* NSString+More.m in Sources */,
-				0459778F1CAE94CA00E4EF59 /* ContentDetailTableViewController.m in Sources */,
 				04DFD6EF1CB3EC71001DDB67 /* LabelCollectionViewCell.m in Sources */,
 				04D8AF261CAFE2FC0088B808 /* CustomerCollectionViewCell.m in Sources */,
 				04E6FB861CAA882C00A4B13A /* MainTableViewCell.m in Sources */,

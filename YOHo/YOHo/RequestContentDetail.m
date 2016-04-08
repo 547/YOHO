@@ -39,9 +39,8 @@
 {
     NSLog(@"=000=======%@",cId);
     
-    NSMutableArray *array = [[NSMutableArray alloc]init];
     [RequestContentDetail getContentWithCIdOrLink:cId Success:^(NSDictionary *responseDic) {
-
+        NSLog(@"%@",responseDic);
        ContentENSObject *contentDetail = [ContentENSObject modelObjectWithDictionary:responseDic];
         
 //      NSString *con =  contentDetail.data.contents.content;

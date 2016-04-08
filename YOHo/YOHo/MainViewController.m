@@ -16,14 +16,13 @@
 #import "Data.h"
 #import <SDCycleScrollView.h>
 #import "ContentTableViewController.h"
-#import "ContentDetailTableViewController.h"
 #import "DataModels.h"
 #import "RequestVideo.h"
 #import "RequestMagazine.h"
 #import "RequestWallPaper.h"
 #import "WallPapersViewController.h"
 #import "SingWallPaperViewController.h"
-
+#import "ContentdetailViewController.h"
 @interface MainViewController ()<SDCycleScrollViewDelegate,UIScrollViewDelegate,ContentTableViewControllerDelegate,MagazineViewControllerDelegate,WallPapersViewControllerDelegate>
 @property(nonatomic,strong)ContentTableViewController *contentOther;
 @property(nonatomic,strong)UIView *topButtonView;
@@ -183,7 +182,7 @@
 //判断是否已经有了，若没有，则进行实例化
     if (!_contentOther) {
         _contentOther = [[ContentTableViewController alloc]init];
-        
+        _contentOther.delegate = self;
         _contentOther.view.frame = CGRectMake(0, BARHEIGHT, WIDTH, HEIGHT-BARHEIGHT);
         [self.view addSubview:_contentOther.view];
     }
@@ -331,6 +330,7 @@
         if ([_selectChannel isEqualToString:@"最新"]||[_selectChannel isEqualToString:@"男生资讯"]||[_selectChannel isEqualToString:@"女生资讯"]) {
             ContentTableViewController *con = contentVCs[tag];
             con.contents = videoSummeries;
+            
         }
         
         if ([_selectChannel isEqualToString:@"视频"]||[_selectChannel isEqualToString:@"专题"]) {
@@ -424,7 +424,7 @@
         [contentVCs addObject:content];
         [contentScrollView addSubview:content.view];
     }
-    
+    NSLog(@"con===%d",contentVCs.count);
     
 
 }
@@ -573,9 +573,13 @@
 #pragma mark==ContentTableViewControllerDelegate
 -(void)contentGetContentDetail:(ContentENSObject *)contentDetail
 {
-    ContentDetailTableViewController *detail = [[ContentDetailTableViewController alloc]init];
+
+    ContentdetailViewController *detail = [[ContentdetailViewController alloc]init];
+    detail.selectChannel = _selectChannel;
     detail.contentDetail = contentDetail;
     [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:detail] animated:YES];
+    [self.sideMenuViewController hideMenuViewController];
+    
 }
 
 #pragma mark==MagazineViewControllerDelegate

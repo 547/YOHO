@@ -86,7 +86,7 @@
     __weak ContentTableViewController *weakSelf = self;
     
     [RequestContentDetail getContentDetailWithCIdOrLink:cId Success:^(ContentENSObject *contentDetail) {
-        
+        NSLog(@"-----%@",contentDetail);
         [weakSelf.delegate contentGetContentDetail:contentDetail];
         //        UIWebView *web = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 300)];
         //        [web loadHTMLString:contentDetail.data.contents.content baseURL:nil];
