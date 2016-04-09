@@ -12,4 +12,6 @@
 #import "DataModels.h"
 @interface RequestContentDetail : NSObject
 +(void)getContentDetailWithCIdOrLink:(NSString *)cId Success:(void(^)(ContentENSObject *contentDetail))success;
+/**获取ContentDetail==app2*/
++(void)getContentDetailWithCIdOrLinkForApp1:(NSString *)cId Success:(void(^)(ContentENSObject *detail))success;
 @end

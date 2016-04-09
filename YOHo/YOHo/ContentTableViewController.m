@@ -87,7 +87,15 @@
     
     [RequestContentDetail getContentDetailWithCIdOrLink:cId Success:^(ContentENSObject *contentDetail) {
         NSLog(@"-----%@",contentDetail);
+        if (contentDetail.code == 400000) {
+            [RequestContentDetail getContentDetailWithCIdOrLinkForApp1:cId Success:^(ContentENSObject *detail) {
+                [weakSelf.delegate contentGetContentDetail:detail];
+            }];
+        }else{
+        
         [weakSelf.delegate contentGetContentDetail:contentDetail];
+        }
+        
         //        UIWebView *web = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 300)];
         //        [web loadHTMLString:contentDetail.data.contents.content baseURL:nil];
         //        [self.view addSubview:web];

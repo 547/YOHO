@@ -363,6 +363,7 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
     NSLog(@"------%@",contentDetail.data.contents.title);
     ContentdetailViewController *detail = [[ContentdetailViewController alloc]init];
     detail.isSearch = YES;
+    detail.contentDetail = contentDetail;
     [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:detail] animated:YES];
 }
 

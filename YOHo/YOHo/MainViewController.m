@@ -296,7 +296,7 @@
 -(void)getBannerDataWithChannelId:(NSString *)channId
 {
 
-    [RequestVideo getVideoBannersWithChannelId:channelId Success:^(NSArray *videoBanners) {
+    [RequestVideo getVideoBannersWithChannelId:channId Success:^(NSArray *videoBanners) {
         if ([_selectChannel isEqualToString:@"最新"]||[_selectChannel isEqualToString:@"男生资讯"]||[_selectChannel isEqualToString:@"女生资讯"]) {
             ContentTableViewController *con = contentVCs[tag];
             con.banners = videoBanners;
@@ -325,7 +325,7 @@
 {
     NSLog(@"mark=====%@",channId);
     
-    [RequestVideo getVideoSummeryWithChannelId:channelId Success:^(NSArray *videoSummeries) {
+    [RequestVideo getVideoSummeryWithChannelId:channId Success:^(NSArray *videoSummeries) {
         
         if ([_selectChannel isEqualToString:@"最新"]||[_selectChannel isEqualToString:@"男生资讯"]||[_selectChannel isEqualToString:@"女生资讯"]) {
             ContentTableViewController *con = contentVCs[tag];
@@ -545,9 +545,10 @@
     
     CGFloat offSetX = tag*WIDTH;
     contentScrollView.contentOffset = CGPointMake(offSetX, 0);
-    NSLog(@"channelId====%@",channelIds[tag]);
-    [self getBannerDataWithChannelId:channelIds[tag]];
-    [self getContentDataWithChannelId:channelIds[tag]];
+    NSString *channel = channelIds[tag];
+    NSLog(@"channelId====%@",channel);
+    [self getBannerDataWithChannelId:channel];
+    [self getContentDataWithChannelId:channel];
 }
 
 #pragma mark ==UIScrollViewDelegate

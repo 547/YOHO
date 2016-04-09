@@ -9,9 +9,7 @@
 #import "RequestVideo.h"
 
 @implementation RequestVideo
-//http://new.yohoboys.com/yohoboyins/v4/channel/contentList?parameters={"channelId":"7-21","language":"zh-Hans"}
 
-//banner==http://new.yohoboys.com/yohoboyins/v4/channel/banner?parameters={"channelId":"7-21","language":"zh-Hans"}
 
 +(void)requestVideoBannersWithChannelId:(NSString *)channelId Success:(void(^)(NSDictionary *responseDic))success
 {
@@ -38,6 +36,7 @@
 /**获取ContentVideoBanners*/
 +(void)getVideoBannersWithChannelId:(NSString *)channelId Success:(void(^)(NSArray *videoBanners))success
 {
+    NSLog(@"channelId====%@",channelId);
     [RequestVideo requestVideoBannersWithChannelId:channelId Success:^(NSDictionary *responseDic) {
         BannerInfo *banner = [BannerInfo modelObjectWithDictionary:responseDic];
         
@@ -74,6 +73,7 @@
 /**获取ContentVideoSummery*/
 +(void)getVideoSummeryWithChannelId:(NSString *)channelId Success:(void(^)(NSArray *videoSummeries))success
 {
+     NSLog(@"channelId====%@",channelId);
     [RequestVideo requestVideoSummeryWithChannelId:channelId Success:^(NSDictionary *responseDic) {
         VideoSum *videoSummery = [VideoSum modelObjectWithDictionary:responseDic];
         success(videoSummery.data.content);
