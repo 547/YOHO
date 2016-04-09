@@ -11,17 +11,18 @@
 #import <RESideMenu.h>
 #import "TypeViewController.h"
 #import <AVFoundation/AVFoundation.h>
-@interface ScanCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate,UIAlertViewDelegate>
+@interface ScanCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @end
 
 @implementation ScanCodeViewController
 {
+    UIImagePickerController *picker;//相册
     AVCaptureDevice *device;//这里代表抽象的硬件设备
     AVCaptureDeviceInput *input;//这里代表输入设备（可以是它的子类），它配置抽象硬件设备的ports
     AVCaptureMetadataOutput *output;//它代表输出数据，管理着输出到一个movie或者图像
     AVCaptureSession *session;//它是input和output的桥梁。它协调着intput到output的数据传输。
-    AVCaptureVideoPreviewLayer *preview;
+    AVCaptureVideoPreviewLayer *preview;//展示Layer
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,6 +53,12 @@
 -(void)toThePhotoAlbum
 {
     NSLog(@"前往相册");
+    picker = [[UIImagePickerController alloc]init];
+    picker.delegate = self;
+    picker.title = @"相册";
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self.sideMenuViewController presentViewController:picker animated:YES completion:nil];
+    
 
 }
 
@@ -64,46 +71,54 @@
      
      后来在扫描之前加了判断相机的访问权限
      **/
-    NSString *mediaType = AVMediaTypeVideo;
+//    NSString *mediaType = AVMediaTypeVideo;
     
-    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
-    
-    if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied || authStatus == AVAuthorizationStatusNotDetermined){
-        authStatus = AVAuthorizationStatusAuthorized;
-//        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"扫描二维码需要开启相机权限，是否开启？" delegate:self cancelButtonTitle:@"开启" otherButtonTitles:@"取消", nil];
-//        
-//        [alert show];
-//        return;
-    }
-    
+//    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+//    
+//    if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied || authStatus == AVAuthorizationStatusNotDetermined){
+//        authStatus = AVAuthorizationStatusAuthorized;
+////        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"扫描二维码需要开启相机权限，是否开启？" delegate:self cancelButtonTitle:@"开启" otherButtonTitles:@"取消", nil];
+////        
+////        [alert show];
+////        return;
+//    }
+    //1.初始化捕捉设备（AVCaptureDevice），类型为AVMediaTypeVideo
     device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     NSError *error = nil;
+    //2.用captureDevice初始化输入流
     input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
-    
+    if (!input) {
+        NSLog(@"%@",[error localizedDescription]);
+        return;
+    }
+    //3.初始化媒体数据输出流
     output = [[AVCaptureMetadataOutput alloc]init];
-    [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-    //设置扫描区域==因为系统默认的是全屏
-    [output setRectOfInterest:CGRectMake((124)/HEIGHT,((WIDTH-220)/2)/WIDTH,220/HEIGHT,220/WIDTH)];
-    
+     //4.实例化捕捉会话
     session = [[AVCaptureSession alloc]init];
+    //4.1.将输入流添加到会话
+    [session addInput:input];
+    //4.2.将媒体输出流添加到会话中
+    [session addOutput:output];
     [session setSessionPreset:AVCaptureSessionPresetHigh];
-    
-    if ([session canAddInput:input]) {
-        [session addInput:input];
-    }
-    if ([session canAddOutput:output]) {
-        [session addOutput:output];
-    }
-    
-    //条形码类型
-//    output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
-    output.metadataObjectTypes = [NSArray arrayWithObject:AVMetadataObjectTypeQRCode];
+    //5.创建串行队列，并加媒体输出流添加到队列当中
+    dispatch_queue_t dispatchQueue;
+    dispatchQueue = dispatch_queue_create("myQueue", NULL);
+    //5.1.设置代理
+     [output setMetadataObjectsDelegate:self queue:dispatchQueue];
+   //5.2.设置输出媒体数据类型为QRCode==//条形码类型
+    [output setMetadataObjectTypes:[NSArray arrayWithObject:AVMetadataObjectTypeQRCode]];
+     //6.实例化预览图层
     preview = [AVCaptureVideoPreviewLayer layerWithSession:session];
+    //7.设置预览图层填充方式
     preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
+   //8.设置图层的frame
     preview.frame = self.view.layer.bounds;
-    [self.view.layer insertSublayer:preview atIndex:0];
+    //9.将图层添加到预览view的图层上
+    [self.view.layer addSublayer:preview];
     
-    //开始
+   //10.设置扫描范围=== //设置扫描区域==因为系统默认的是全屏
+    [output setRectOfInterest:CGRectMake((124)/HEIGHT,((WIDTH-220)/2)/WIDTH,220/HEIGHT,220/WIDTH)];
+    //11.开始扫描
     [session startRunning];
 }
 
@@ -120,10 +135,42 @@
 }
 
 
-#pragma mark===UIAlertViewDelegate
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+#pragma mark===UIImagePickerControllerDelegate
+/**实现从相册中选择带有二维码的图片，然后用CIDetector解析图片中带的有二维码，CIDetector还可以用于人脸识别*/
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
+    
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    CIImage *ciImage = [CIImage imageWithCGImage:[image CGImage]];
+    CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy:CIDetectorAccuracyHigh}];
+   NSArray *features = [detector featuresInImage:ciImage];
+//遍历二维码
+    if (features.count>0) {
+        NSString *message = @"";
+        for (CIQRCodeFeature *fe in features) {
+            NSLog(@"%@",fe.messageString);
+            NSString *b = [NSString stringWithFormat:@"%@%@",message,fe.messageString];
+            message = [NSString stringWithFormat:@"%@\n",b];
+        }
+        [self showAlterViewWithTitle:@"温馨提示" message:message buttonTitle:@"确定"];
+    }else{
+        NSLog(@"你选的图片没有二维码");
+        [self showAlterViewWithTitle:@"温馨提示" message:@"你选的图片没有二维码" buttonTitle:@"确定"];
+    }
+}
 
+
+
+
+-(void)showAlterViewWithTitle:(NSString *)title message:(NSString *)message buttonTitle:(NSString *)buttonTitle
+{
+//    UIAlertController *alter= [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *action = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:nil];
+//    [alter addAction:action];
+//    [self presentViewController:alter animated:YES completion:nil];
+    
+    UIAlertView *alter = [[UIAlertView alloc]initWithTitle:title message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:buttonTitle, nil];
+    [alter show];
 }
 
 

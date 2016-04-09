@@ -70,7 +70,6 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self getChanelData];
-    
    
 }
 
@@ -80,6 +79,7 @@
     [super viewWillAppear:animated];
     
     [[UIApplication sharedApplication].delegate window].rootViewController = self.sideMenuViewController;
+    
     [self initUI];
     
 }

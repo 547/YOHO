@@ -16,6 +16,7 @@
 #import "LoginViewController.h"
 #import "SettingViewController.h"
 #import "ScanCodeViewController.h"
+#import "SearchViewController.h"
 @interface TypeViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -141,13 +142,16 @@
     switch (button.tag) {
         case 100:
             //搜索
+        {
+            SearchViewController *search = [[SearchViewController alloc]init];
+            [self goToOtherViewControll:search];
+        }
             break;
         case 101:
             //扫描
         {
             ScanCodeViewController *scan = [[ScanCodeViewController alloc]init];
-            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:scan] animated:YES];
-            [self.sideMenuViewController hideMenuViewController];
+            [self goToOtherViewControll:scan];
         }
             break;
         case 102:
@@ -157,8 +161,7 @@
             //设置
         {
             SettingViewController *setting = [[SettingViewController alloc]init];
-            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:setting] animated:YES];
-            [self.sideMenuViewController hideMenuViewController];
+            [self goToOtherViewControll:setting];
         }
             
             break;
@@ -167,6 +170,14 @@
             break;
     }
     
+}
+
+/**前往下一个页面**/
+-(void)goToOtherViewControll:(UIViewController *)vc
+{
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:vc] animated:YES];
+    [self.sideMenuViewController hideMenuViewController];
+
 }
 
 /**点击登录*/

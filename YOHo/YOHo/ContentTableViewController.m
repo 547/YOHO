@@ -92,9 +92,19 @@
         //        [web loadHTMLString:contentDetail.data.contents.content baseURL:nil];
         //        [self.view addSubview:web];
     }];
+}
+
+#pragma mark==请求相关推荐数据
+/**请求相关推荐数据*/
+-(void)getRecommendSumWithCIdOrLink:(NSString *)cId
+{
+    
+    __weak ContentTableViewController *weakSelf = self;
 
     
+    
 }
+
 
 
 

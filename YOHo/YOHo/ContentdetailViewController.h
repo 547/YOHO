@@ -14,5 +14,6 @@
 #import "DataModels.h"
 @interface ContentdetailViewController : UIViewController
 @property(nonatomic,strong)ContentENSObject *contentDetail;
+@property(nonatomic,strong)RecommendSum *recommendSum;
 @property(nonatomic,copy)NSString *selectChannel;
 @end

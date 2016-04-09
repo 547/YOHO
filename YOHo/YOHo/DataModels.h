@@ -30,3 +30,14 @@
 #import "VideoContent.h"
 #import "VideoChannel.h"
 #import "VideoSum.h"
+
+/**Recommend**/
+#import "RecommendData.h"
+#import "RecommendSum.h"
+
+/***Search***/
+#import "SearchTWData.h"
+#import "SearchTWChannel.h"
+#import "SearchTWList.h"
+#import "SearchTWResult.h"
+#import "SearchFWResult.h"
