@@ -10,6 +10,7 @@
 #import <NSAttributedString+HTML.h>
 #import <DTAttributedTextView.h>
 #import <UIView+SDAutoLayout.h>
+#import "SearchViewController.h"
 @interface ContentdetailViewController ()<UIWebViewDelegate,UIScrollViewDelegate>
 
 @end
@@ -109,9 +110,17 @@
 /**返回主页**/
 -(void)backMian
 {
-    MainViewController *main = [[MainViewController alloc]init];
-    main.selectChannel = self.selectChannel;
-    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc]initWithRootViewController:main ] animated:YES];
+    if (_isSearch) {
+        //
+        SearchViewController *search = [[SearchViewController alloc]init];
+        [self.sideMenuViewController setContentViewController:[[UINavigationController alloc]initWithRootViewController:search ] animated:YES];
+    }else
+    {
+        MainViewController *main = [[MainViewController alloc]init];
+        main.selectChannel = self.selectChannel;
+        [self.sideMenuViewController setContentViewController:[[UINavigationController alloc]initWithRootViewController:main ] animated:YES];
+    }
+    
 }
 
 #pragma mark===UIWebViewDelegate

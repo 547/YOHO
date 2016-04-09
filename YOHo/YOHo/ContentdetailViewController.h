@@ -16,4 +16,5 @@
 @property(nonatomic,strong)ContentENSObject *contentDetail;
 @property(nonatomic,strong)RecommendSum *recommendSum;
 @property(nonatomic,copy)NSString *selectChannel;
+@property(nonatomic,unsafe_unretained)BOOL isSearch;
 @end

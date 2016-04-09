@@ -163,10 +163,17 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    VideoContent *content = _contents[indexPath.row];
-//    ContentClass *content = _contents[indexPath.row];
-    NSString *cId = content.cid;
+    NSString *cId = nil;
+   if (_isSearch) {
+        SearchTWList *list = _contents[indexPath.row];
+        cId = list.cid;
+    }else{
+        VideoContent *content = _contents[indexPath.row];
+        //    ContentClass *content = _contents[indexPath.row];
+        cId = content.cid;
+    }
     [self getContentDetailWithCIdOrLink:cId];
+
 }
 /*
 // Override to support conditional editing of the table view.

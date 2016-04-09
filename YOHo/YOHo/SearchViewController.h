@@ -11,6 +11,7 @@
 #import "Data.h"
 #import <UIView+SDAutoLayout.h>
 #import "MainTableViewCell.h"
+#import "ContentdetailViewController.h"
 @interface SearchViewController : UIViewController
 
 @end

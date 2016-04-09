@@ -11,7 +11,7 @@
 #import "RequestSearch.h"
 #import "ContentTableViewController.h"
 #import <UIView+SDAutoLayout.h>
-@interface SearchViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface SearchViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,ContentTableViewControllerDelegate>
 typedef NS_ENUM(NSInteger, ShowTableType) {
     ShowTableTypeDefault = 0,//不展示tableView
     ShowTableTypeEsayList = 1,//展示简单的cell的表
@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
 
 @implementation SearchViewController
 {
+    BOOL haveClicked;
     NSMutableArray *historyLists;
     UIView *searchView;
     UITextField *searchText;
@@ -34,8 +35,9 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    haveClicked = NO;//默认没有点击搜索按钮
     self.automaticallyAdjustsScrollViewInsets = NO;
-    historyLists = [[NSMutableArray alloc]init];
+    historyLists = [[NSMutableArray alloc]initWithCapacity:0];
     self.tableType = 0;
     [self initUI];
 }
@@ -60,36 +62,13 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
         case 0:
             //不展示
         {
-            if (_clearHistory != nil) {
-                [_clearHistory removeFromSuperview];
-            }
-            if (_content != nil) {
-                [_content.view removeFromSuperview];
-            }
-            if (_resultTable != nil) {
-                [_resultTable removeFromSuperview];
-            }
-            if (_resultCount != nil) {
-                [_resultCount removeFromSuperview];
-            }
-
+            [self removeAllView];
         }
             break;
         case 1:
             //展示简单
         {
-            if (_clearHistory != nil) {
-                [_clearHistory removeFromSuperview];
-            }
-            if (_content != nil) {
-                [_content.view removeFromSuperview];
-            }
-            if (_resultCount != nil) {
-                [_resultCount removeFromSuperview];
-            }
-            if (_resultTable != nil) {
-                [_resultCount removeFromSuperview];
-            }
+            [self removeAllView];
 
             [self showResultTable];
 
@@ -98,19 +77,7 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
         case 2:
             //展示图文
         {
-            if (_clearHistory != nil) {
-                [_clearHistory removeFromSuperview];
-            }
-            if (_content != nil) {
-                [_content.view removeFromSuperview];
-            }
-            if (_resultTable != nil) {
-                [_resultTable removeFromSuperview];
-            }
-            if (_resultCount != nil) {
-                [_resultCount removeFromSuperview];
-            }
-
+            [self removeAllView];
             [self showResultCount];
             [self showContent];
         }
@@ -118,19 +85,7 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
         case 3:
             //展示清除按钮
         {
-            if (_clearHistory != nil) {
-                [_clearHistory removeFromSuperview];
-            }
-            if (_content != nil) {
-                [_content.view removeFromSuperview];
-            }
-            if (_resultTable != nil) {
-                [_resultTable removeFromSuperview];
-            }
-            if (_resultCount != nil) {
-                [_resultCount removeFromSuperview];
-            }
-
+            [self removeAllView];
             [self showResultTable];
             [self showClearHistory];
         }
@@ -140,10 +95,29 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
     }
 }
 
+/**清除所有的视图*/
+-(void)removeAllView
+{
+    if (_clearHistory != nil) {
+        [_clearHistory removeFromSuperview];
+    }
+    if (_content != nil) {
+        [_content.view removeFromSuperview];
+    }
+    if (_resultTable != nil) {
+        [_resultTable removeFromSuperview];
+    }
+    if (_resultCount != nil) {
+        [_resultCount removeFromSuperview];
+    }
+
+}
+
 /**清除历史记录**/
 -(void)clearHistory:(UIButton *)button
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"historyLists"];
+    [historyLists removeAllObjects];
     self.tableType = 0;
 }
 
@@ -166,11 +140,12 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
     [_clearHistory setTitle:@"清除历史记录" forState:UIControlStateNormal];
     [_clearHistory setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [_clearHistory addTarget:self action:@selector(clearHistory:) forControlEvents:UIControlEventTouchUpInside];
-    _clearHistory.sd_layout
-    .centerXEqualToView(self.view)
-    .topSpaceToView(_resultTable,10)
-    .heightIs(30*HEIGHTMULTIPLE)
-    .widthIs(80*WIDTHMULTIPLE);
+    CGFloat h = 30*HEIGHTMULTIPLE;
+    CGFloat y = _resultTable.frame.origin.y+_resultTable.frame.size.height+h*5;
+    _clearHistory.center = CGPointMake(self.view.center.x, y);
+    _clearHistory.bounds = CGRectMake(0, 0, 130*WIDTHMULTIPLE, h);
+    [self.view addSubview:_clearHistory];
+
 
 }
 
@@ -179,22 +154,23 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
 -(void)showResultTable
 {
     _resultTable = [[UITableView alloc]init];
+    [self.view addSubview:_resultTable];
     _resultTable.delegate = self;
     _resultTable.dataSource = self;
-    //        _resultTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_resultTable registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    [self.view addSubview:_resultTable];
     _resultTable.sd_layout
     .leftEqualToView(searchView)
     .topSpaceToView(searchView,0)
     .rightEqualToView(searchView)
-    .heightIs(HEIGHT-searchView.frame.origin.y-searchView.frame.size.height);
+    .heightIs(44*results.count);
 }
 
 -(void)showContent
 {
     _content = [[ContentTableViewController alloc]init];
     _content.contents = results;
+    _content.delegate = self;
+    _content.isSearch = YES;
     CGFloat y =  _resultCount.frame.origin.y+_resultCount.frame.size.height;
     _content.view.frame = CGRectMake(0,y, searchView.frame.size.width, HEIGHT-y);
     [self.view addSubview:_content.view];
@@ -215,7 +191,7 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
     searchText = [[UITextField alloc]init];
     searchText.borderStyle = UITextBorderStyleRoundedRect;
     searchText.delegate = self;
-    searchText.clearButtonMode = UITextFieldViewModeWhileEditing;
+    searchText.clearButtonMode = UITextFieldViewModeUnlessEditing;
     searchText.placeholder = @"请输入搜索关键字";
     searchText.leftViewMode = UITextFieldViewModeAlways;
     UIImageView *leftView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"search-pressed.png"]];
@@ -250,6 +226,17 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
             results = result.data;
             self.tableType = 1;
         }];
+    }else{
+        NSLog(@"搜索框内为空，要不要展示历史搜索记录，如果点击了搜索就要展示，没有点击就什么都不展示");
+        if (haveClicked || historyLists.count>0) {
+            NSLog(@"展示历史记录");
+            results = historyLists;
+            self.tableType = 3;
+        }else{
+            NSLog(@"什么都不展示");
+            self.tableType = 0;
+        }
+        
     }
     
 }
@@ -275,15 +262,18 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     NSString *data = results[indexPath.row];
-    if ([data containsString:@"<br/>"]) {
-      NSArray *subData = [data componentsSeparatedByString:@"<br/>"];
-        cell = [cell initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
-        cell.textLabel.text = subData[0];
-        cell.detailTextLabel.text = subData[1];
-    }else{
-        cell = [cell initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        cell.textLabel.text = data;
-    }
+
+        if ([data containsString:@"<br/>"]) {
+            NSArray *subData = [data componentsSeparatedByString:@"<br/>"];
+            cell = [cell initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+            cell.textLabel.text = subData[0];
+            cell.detailTextLabel.text = subData[1];
+        }else{
+            cell = [cell initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+            cell.textLabel.text = data;
+        }
+
+
     
     return cell;
 }
@@ -293,11 +283,16 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [searchText endEditing:YES];
     NSString *data = results[indexPath.row];
-    [historyLists addObject:data];//保存搜索历史记录
+    if (![historyLists containsObject:data]) {
+        [historyLists addObject:data];//保存搜索历史记录
+    }
+    
     if ([data containsString:@"<br/>"]) {
         NSArray *subData = [data componentsSeparatedByString:@"<br/>"];
         data = subData[0];
     }
+    searchText.text = data;
+    haveClicked = YES;
     [self requestDataWithString:data];
 }
 
@@ -316,8 +311,9 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
 {
     [textField endEditing:YES];
     if (textField.text.length>0) {
-        [historyLists addObject:textField.text];//保存搜索历史记录
-        
+        if (![historyLists containsObject:textField.text]) {
+            [historyLists addObject:textField.text];//保存搜索历史记录
+        }        haveClicked = YES;
         //点击键盘的按钮查找最终结果
         [self requestDataWithString:textField.text];
     }
@@ -330,6 +326,9 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
 {
     [super viewWillDisappear:animated];
     NSUserDefaults *use = [NSUserDefaults standardUserDefaults];
+    for (NSString *da in historyLists) {
+        NSLog(@"WillAppear=====%@",da);
+    }
     [use setObject:historyLists forKey:@"historyLists"];
     [use synchronize];//立即存储
 }
@@ -340,10 +339,12 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
 {
     [super viewWillAppear:animated];
     NSUserDefaults *use = [NSUserDefaults standardUserDefaults];
-   historyLists = (NSMutableArray *)[use objectForKey:@"historyLists"];
+   NSArray *array = [use objectForKey:@"historyLists"];
     
+    historyLists = [[NSMutableArray alloc]initWithArray:array];
     if (historyLists.count>0) {
         //需要展示简单cell的tableview
+        results = historyLists;
         self.tableType = 3;
     }else{
         self.tableType = 0;
@@ -354,6 +355,15 @@ typedef NS_ENUM(NSInteger, ShowTableType) {
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
+}
+
+#pragma mark==ContentTableViewControllerDelegate
+-(void)contentGetContentDetail:(ContentENSObject *)contentDetail
+{
+    NSLog(@"------%@",contentDetail.data.contents.title);
+    ContentdetailViewController *detail = [[ContentdetailViewController alloc]init];
+    detail.isSearch = YES;
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:detail] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

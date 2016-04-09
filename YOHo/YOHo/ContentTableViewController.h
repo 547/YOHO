@@ -19,10 +19,11 @@
 @property(nonatomic,strong)NSArray *contents;
 @property(nonatomic,strong)NSMutableArray *items;
 @property(nonatomic,strong)NSArray *banners;
+@property(nonatomic,unsafe_unretained)BOOL isSearch;
 @property(nonatomic,unsafe_unretained)id<ContentTableViewControllerDelegate>delegate;
 @end
 @protocol ContentTableViewControllerDelegate <NSObject>
 
 -(void)contentGetContentDetail:(ContentENSObject *)contentDetail;
-
+-(void)contentGetSearchResultDetail:(SearchTWList *)searchResultDetail;
 @end
