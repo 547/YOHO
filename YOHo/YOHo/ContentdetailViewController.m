@@ -62,6 +62,12 @@
     
 }
 
+/**创建表情视图*/
+-(void)createExpressionView
+{
+
+}
+
 /**使用第三方富文本展示html**/
 -(void)useRichText
 {
