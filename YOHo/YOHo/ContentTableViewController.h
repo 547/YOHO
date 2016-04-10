@@ -25,5 +25,5 @@
 @protocol ContentTableViewControllerDelegate <NSObject>
 
 -(void)contentGetContentDetail:(ContentENSObject *)contentDetail;
--(void)contentGetSearchResultDetail:(SearchTWList *)searchResultDetail;
+-(void)contentGetExpression:(CommentExpression *)expression;
 @end

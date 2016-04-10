@@ -189,7 +189,7 @@
 
     [self presentViewController:login animated:YES completion:nil];
     
-    [self backMianWitnChannel:@"最新"];
+//    [self backMianWitnChannel:@"最新"];
 }
 
 

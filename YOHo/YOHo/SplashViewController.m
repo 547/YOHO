@@ -22,10 +22,13 @@
 
 @implementation SplashViewController
 {
-    
+    int d;
+    UIButton *ignoreButton;
+    NSTimer *timer;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    d = 5;
     [self initUI];
     [RequestAppInfo saveVersion];
 //    [RequestSettinginfo saveSetting];
@@ -47,30 +50,52 @@
 {
 //广告
     UIImageView *splashImageView = [[UIImageView alloc]init];
-    splashImageView.frame = CGRectMake(0, 0, WIDTH, HEIGHT);
-
+    splashImageView.center = self.view.center;
+    splashImageView.bounds = CGRectMake(0, 0, WIDTH+100, HEIGHT+100);
     [RequestSplashImage getSplashImageSuccess:^(NSString *picUrl) {
         NSLog(@"%@",picUrl);
     [splashImageView sd_setImageWithURL:[NSURL URLWithString:picUrl]];
     }];
     [self.view addSubview:splashImageView];
-    NSString *buttonTitle = @"跳过 3S";
+
+    [UIView animateWithDuration:2 animations:^{
+        splashImageView.frame = CGRectMake(0, 0, WIDTH, HEIGHT);
+    }];
+    
+    
 //跳过按钮
-    UIButton *ignoreButton = [[UIButton alloc]init];
+    ignoreButton = [[UIButton alloc]init];
     ignoreButton.frame = CGRectMake(IGNOREBUTTONX*WIDTHMULTIPLE, IGNOREBUTTONY*HEIGHTMULTIPLE, IGNOREBUTTONW*WIDTHMULTIPLE, IGNOREBUTTONH);
     ignoreButton.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.7];
     ignoreButton.layer.cornerRadius
     = 6;
     ignoreButton.layer.masksToBounds = YES;
-    [ignoreButton setTitle:buttonTitle forState:UIControlStateNormal];
+
     [ignoreButton addTarget:self action:@selector(goToMain) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:ignoreButton];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeSplash:) userInfo:nil repeats:YES];
+    [timer fire];
+}
+
+-(void)changeSplash:(NSTimer *)timer
+{
+    d -= 1;
+    NSString *buttonTitle = [NSString stringWithFormat:@"跳过 %d",d];
+    [ignoreButton setTitle:buttonTitle forState:UIControlStateNormal];
+    if (d == 0) {
+        [timer invalidate];
+        [self performSelector:@selector(goToMain) withObject:self afterDelay:1];
+    }
 }
 
 
 /**前往主界面*/
 -(void)goToMain
 {
+    if (timer) {
+        [timer invalidate];
+    }
     MainViewController *main = [[MainViewController alloc]init];
     TypeViewController *type = [[TypeViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:main];

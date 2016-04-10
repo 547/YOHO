@@ -1,18 +1,18 @@
 //
-//  ContentENSObject.h
+//  CommentExpression.h
 //
-//  Created by mac  on 16/4/1
+//  Created by mac  on 16/4/9
 //  Copyright (c) 2016 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@class ContentEData;
+@class CommentData;
 
-@interface ContentENSObject : NSObject <NSCoding, NSCopying>
-@property (nonatomic, unsafe_unretained) BOOL isOne;
+@interface CommentExpression : NSObject <NSCoding, NSCopying>
+
 @property (nonatomic, strong) NSString *status;
-@property (nonatomic, strong) ContentEData *data;
+@property (nonatomic, strong) CommentData *data;
 @property (nonatomic, assign) double code;
 @property (nonatomic, strong) NSString *message;
 

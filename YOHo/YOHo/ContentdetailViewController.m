@@ -7,21 +7,26 @@
 //
 
 #import "ContentdetailViewController.h"
-#import <NSAttributedString+HTML.h>
-#import <DTAttributedTextView.h>
-#import <UIView+SDAutoLayout.h>
-#import "SearchViewController.h"
+
 @interface ContentdetailViewController ()<UIWebViewDelegate,UIScrollViewDelegate>
 
 @end
 
 @implementation ContentdetailViewController
 {
+    BOOL isCancel;
+    NSMutableArray *canceles;
     DTAttributedTextView *dtTextView;
+    NSMutableArray *expressiones;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isCancel = NO;//默认不取消
+   
+    canceles = [[NSMutableArray alloc]initWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO], nil];
+    expressiones = [[NSMutableArray alloc]initWithCapacity:3];
     [self initUI];
+    [self getExpression];
 }
 
 
@@ -36,17 +41,72 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(backMian)];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(comments)];
+    
     [self addWebView];
     [self addToolbar];
-//    [self useRichText];
     
     
 }
 
+/**前往评论页面**/
+-(void)comments
+{
+
+}
+
+/**请求表情*/
+-(void)getExpression
+{
+    NSString *app = @"2";
+    NSString *cId = _contentDetail.data.contents.cid;
+    __weak ContentdetailViewController *weakSelf = self;
+    if (_contentDetail.isOne) {
+        app = @"1";
+        [RequestContentDetail getExpressionWithCIdOrLink:cId app:app Success:^(CommentExpression *expre) {
+            [weakSelf changeButtonTitleWith:expre];
+        }];
+    }else{
+        [RequestContentDetail getExpressionWithCIdOrLink:cId app:app Success:^(CommentExpression *expre) {
+            [weakSelf changeButtonTitleWith:expre];
+        }];
+    }
+}
+
+/**改变表情按钮的title**/
+-(void)changeButtonTitleWith:(CommentExpression *)ex
+{
+    
+    double tit = 0;
+    for (int i=0; i<3; i++) {
+        UIButton *bu = expressiones[i];
+        switch (i) {
+            case 0:
+                tit = ex.data.wowCount;
+                break;
+            case 1:
+                tit = ex.data.zzzCount;
+                break;
+            case 2:
+                tit = ex.data.wtfCount;
+                break;
+            default:
+                break;
+        }
+        if (tit>0) {
+            NSString *title = [NSString stringWithFormat:@"%0.0f",tit];
+            NSLog(@"tit===%@",title);
+            [bu setTitle:title forState:UIControlStateNormal];
+        }
+        
+        
+    }
+}
 
 /**添加假工具栏**/
 -(void)addToolbar
 {
+    NSArray *strs = @[@"wow",@"zzz",@"wtf"];
     UIView *bottomView = [[UIView alloc]init];
     [self.view addSubview:bottomView];
 
@@ -56,17 +116,113 @@
     .bottomSpaceToView(self.view,0)
     .heightIs(BARHEIGHT);
     
-//    for (int i=0; i; <#increment#>) {
-//        <#statements#>
-//    }
+    UILabel *line = [[UILabel alloc]init];
+    [bottomView addSubview:line];
+    line.backgroundColor = [UIColor lightGrayColor];
+    line.sd_layout
+    .leftSpaceToView(bottomView,0)
+    .topSpaceToView(bottomView,0)
+    .rightSpaceToView(bottomView,0)
+    .heightIs(0.5);
+    
+    UIButton *share = [[UIButton alloc]init];
+    [bottomView addSubview:share];
+    share.sd_layout
+    .centerYEqualToView(bottomView)
+    .rightSpaceToView(bottomView,10)
+    .widthIs(40)
+    .heightEqualToWidth();
+    [share setBackgroundImage:[UIImage imageNamed:@"content_shareIconBlack_highlighted.png"] forState:UIControlStateNormal];
+    [share addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    CGFloat margin = 10*WIDTHMULTIPLE;
+    CGFloat w = 50;
+    CGFloat hei = 20;
+    CGFloat y = (bottomView.frame.size.height - hei)*0.5;
+    for (int i=0; i<3; i++) {
+        UIButton *button = [[UIButton alloc]init];
+//        button.backgroundColor = [UIColor redColor];
+        [bottomView addSubview:button];
+        [expressiones addObject:button];
+        button.tag = i+100;
+        int h = i%3;
+        CGFloat x = margin+(w+margin)*h;
+        button.frame = CGRectMake(x, y, w, hei);
+        NSString *imageName = [NSString stringWithFormat:@"ar_%d.png",i];
+        [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        //button图片的偏移量，距上左下右分别(10, 10, 10, 60)像素点
+        button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 30);
+        [button addTarget:self action:@selector(changeExpression:) forControlEvents:UIControlEventTouchUpInside];
+        NSString *title = strs[i];
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        //button标题的偏移量，这个偏移量是相对于图片的
+        button.titleEdgeInsets = UIEdgeInsetsMake(10, -10, 0, 0);
+        button.titleLabel.font = [UIFont systemFontOfSize:12];
+    }
     
 }
 
-/**创建表情视图*/
--(void)createExpressionView
+/**改变表情视图*/
+-(void)changeExpression:(UIButton *)button
 {
-
+    NSLog(@"改变表情视图");
+    int tag = button.tag - 100;
+    NSString *type = [NSString stringWithFormat:@"%d",tag];
+    isCancel = [canceles[tag] boolValue];
+    if (isCancel) {
+        [self cancelExpressionWithType:type];
+    }else{
+        [self commitExpressionWithType:type];
+    }
+    
+    
+    
 }
+
+/**分享**/
+-(void)share:(UIButton *)button
+{
+    NSLog(@"分享");
+}
+
+/**取消表情*/
+-(void)cancelExpressionWithType:(NSString *)type
+{
+    BOOL isOne = self.contentDetail.isOne;
+    NSString *app = @"2";
+    if (isOne) {
+        app = @"1";
+    }
+    __weak ContentdetailViewController *weakSelf = self;
+    [RequestCommendExpression cancelCommendExpressiontWithCid:self.contentDetail.data.contents.cid app:app type:type Success:^(BOOL success) {
+        if (success) {
+            isCancel = !isCancel;
+            [canceles replaceObjectAtIndex:[type intValue] withObject:[NSNumber numberWithBool:isCancel]];
+            [weakSelf getExpression];
+        }
+    }];
+}
+
+/**提交表情**/
+-(void)commitExpressionWithType:(NSString *)type
+{
+    BOOL isOne = self.contentDetail.isOne;
+    NSString *app = @"2";
+    if (isOne) {
+        app = @"1";
+    }
+    __weak ContentdetailViewController *weakSelf = self;
+    [RequestCommendExpression postCommendExpressiontWithCid:self.contentDetail.data.contents.cid app:app type:type Success:^(BOOL success) {
+        if (success) {
+            isCancel = !isCancel;
+            [canceles replaceObjectAtIndex:[type intValue] withObject:[NSNumber numberWithBool:isCancel]];
+            [weakSelf getExpression];
+        }
+    }];
+}
+
 
 /**使用第三方富文本展示html**/
 -(void)useRichText

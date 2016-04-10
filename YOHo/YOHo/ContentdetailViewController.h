@@ -12,6 +12,12 @@
 #import <RESideMenu.h>
 #import "MainViewController.h"
 #import "DataModels.h"
+#import <NSAttributedString+HTML.h>
+#import <DTAttributedTextView.h>
+#import <UIView+SDAutoLayout.h>
+#import "SearchViewController.h"
+#import "RequestContentDetail.h"
+#import "RequestCommendExpression.h"
 @interface ContentdetailViewController : UIViewController
 @property(nonatomic,strong)ContentENSObject *contentDetail;
 @property(nonatomic,strong)RecommendSum *recommendSum;

@@ -89,6 +89,8 @@
 }
 
 
+
+
 +(void)getContentWithCIdOrLinkForApp1:(NSString *)cId Success:(void(^)(NSDictionary *responseDic))success
 {
     
@@ -124,5 +126,46 @@
     }];
     
 }
+
+
+
++(void)requestExpressionWithCIdOrLink:(NSString *)cId app:(NSString *)app Success:(void(^)(NSDictionary *responseDic))success
+{
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://new.yohoboys.com/yohoboyins/v4/channel/getExpression?parameters={\"app\":%@,\"curVersion\":\"4.0.3\",\"uid\":\"16F57C61-B466-46C7-A37A-49D62F526B0C\",\"cid\":%@}",app,cId];
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //如果服务器提供的是text/html的就要设置接受类型，否则会报错Request failed: unacceptable content-type: text/html"====这句话的意思是需要设置content-type的为text/html
+    manager.responseSerializer.acceptableContentTypes =  [NSSet setWithObject:@"text/html"];
+    
+    [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dic = (NSDictionary *)responseObject;
+        success(dic);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求出错：%@",error);
+    }];
+    
+}
+
+
+/**获取表情==app*/
++(void)getExpressionWithCIdOrLink:(NSString *)cId app:(NSString *)app Success:(void(^)(CommentExpression *expre))success
+{
+    //    NSLog(@"=000=======%@",cId);
+    
+    [RequestContentDetail requestExpressionWithCIdOrLink:(NSString *)cId app:(NSString *)app Success:^(NSDictionary *responseDic) {
+        
+        CommentExpression *expression = [CommentExpression modelObjectWithDictionary:responseDic];
+       
+        success(expression);
+    }];
+    
+}
+
+
 
 @end

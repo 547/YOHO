@@ -89,10 +89,12 @@
         NSLog(@"-----%@",contentDetail);
         if (contentDetail.code == 400000) {
             [RequestContentDetail getContentDetailWithCIdOrLinkForApp1:cId Success:^(ContentENSObject *detail) {
+                detail.isOne = YES;
                 [weakSelf.delegate contentGetContentDetail:detail];
             }];
+            
         }else{
-        
+        contentDetail.isOne = NO;
         [weakSelf.delegate contentGetContentDetail:contentDetail];
         }
         

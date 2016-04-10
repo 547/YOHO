@@ -197,6 +197,22 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGSize size = scrollView.contentSize;
+    NSLog(@"--sh-%f++++==%f",size.height,scrollView.contentOffset.y);
+    CGFloat y = scrollView.contentOffset.y;
+    if (y<=0) {
+        [scrollView setContentOffset:CGPointZero animated:NO];
+        
+    }
+    if (y>=size.height-scrollView.frame.size.height) {
+        [scrollView setContentOffset:CGPointMake(0, size.height-scrollView.frame.size.height) animated:NO];
+    }
+    
+}
+
+
 #pragma mark==为collectionView添加区头
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section

@@ -24,12 +24,19 @@
     UILabel *selectedCoun;
     UILabel *moLa;
     NSArray *numbers;
-//    @property(nonatomic,strong)NSString *selectCountry;
-//    @property(nonatomic,unsafe_unretained)int selectedRow;
+    UIImageView *yohoImage;
+    UIButton *familyButoon;
+    UITextField *userText;
+    UITextField *pawText;
+    UIButton *loginButton;
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    NSNotificationCenter *center  = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(changeView) name:UIKeyboardWillShowNotification object:nil];
+    [center addObserver:self selector:@selector(restoreView) name:UIKeyboardWillHideNotification object:nil];
     numbers = @[@"61",@"82",@"1",@"60",@"1",@"81",@"65",@"44",@"86",@"853",@"886",@"852"];
     [self initUI];
 }
@@ -66,16 +73,13 @@
 -(UIView *)setLoginView
 {
     UIView *loginView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
-//    [self.view addSubview:loginView];
-//    loginView.backgroundColor = [UIColor redColor];
-//    loginView.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.3];
-    UIImageView *yohoImage = [[UIImageView alloc]init];
+    yohoImage = [[UIImageView alloc]init];
     yohoImage.center = CGPointMake(WIDTH*0.5, 50);
     yohoImage.bounds = CGRectMake(0, 0, 160*WIDTHMULTIPLE, 100*HEIGHTMULTIPLE);
     yohoImage.image = [UIImage imageNamed:@"yoHo"];
     [loginView addSubview:yohoImage];
     
-    UIButton *familyButoon = [[UIButton alloc]init];
+    familyButoon = [[UIButton alloc]init];
     familyButoon.center = CGPointMake(yohoImage.center.x, yohoImage.frame.size.height+20);
     familyButoon.bounds = CGRectMake(0, 0, yohoImage.frame.size.width+20, 20);
     familyButoon.font = [UIFont systemFontOfSize:12];
@@ -84,7 +88,7 @@
     [familyButoon addTarget:self action:@selector(showAlterView) forControlEvents:UIControlEventTouchUpInside];
     [loginView addSubview:familyButoon];
     
-    UITextField *userText = [[UITextField alloc]init];
+    userText = [[UITextField alloc]init];
     userText.clearButtonMode = UITextFieldViewModeWhileEditing;
     userText.center = CGPointMake(loginView.center.x, familyButoon.frame.size.height+familyButoon.frame.origin.y+40);
     userText.bounds = CGRectMake(0, 0, WIDTH-20,40);
@@ -92,7 +96,7 @@
     userText.borderStyle = UITextBorderStyleRoundedRect;
     [loginView addSubview:userText];
     
-    UITextField *pawText = [[UITextField alloc]init];
+    pawText = [[UITextField alloc]init];
     pawText.clearButtonMode = UITextFieldViewModeWhileEditing;
     pawText.center = CGPointMake(loginView.center.x, userText.frame.size.height+userText.frame.origin.y+30);
     pawText.bounds = CGRectMake(0, 0, WIDTH-20,40);
@@ -101,7 +105,7 @@
     pawText.borderStyle = UITextBorderStyleRoundedRect;
     [loginView addSubview:pawText];
     
-    UIButton *loginButton = [[UIButton alloc]init];
+    loginButton = [[UIButton alloc]init];
     loginButton.center = CGPointMake(loginView.center.x, pawText.frame.size.height+pawText.frame.origin.y+30);
     loginButton.bounds = CGRectMake(0, 0, pawText.frame.size.width,pawText.frame.size.height);
     loginButton.layer.cornerRadius = 6;
@@ -307,13 +311,36 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+/**键盘将要弹起来**/
+-(void)changeView
+{
+    NSLog(@"键盘将要弹起来");
+    CGFloat y = 110;
+    yohoImage.frame = CGRectMake(userText.frame.origin.x, yohoImage.frame.origin.y, yohoImage.frame.size.width*0.3, yohoImage.frame.size.height*0.3);
+    familyButoon.hidden = YES;
+    userText.frame = CGRectMake(userText.frame.origin.x, userText.frame.origin.y-y, userText.frame.size.width, userText.frame.size.height);
+    pawText.frame = CGRectMake(pawText.frame.origin.x, pawText.frame.origin.y-y, pawText.frame.size.width, pawText.frame.size.height);
+    loginButton.frame = CGRectMake(loginButton.frame.origin.x, loginButton.frame.origin.y-y, loginButton.frame.size.width, loginButton.frame.size.height);
+}
+
+/**键盘收起来==视图恢复*/
+-(void)restoreView
+{
+    CGFloat y = 110;
+    yohoImage.center = CGPointMake(WIDTH*0.5, 50);
+    yohoImage.bounds = CGRectMake(userText.frame.origin.x, yohoImage.frame.origin.y, yohoImage.frame.size.width/0.3, yohoImage.frame.size.height/0.3);
+    familyButoon.hidden = NO;
+    userText.frame = CGRectMake(userText.frame.origin.x, userText.frame.origin.y+y, userText.frame.size.width, userText.frame.size.height);
+    pawText.frame = CGRectMake(pawText.frame.origin.x, pawText.frame.origin.y+y, pawText.frame.size.width, pawText.frame.size.height);
+    loginButton.frame = CGRectMake(loginButton.frame.origin.x, loginButton.frame.origin.y+y, loginButton.frame.size.width, loginButton.frame.size.height);
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
 
     
     [select getSelectedInfo:^(NSString *country, int selectRow) {
         if (country != nil) {
-//            NSLog(@"===%@===%d",country,selectRow);
             selectedCoun.text = country;
             moLa.text = [NSString stringWithFormat:@"+%@",numbers[selectRow]];
         }
@@ -328,7 +355,6 @@
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
-
     [scroll endEditing:YES];
 }
 

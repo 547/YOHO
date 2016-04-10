@@ -52,6 +52,11 @@
     leftCollection.delegate = self;
     leftCollection.dataSource = self;
     [self.view addSubview:leftCollection];
+//    leftCollection.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        //刷新
+//        [self performSelector:@selector(JSX) withObject:nil afterDelay:1];
+//    }];
+    
     
     UICollectionViewFlowLayout *rightFlow = [[UICollectionViewFlowLayout alloc]init];
     
@@ -66,13 +71,38 @@
     rightCollection.delegate = self;
     rightCollection.dataSource = self;
     [self.view addSubview:rightCollection];
+    //下拉刷新
+   rightCollection.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        //刷新
+       [self performSelector:@selector(getData) withObject:nil afterDelay:1];
+    }];
     
     leftFlow.itemSize = CGSizeMake(leftCollection.frame.size.width,rightFlow.itemSize.height);
 }
 
+/**假刷新**/
+-(void)JSX
+{
+    [self endRefresh];
+}
+
+/**停止刷新*/
+-(void)endRefresh
+{
+    if (rightCollection.mj_header) {
+        [rightCollection.mj_header endRefreshing];
+
+    }
+//    if (leftCollection.mj_header) {
+//        [leftCollection.mj_header endRefreshing];
+//    }
+    
+}
+
+/**获取数据*/
 -(void)getData
 {
-    
+    [self endRefresh];
     [RequestWallPaper getWallPapersSummerySuccess:^(NSArray *wallPapers) {
         _rightDatas = wallPapers;
         NSString *mon = nil;

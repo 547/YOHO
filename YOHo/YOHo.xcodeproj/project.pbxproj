@@ -558,6 +558,21 @@
 		04DFEF4E1CAE1B9A004C7F26 /* ChannelClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DFEF4D1CAE1B9A004C7F26 /* ChannelClass.m */; };
 		04E0A70A1CB55C83005115A0 /* ScanCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E0A7091CB55C83005115A0 /* ScanCodeViewController.m */; };
 		04E3F4181CB50EE100A857B0 /* SingWallPaperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E3F4171CB50EE100A857B0 /* SingWallPaperViewController.m */; };
+		04E59CA81CB8F80B00B1DF70 /* CommentData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E59CA51CB8F80B00B1DF70 /* CommentData.m */; };
+		04E59CA91CB8F80B00B1DF70 /* CommentExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E59CA71CB8F80B00B1DF70 /* CommentExpression.m */; };
+		04E59CB61CB8F96D00B1DF70 /* ar_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E59CAA1CB8F96D00B1DF70 /* ar_0.png */; };
+		04E59CB71CB8F96D00B1DF70 /* ar_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E59CAB1CB8F96D00B1DF70 /* ar_0@2x.png */; };
+		04E59CB81CB8F96D00B1DF70 /* ar_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E59CAC1CB8F96D00B1DF70 /* ar_1.png */; };
+		04E59CB91CB8F96D00B1DF70 /* ar_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E59CAD1CB8F96D00B1DF70 /* ar_1@2x.png */; };
+		04E59CBA1CB8F96D00B1DF70 /* ar_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E59CAE1CB8F96D00B1DF70 /* ar_2.png */; };
+		04E59CBB1CB8F96D00B1DF70 /* ar_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E59CAF1CB8F96D00B1DF70 /* ar_2@2x.png */; };
+		04E59CBC1CB8F96D00B1DF70 /* ar_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E59CB01CB8F96D00B1DF70 /* ar_3.png */; };
+		04E59CBD1CB8F96D00B1DF70 /* ar_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E59CB11CB8F96D00B1DF70 /* ar_3@2x.png */; };
+		04E59CBE1CB8F96D00B1DF70 /* ar_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E59CB21CB8F96D00B1DF70 /* ar_4.png */; };
+		04E59CBF1CB8F96D00B1DF70 /* ar_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E59CB31CB8F96D00B1DF70 /* ar_4@2x.png */; };
+		04E59CC01CB8F96D00B1DF70 /* ar_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E59CB41CB8F96D00B1DF70 /* ar_5.png */; };
+		04E59CC11CB8F96D00B1DF70 /* ar_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E59CB51CB8F96D00B1DF70 /* ar_5@2x.png */; };
+		04E59CC41CB9118600B1DF70 /* RequestCommendExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E59CC31CB9118600B1DF70 /* RequestCommendExpression.m */; };
 		04E6FB771CAA252B00A4B13A /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6FB761CAA252B00A4B13A /* BannerView.m */; };
 		04E6FB861CAA882C00A4B13A /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6FB851CAA882C00A4B13A /* MainTableViewCell.m */; };
 		04E6FB941CAAB2E200A4B13A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6FB931CAAB2E200A4B13A /* LoginViewController.m */; };
@@ -1221,6 +1236,24 @@
 		04E0A7091CB55C83005115A0 /* ScanCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeViewController.m; sourceTree = "<group>"; };
 		04E3F4161CB50EE100A857B0 /* SingWallPaperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingWallPaperViewController.h; sourceTree = "<group>"; };
 		04E3F4171CB50EE100A857B0 /* SingWallPaperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingWallPaperViewController.m; sourceTree = "<group>"; };
+		04E59CA41CB8F80B00B1DF70 /* CommentData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentData.h; sourceTree = "<group>"; };
+		04E59CA51CB8F80B00B1DF70 /* CommentData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentData.m; sourceTree = "<group>"; };
+		04E59CA61CB8F80B00B1DF70 /* CommentExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentExpression.h; sourceTree = "<group>"; };
+		04E59CA71CB8F80B00B1DF70 /* CommentExpression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentExpression.m; sourceTree = "<group>"; };
+		04E59CAA1CB8F96D00B1DF70 /* ar_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ar_0.png; sourceTree = "<group>"; };
+		04E59CAB1CB8F96D00B1DF70 /* ar_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ar_0@2x.png"; sourceTree = "<group>"; };
+		04E59CAC1CB8F96D00B1DF70 /* ar_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ar_1.png; sourceTree = "<group>"; };
+		04E59CAD1CB8F96D00B1DF70 /* ar_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ar_1@2x.png"; sourceTree = "<group>"; };
+		04E59CAE1CB8F96D00B1DF70 /* ar_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ar_2.png; sourceTree = "<group>"; };
+		04E59CAF1CB8F96D00B1DF70 /* ar_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ar_2@2x.png"; sourceTree = "<group>"; };
+		04E59CB01CB8F96D00B1DF70 /* ar_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ar_3.png; sourceTree = "<group>"; };
+		04E59CB11CB8F96D00B1DF70 /* ar_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ar_3@2x.png"; sourceTree = "<group>"; };
+		04E59CB21CB8F96D00B1DF70 /* ar_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ar_4.png; sourceTree = "<group>"; };
+		04E59CB31CB8F96D00B1DF70 /* ar_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ar_4@2x.png"; sourceTree = "<group>"; };
+		04E59CB41CB8F96D00B1DF70 /* ar_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ar_5.png; sourceTree = "<group>"; };
+		04E59CB51CB8F96D00B1DF70 /* ar_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ar_5@2x.png"; sourceTree = "<group>"; };
+		04E59CC21CB9118600B1DF70 /* RequestCommendExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestCommendExpression.h; sourceTree = "<group>"; };
+		04E59CC31CB9118600B1DF70 /* RequestCommendExpression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestCommendExpression.m; sourceTree = "<group>"; };
 		04E6FB751CAA252B00A4B13A /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
 		04E6FB761CAA252B00A4B13A /* BannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
 		04E6FB841CAA882C00A4B13A /* MainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewCell.h; sourceTree = "<group>"; };
@@ -1363,6 +1396,18 @@
 		0436070B1CA90EF40008E496 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				04E59CAA1CB8F96D00B1DF70 /* ar_0.png */,
+				04E59CAB1CB8F96D00B1DF70 /* ar_0@2x.png */,
+				04E59CAC1CB8F96D00B1DF70 /* ar_1.png */,
+				04E59CAD1CB8F96D00B1DF70 /* ar_1@2x.png */,
+				04E59CAE1CB8F96D00B1DF70 /* ar_2.png */,
+				04E59CAF1CB8F96D00B1DF70 /* ar_2@2x.png */,
+				04E59CB01CB8F96D00B1DF70 /* ar_3.png */,
+				04E59CB11CB8F96D00B1DF70 /* ar_3@2x.png */,
+				04E59CB21CB8F96D00B1DF70 /* ar_4.png */,
+				04E59CB31CB8F96D00B1DF70 /* ar_4@2x.png */,
+				04E59CB41CB8F96D00B1DF70 /* ar_5.png */,
+				04E59CB51CB8F96D00B1DF70 /* ar_5@2x.png */,
 				04F3DDCA1CB7AEDB005252EA /* search-pressed.png */,
 				04F3DDCB1CB7AEDB005252EA /* search-pressed@2x.png */,
 				04F3DDCC1CB7AEDB005252EA /* search-pressed@3x.png */,
@@ -1859,6 +1904,7 @@
 		04360AC81CA9213B0008E496 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				04E59CA31CB8F80B00B1DF70 /* CommentExpression */,
 				04F3DDD31CB7DA25005252EA /* Search */,
 				04F3DDB91CB73F37005252EA /* Recommend */,
 				04DFD6E11CB39A6B001DDB67 /* Magazines.h */,
@@ -1950,6 +1996,8 @@
 				04F3DDB71CB73DE4005252EA /* RequestRecommend.m */,
 				04F3DDD01CB7D242005252EA /* RequestSearch.h */,
 				04F3DDD11CB7D242005252EA /* RequestSearch.m */,
+				04E59CC21CB9118600B1DF70 /* RequestCommendExpression.h */,
+				04E59CC31CB9118600B1DF70 /* RequestCommendExpression.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2133,6 +2181,17 @@
 				04E0A7091CB55C83005115A0 /* ScanCodeViewController.m */,
 			);
 			name = "扫描二维码";
+			sourceTree = "<group>";
+		};
+		04E59CA31CB8F80B00B1DF70 /* CommentExpression */ = {
+			isa = PBXGroup;
+			children = (
+				04E59CA41CB8F80B00B1DF70 /* CommentData.h */,
+				04E59CA51CB8F80B00B1DF70 /* CommentData.m */,
+				04E59CA61CB8F80B00B1DF70 /* CommentExpression.h */,
+				04E59CA71CB8F80B00B1DF70 /* CommentExpression.m */,
+			);
+			path = CommentExpression;
 			sourceTree = "<group>";
 		};
 		04E9EEEB1CACBD470093D963 /* 设置 */ = {
@@ -2407,6 +2466,7 @@
 				043609E21CA90EF60008E496 /* shared_bottom_line.png in Resources */,
 				043609581CA90EF60008E496 /* front_cover_defaultBg@2x~ipad.png in Resources */,
 				043609751CA90EF60008E496 /* LaunchImage-700-568h@2x.png in Resources */,
+				04E59CBB1CB8F96D00B1DF70 /* ar_2@2x.png in Resources */,
 				04360A871CA90EF60008E496 /* wallpaper_top_alpha~ipad.png in Resources */,
 				04360A5A1CA90EF60008E496 /* source_loading_cancel@2x.png in Resources */,
 				043609A61CA90EF60008E496 /* NewsstandIcon.png in Resources */,
@@ -2464,10 +2524,12 @@
 				04360AB11CA90EF60008E496 /* zine_webview_navigationBarBackground@2x.png in Resources */,
 				04360AA11CA90EF60008E496 /* yohomarket_logo@2x.png in Resources */,
 				043608FF1CA90EF60008E496 /* banner_download_btn_n@3x.png in Resources */,
+				04E59CB91CB8F96D00B1DF70 /* ar_1@2x.png in Resources */,
 				04360A741CA90EF60008E496 /* wallpaper_ preview_normalEMG@2x.png in Resources */,
 				04360A6C1CA90EF60008E496 /* UIBarButtonItemGrid.png in Resources */,
 				043609871CA90EF60008E496 /* magazineDefault@3x.png in Resources */,
 				04360AC01CA90EF60008E496 /* zine_webview_toolbar_forwardButtonItem_normal.png in Resources */,
+				04E59CB71CB8F96D00B1DF70 /* ar_0@2x.png in Resources */,
 				043609661CA90EF60008E496 /* ImageSelectedOff@2x.png in Resources */,
 				04360A031CA90EF60008E496 /* shared_like_normal@3x.png in Resources */,
 				043609A71CA90EF60008E496 /* NewsstandIcon@2x.png in Resources */,
@@ -2481,7 +2543,9 @@
 				04360A151CA90EF60008E496 /* shared_more_normalHD@3x.png in Resources */,
 				043609DC1CA90EF60008E496 /* shared_background_normal-568h@3x.png in Resources */,
 				043609531CA90EF60008E496 /* down_arrow_gray@3x.png in Resources */,
+				04E59CBC1CB8F96D00B1DF70 /* ar_3.png in Resources */,
 				043609991CA90EF60008E496 /* magazineUndownloaded.png in Resources */,
+				04E59CC01CB8F96D00B1DF70 /* ar_5.png in Resources */,
 				043609201CA90EF60008E496 /* common_checkbox_checked@2x.png in Resources */,
 				04360A5E1CA90EF60008E496 /* tencentWeiboCancel@2x.png in Resources */,
 				0436093B1CA90EF60008E496 /* content_shareIconBlack_highlighted@2x.png in Resources */,
@@ -2545,6 +2609,7 @@
 				043609021CA90EF60008E496 /* blackArrow@2x.png in Resources */,
 				043609C51CA90EF60008E496 /* share_navigationBar.png in Resources */,
 				043609C21CA90EF60008E496 /* share_close_normal.png in Resources */,
+				04E59CC11CB8F96D00B1DF70 /* ar_5@2x.png in Resources */,
 				043609C01CA90EF60008E496 /* setting_aboutBackground@3x.png in Resources */,
 				0436097A1CA90EF60008E496 /* LaunchImage-800-Portrait-736h@3x.png in Resources */,
 				043608F31CA90EF60008E496 /* AppIcon60x60@3x.png in Resources */,
@@ -2559,6 +2624,7 @@
 				0436093E1CA90EF60008E496 /* cover_slide_active.png in Resources */,
 				04360AC51CA90EF60008E496 /* zine_webview_toolbar_refreshButtonItem_normal@2x.png in Resources */,
 				0436097D1CA90EF60008E496 /* listing_triangleIcon.png in Resources */,
+				04E59CBD1CB8F96D00B1DF70 /* ar_3@2x.png in Resources */,
 				04360A441CA90EF60008E496 /* shared_weibo_normal@2x.png in Resources */,
 				04360ABA1CA90EF60008E496 /* zine_webview_toolbar_closeButtonItem_normal.png in Resources */,
 				04360A901CA90EF60008E496 /* webView_more_normal@3x.png in Resources */,
@@ -2632,6 +2698,7 @@
 				04360A1B1CA90EF60008E496 /* shared_newsTitle@3x.png in Resources */,
 				04360A541CA90EF60008E496 /* shareMagazineHD@2x.png in Resources */,
 				043609781CA90EF60008E496 /* LaunchImage-700@2x.png in Resources */,
+				04E59CBE1CB8F96D00B1DF70 /* ar_4.png in Resources */,
 				04360A071CA90EF60008E496 /* shared_lineLongHD.png in Resources */,
 				043609F71CA90EF60008E496 /* shared_email_normalHD@2x.png in Resources */,
 				043609FC1CA90EF60008E496 /* shared_featureTitle@3x.png in Resources */,
@@ -2713,6 +2780,7 @@
 				04360A001CA90EF60008E496 /* shared_like_black@3x.png in Resources */,
 				043609151CA90EF60008E496 /* comment_voice_button@2x.png in Resources */,
 				0436094A1CA90EF60008E496 /* detail_title_icon_down.png in Resources */,
+				04E59CBF1CB8F96D00B1DF70 /* ar_4@2x.png in Resources */,
 				04360A991CA90EF60008E496 /* YHExpandableLabelExpand@2x.png in Resources */,
 				043609911CA90EF60008E496 /* magazineNavigationBackground.png in Resources */,
 				043609B41CA90EF60008E496 /* progress_paused@3x.png in Resources */,
@@ -2817,18 +2885,21 @@
 				04360A681CA90EF60008E496 /* UIBarButtonItemArrowOutlineRight.png in Resources */,
 				0436095E1CA90EF60008E496 /* home_settingIcon_normal@2x.png in Resources */,
 				04360A261CA90EF60008E496 /* shared_placeholder_collection@2x.png in Resources */,
+				04E59CBA1CB8F96D00B1DF70 /* ar_2.png in Resources */,
 				043609801CA90EF60008E496 /* listing_triangleIcon_black@2x.png in Resources */,
 				04360A4B1CA90EF60008E496 /* shared_yohoeTitleHD@2x.png in Resources */,
 				04360A9F1CA90EF60008E496 /* yohogirl_logo@2x.png in Resources */,
 				04360A061CA90EF60008E496 /* shared_lineLong@3x.png in Resources */,
 				04360A7D1CA90EF60008E496 /* wallpaper_preview_mainScreen_iOS7_iPad.png in Resources */,
 				043609C41CA90EF60008E496 /* share_close_normal@3x.png in Resources */,
+				04E59CB81CB8F96D00B1DF70 /* ar_1.png in Resources */,
 				04360A391CA90EF60008E496 /* shared_right_line.png in Resources */,
 				04360A6E1CA90EF60008E496 /* UIBarButtonItemGridiOS6.png in Resources */,
 				0436095D1CA90EF60008E496 /* home_settingIcon_normal.png in Resources */,
 				04360A2D1CA90EF60008E496 /* shared_placeholder_fashion@3x.png in Resources */,
 				04360A341CA90EF60008E496 /* shared_prev_articleHD.png in Resources */,
 				04360AAE1CA90EF60008E496 /* zine_shareIcon_normal.png in Resources */,
+				04E59CB61CB8F96D00B1DF70 /* ar_0.png in Resources */,
 				043609B11CA90EF60008E496 /* play_icon@3x.png in Resources */,
 				04360A4D1CA90EF60008E496 /* shared_yohogirlTitleHD.png in Resources */,
 				043608F91CA90EF60008E496 /* article_translucent_shadow_top.png in Resources */,
@@ -2926,10 +2997,12 @@
 				04D9BEA81CB62FC2001B3CFF /* ContentdetailViewController.m in Sources */,
 				04DFEF401CAE061B004C7F26 /* BLKFlexibleHeightBar.m in Sources */,
 				04360ADE1CA936780008E496 /* RequestSplashImage.m in Sources */,
+				04E59CC41CB9118600B1DF70 /* RequestCommendExpression.m in Sources */,
 				04AA0FA21CABD701008EB2AB /* SettingViewController.m in Sources */,
 				04DFEF421CAE061B004C7F26 /* BLKFlexibleHeightBarSubviewLayoutAttributes.m in Sources */,
 				04D7EDBB1CAFB885005DC5E9 /* WallPapersData.m in Sources */,
 				04DFEF431CAE061B004C7F26 /* FacebookStyleBarBehaviorDefiner.m in Sources */,
+				04E59CA91CB8F80B00B1DF70 /* CommentExpression.m in Sources */,
 				045977521CAE78B000E4EF59 /* ContentEData.m in Sources */,
 				04D7EDAB1CAFB2EA005DC5E9 /* MagazineData.m in Sources */,
 				045977451CAE627900E4EF59 /* XMLToJson.m in Sources */,
@@ -2940,6 +3013,7 @@
 				04D7ED971CAF9886005DC5E9 /* VideoChannel.m in Sources */,
 				04E6FB941CAAB2E200A4B13A /* LoginViewController.m in Sources */,
 				04DFD6E91CB3C3B9001DDB67 /* WallPapersViewController.m in Sources */,
+				04E59CA81CB8F80B00B1DF70 /* CommentData.m in Sources */,
 				045977511CAE78B000E4EF59 /* ContentEContents.m in Sources */,
 				04F3DDE01CB7DA25005252EA /* SearchFWResult.m in Sources */,
 				04F3DDE11CB7DA25005252EA /* SearchTWChannel.m in Sources */,

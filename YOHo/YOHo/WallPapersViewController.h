@@ -12,6 +12,7 @@
 #import "Data.h"
 #import "EasyCollectionViewCell.h"
 #import "LabelCollectionViewCell.h"
+#import <MJRefresh.h>
 @protocol WallPapersViewControllerDelegate;
 @interface WallPapersViewController : UIViewController
 {
