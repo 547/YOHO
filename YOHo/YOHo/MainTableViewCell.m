@@ -133,7 +133,7 @@
     }
     _channelLabel.text = contentModel.channel.channelNameCn;
     _titleLabel.text = contentModel.title;
-    _timeLabel.text =contentModel.publishTime;
+//    _timeLabel.text =contentModel.publishTime;
     [_timeLabel sizeToFit];// 防止单行文本label在重用时宽度计算不准的问题
     _nextTitleLabel.text = contentModel.subtitle;
     _summaryLabel.text = contentModel.summary;

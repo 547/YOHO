@@ -9,6 +9,18 @@
 #import "NSString+More.h"
 
 @implementation NSString (More)
+
++(BOOL)isValidateRegularExpression:(NSString *)strDestination byExpression:(NSString *)strExpression
+
+{
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", strExpression];
+    
+    return [predicate evaluateWithObject:strDestination];
+    
+}
+
+
 /**将文件保存到tmp路径*/
 +(NSString *)getToTmpWithFileName:(NSString *)fileName
 {
@@ -27,14 +39,22 @@
 +(NSString *)getToDocumentsWithFileName:(NSString *)fileName
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *firstPath = [NSString getFilePathWitName:@"Documents" lastName:@"files"];
     NSString *path = [NSString getFilePathWitName:@"Documents" lastName:@"files" fileName:fileName];
-    BOOL isExist = [fileManager fileExistsAtPath:path];
+    BOOL isExist = [fileManager fileExistsAtPath:firstPath];
     if (!isExist) {
-        [fileManager createFileAtPath:path contents:nil attributes:nil];
+        [fileManager createDirectoryAtPath:firstPath withIntermediateDirectories:YES attributes:nil error:nil];
+        
     }
-//    NSLog(@"pa tn ==%@",path);
     return path;
     
+}
+
++(NSString *)getFilePathWitName:(NSString *)name lastName:(NSString *)lastName
+{
+    NSString *path = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/%@/%@/",name,lastName]];
+    //    NSLog(@"==p ==%@",path);
+    return path;
 }
 
 +(NSString *)getFilePathWitName:(NSString *)name lastName:(NSString *)lastName fileName:(NSString *)fileName

@@ -16,6 +16,7 @@
 #import "DataModels.h"
 @protocol ContentTableViewControllerDelegate;
 @interface ContentTableViewController : UITableViewController
+@property(nonatomic,copy)NSString *channelId;
 @property(nonatomic,strong)NSArray *contents;
 @property(nonatomic,strong)NSMutableArray *items;
 @property(nonatomic,strong)NSArray *banners;
@@ -26,4 +27,5 @@
 
 -(void)contentGetContentDetail:(ContentENSObject *)contentDetail;
 -(void)contentGetExpression:(CommentExpression *)expression;
+-(void)contentShouldRefrshWithChannelId:(NSString *)chanId;
 @end

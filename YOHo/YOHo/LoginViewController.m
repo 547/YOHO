@@ -12,12 +12,15 @@
 #import <UIView+SDAutoLayout.h>
 #import "SelectCountryViewController.h"
 #import <RESideMenu.h>
-@interface LoginViewController ()
+#import <ShareSDK/ShareSDK.h>
+#import "NSString+More.h"
+@interface LoginViewController ()<UITextFieldDelegate>
 
 @end
 
 @implementation LoginViewController
 {
+    BOOL haveUP;
     UITextField *countext;
     UIScrollView *scroll;
     SelectCountryViewController *select;
@@ -30,10 +33,12 @@
     UITextField *pawText;
     UIButton *loginButton;
 
+    UITextField *mobeliText;
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    haveUP = NO;
     NSNotificationCenter *center  = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(changeView) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(restoreView) name:UIKeyboardWillHideNotification object:nil];
@@ -94,9 +99,11 @@
     userText.bounds = CGRectMake(0, 0, WIDTH-20,40);
     userText.placeholder = @"手机号/邮箱";
     userText.borderStyle = UITextBorderStyleRoundedRect;
+    userText.delegate = self;
     [loginView addSubview:userText];
     
     pawText = [[UITextField alloc]init];
+    pawText.delegate = self;
     pawText.clearButtonMode = UITextFieldViewModeWhileEditing;
     pawText.center = CGPointMake(loginView.center.x, userText.frame.size.height+userText.frame.origin.y+30);
     pawText.bounds = CGRectMake(0, 0, WIDTH-20,40);
@@ -125,6 +132,8 @@
     [forgetButton addTarget:self action:@selector(forget:) forControlEvents:UIControlEventTouchUpInside];
     [loginView addSubview:forgetButton];
     
+    NSArray *images = @[[UIImage imageNamed:@"shared_weixin_normalHD.png"],[UIImage imageNamed:@"sinaWeiboSelected.png"],[UIImage imageNamed:@"qqicon.png"]];
+    
     UIView *buttonSet = [[UIView alloc]init];//按钮集合
     buttonSet.center = CGPointMake(loginView.center.x, loginButton.frame.size.height+loginButton.frame.origin.y+50);
     buttonSet.bounds = CGRectMake(0, 0, WIDTH-200, 30*WIDTHMULTIPLE);
@@ -139,9 +148,10 @@
         CGFloat x = (VH+WIDTH*0.5-100-VH*1.5)*j;
         shareButton.frame = CGRectMake(x, 0, VH, VH);
         shareButton.tag = 200+i;
-        shareButton.backgroundColor = [UIColor lightGrayColor];
+//        shareButton.backgroundColor = [UIColor lightGrayColor];
         shareButton.layer.cornerRadius = VH*0.5;
         [shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [shareButton setBackgroundImage:images[i] forState:UIControlStateNormal];
         [buttonSet addSubview:shareButton];
         
     }
@@ -208,7 +218,7 @@
     [regView addSubview:counView];
     
     
-    UITextField *mobeliText = [[UITextField alloc]init];
+    mobeliText = [[UITextField alloc]init];
     mobeliText.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.6];
     mobeliText.center = CGPointMake(self.view.center.x, countext.frame.size.height+countext.frame.origin.y+30);
     mobeliText.bounds = CGRectMake(0, 0, WIDTH-20,40);
@@ -251,7 +261,7 @@
     return regView;
 }
 
-
+#pragma mark===选择地区
 /**选择地区*/
 -(void)selectCountry:(UITapGestureRecognizer *)tap
 {
@@ -266,12 +276,30 @@
     [[UIApplication sharedApplication].delegate window].rootViewController = na;
 }
 
+#pragma mark===下一步
 /**下一步**/
 -(void)nextStep:(UIButton *)button
 {
     NSLog(@"下一步");
+    NSString *phoneNum = mobeliText.text;
+    //国际号码：^\\s*\\+?\\s*(\\(\\s*\\d+\\s*\\)|\\d+)(\\s*-?\\s*(\\(\\s*\\d+\\s*\\)|\\s*\\d+\\s*))*\\s*$
+    //普通号码：^1+[3578]+\\d{9}
+    NSString *format = @"^\\s*\\+?\\s*(\\(\\s*\\d+\\s*\\)|\\d+)(\\s*-?\\s*(\\(\\s*\\d+\\s*\\)|\\s*\\d+\\s*))*\\s*$";
+    BOOL isOk = [NSString isValidateRegularExpression:phoneNum byExpression:format];
+    if (!isOk) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"您输入的不是手机号码"
+                                                            message:nil
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+
+        return;
+    }
 }
 
+
+#pragma mark===点击注册
 /**点击注册**/
 -(void)registerUser:(UIButton *)button
 {
@@ -279,60 +307,127 @@
     scroll.contentOffset = CGPointMake(WIDTH, 0);
 }
 
+#pragma mark===第三方登录
 /**分享按钮被点击*/
 -(void)shareButtonClick:(UIButton *)button
 {
+    int tag = button.tag - 200;
     NSLog(@"分享按钮被点击");
+    [self ThridLoginWithTag:tag];
+}
+
+#pragma mark===第三方登录
+/**第三方登录*/
+-(void)ThridLoginWithTag:(int)tag
+{
+    __weak LoginViewController *weakSelf = self;
+    NSArray *plates = @[@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeSinaWeibo),@(SSDKPlatformTypeQQ)];
+    SSDKPlatformType info = (SSDKPlatformType)plates[tag];
+    [ShareSDK getUserInfo:SSDKPlatformTypeSinaWeibo
+           onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
+     {
+         if (state == SSDKResponseStateSuccess)
+         {
+           
+             NSString *uid = user.uid;
+             NSString *token = user.credential.token;
+             NSString *icon = user.icon;
+             NSString *nickname = user.nickname;
+             NSUserDefaults *us = [NSUserDefaults standardUserDefaults];
+             [us setObject:uid forKey:@"uid"];
+             [us setObject:icon forKey:@"icon"];
+             [us setObject:token forKey:@"token"];
+             [us setObject:nickname forKey:@"nickname"];
+             [us synchronize];
+             NSLog(@"uid=%@",user.uid);
+             NSLog(@"%@",user.credential);
+             NSLog(@"token=%@",user.credential.token);
+             NSLog(@"nickname=%@",user.nickname);
+             [weakSelf cancelClick:nil];
+         }
+         
+         else
+         {
+             NSLog(@"%@",error);
+         }
+         
+     }];
+
 }
 
 /**忘记密码*/
 -(void)forget:(UIButton *)button
 {
     NSLog(@"忘记密码");
+    
 }
 
 /**登录*/
 -(void)login:(UIButton *)loginB
 {
     NSLog(@"登录");
+    [self .view endEditing:YES];
 }
 
 /**展示alterView*/
 -(void)showAlterView
 {
     NSLog(@"展示alterView");
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"YoHo!Family"
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+    [alertView show];
+    [self .view endEditing:YES];
 }
 
 
 /**点击叉号按钮*/
 -(void)cancelClick:(UIButton *)button
 {
+    
     NSLog(@"点击叉号按钮");
+    [self .view endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /**键盘将要弹起来**/
 -(void)changeView
 {
-    NSLog(@"键盘将要弹起来");
-    CGFloat y = 110;
-    yohoImage.frame = CGRectMake(userText.frame.origin.x, yohoImage.frame.origin.y, yohoImage.frame.size.width*0.3, yohoImage.frame.size.height*0.3);
-    familyButoon.hidden = YES;
-    userText.frame = CGRectMake(userText.frame.origin.x, userText.frame.origin.y-y, userText.frame.size.width, userText.frame.size.height);
-    pawText.frame = CGRectMake(pawText.frame.origin.x, pawText.frame.origin.y-y, pawText.frame.size.width, pawText.frame.size.height);
-    loginButton.frame = CGRectMake(loginButton.frame.origin.x, loginButton.frame.origin.y-y, loginButton.frame.size.width, loginButton.frame.size.height);
+    
+        NSLog(@"键盘将要弹起来");
+    if (!haveUP) {
+        CGFloat y = 110;
+        yohoImage.frame = CGRectMake(userText.frame.origin.x, yohoImage.frame.origin.y, yohoImage.frame.size.width*0.3, yohoImage.frame.size.height*0.3);
+        familyButoon.hidden = YES;
+        userText.frame = CGRectMake(userText.frame.origin.x, userText.frame.origin.y-y, userText.frame.size.width, userText.frame.size.height);
+        pawText.frame = CGRectMake(pawText.frame.origin.x, pawText.frame.origin.y-y, pawText.frame.size.width, pawText.frame.size.height);
+        loginButton.frame = CGRectMake(loginButton.frame.origin.x, loginButton.frame.origin.y-y, loginButton.frame.size.width, loginButton.frame.size.height);
+        haveUP = !haveUP;
+    }
+    
+    
+    
+     
+    
+   
 }
 
 /**键盘收起来==视图恢复*/
 -(void)restoreView
 {
-    CGFloat y = 110;
-    yohoImage.center = CGPointMake(WIDTH*0.5, 50);
-    yohoImage.bounds = CGRectMake(userText.frame.origin.x, yohoImage.frame.origin.y, yohoImage.frame.size.width/0.3, yohoImage.frame.size.height/0.3);
-    familyButoon.hidden = NO;
-    userText.frame = CGRectMake(userText.frame.origin.x, userText.frame.origin.y+y, userText.frame.size.width, userText.frame.size.height);
-    pawText.frame = CGRectMake(pawText.frame.origin.x, pawText.frame.origin.y+y, pawText.frame.size.width, pawText.frame.size.height);
-    loginButton.frame = CGRectMake(loginButton.frame.origin.x, loginButton.frame.origin.y+y, loginButton.frame.size.width, loginButton.frame.size.height);
+    if (haveUP) {
+        CGFloat y = 110;
+        yohoImage.center = CGPointMake(WIDTH*0.5, 50);
+        yohoImage.bounds = CGRectMake(userText.frame.origin.x, yohoImage.frame.origin.y, yohoImage.frame.size.width/0.3, yohoImage.frame.size.height/0.3);
+        familyButoon.hidden = NO;
+        userText.frame = CGRectMake(userText.frame.origin.x, userText.frame.origin.y+y, userText.frame.size.width, userText.frame.size.height);
+        pawText.frame = CGRectMake(pawText.frame.origin.x, pawText.frame.origin.y+y, pawText.frame.size.width, pawText.frame.size.height);
+        loginButton.frame = CGRectMake(loginButton.frame.origin.x, loginButton.frame.origin.y+y, loginButton.frame.size.width, loginButton.frame.size.height);
+        haveUP = !haveUP;
+    }
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -355,8 +450,20 @@
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
-    [scroll endEditing:YES];
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self.view];
+    if (!CGRectContainsPoint(userText.frame, point) || !CGRectContainsPoint(pawText.frame, point)) {
+        [self.view endEditing:YES];
+    }
 }
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self login:nil];
+    return YES;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

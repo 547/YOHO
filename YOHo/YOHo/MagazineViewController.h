@@ -20,7 +20,7 @@
 
 @protocol MagazineViewControllerDelegate <NSObject>
 
--(void)magazineViewCGoToReadingMagazineWithSavePath:(NSString *)savePath;
+-(void)magazineViewCGoToReadingMagazineWithSavePath:(MagazineData *)aMagazine;
 -(void)magazineViewCGoToSeeMoew:(NSMutableArray *)datas;
 @end
 

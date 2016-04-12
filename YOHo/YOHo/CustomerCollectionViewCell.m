@@ -186,9 +186,14 @@
             break;
         case 4:
             //下载完成
+        {
             self.downloadState = 4;
+            NSString *path = [self cheakMagazineWithAttribute:@"savePath"];
+            _magazine.savePath = path;
             //查看杂志
             [self.delegate customerCollectionViewCellGotoReadMagazine:_magazine];
+        }
+           
             break;
 
         default:

@@ -519,8 +519,19 @@
 		045977531CAE78B000E4EF59 /* ContentEImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459774D1CAE78B000E4EF59 /* ContentEImages.m */; };
 		045977541CAE78B000E4EF59 /* ContentENSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459774F1CAE78B000E4EF59 /* ContentENSObject.m */; };
 		045A1EFE1CAD171100CB2646 /* ContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045A1EFD1CAD171100CB2646 /* ContentTableViewController.m */; };
+		045CA4561CBBE38E00E54EA9 /* ReadingMagazineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045CA4551CBBE38E00E54EA9 /* ReadingMagazineViewController.m */; };
+		045CA4591CBBE80C00E54EA9 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 045CA4571CBBE80C00E54EA9 /* list.png */; };
+		045CA45A1CBBE80C00E54EA9 /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 045CA4581CBBE80C00E54EA9 /* list@2x.png */; };
 		047352F61CB103D200EC4931 /* MagazineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047352F51CB103D200EC4931 /* MagazineViewController.m */; };
 		047352F91CB126B000EC4931 /* HeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047352F81CB126B000EC4931 /* HeaderCollectionReusableView.m */; };
+		04A4311D1CBB881A0020439C /* wechat-ios8.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A431191CBB881A0020439C /* wechat-ios8.png */; };
+		04A4311E1CBB881A0020439C /* wechat-ios8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A4311A1CBB881A0020439C /* wechat-ios8@2x.png */; };
+		04A4311F1CBB881A0020439C /* wechat-ios8@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A4311B1CBB881A0020439C /* wechat-ios8@2x~ipad.png */; };
+		04A431201CBB881A0020439C /* wechat-ios8~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A4311C1CBB881A0020439C /* wechat-ios8~ipad.png */; };
+		04A431251CBB888C0020439C /* wechat.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A431211CBB888C0020439C /* wechat.png */; };
+		04A431261CBB888C0020439C /* wechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A431221CBB888C0020439C /* wechat@2x.png */; };
+		04A431271CBB888C0020439C /* wechat@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A431231CBB888C0020439C /* wechat@2x~ipad.png */; };
+		04A431281CBB888C0020439C /* wechat~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A431241CBB888C0020439C /* wechat~ipad.png */; };
 		04AA0FA21CABD701008EB2AB /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA0FA11CABD701008EB2AB /* SettingViewController.m */; };
 		04D7ED8C1CAF970B005DC5E9 /* RequestVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D7ED8B1CAF970B005DC5E9 /* RequestVideo.m */; };
 		04D7ED971CAF9886005DC5E9 /* VideoChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D7ED901CAF9886005DC5E9 /* VideoChannel.m */; };
@@ -1160,10 +1171,22 @@
 		045977501CAE78B000E4EF59 /* DataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModels.h; sourceTree = "<group>"; };
 		045A1EFC1CAD171100CB2646 /* ContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentTableViewController.h; sourceTree = "<group>"; };
 		045A1EFD1CAD171100CB2646 /* ContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentTableViewController.m; sourceTree = "<group>"; };
+		045CA4541CBBE38E00E54EA9 /* ReadingMagazineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingMagazineViewController.h; sourceTree = "<group>"; };
+		045CA4551CBBE38E00E54EA9 /* ReadingMagazineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingMagazineViewController.m; sourceTree = "<group>"; };
+		045CA4571CBBE80C00E54EA9 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
+		045CA4581CBBE80C00E54EA9 /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = "<group>"; };
 		047352F41CB103D200EC4931 /* MagazineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagazineViewController.h; sourceTree = "<group>"; };
 		047352F51CB103D200EC4931 /* MagazineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagazineViewController.m; sourceTree = "<group>"; };
 		047352F71CB126B000EC4931 /* HeaderCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCollectionReusableView.h; sourceTree = "<group>"; };
 		047352F81CB126B000EC4931 /* HeaderCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCollectionReusableView.m; sourceTree = "<group>"; };
+		04A431191CBB881A0020439C /* wechat-ios8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat-ios8.png"; sourceTree = "<group>"; };
+		04A4311A1CBB881A0020439C /* wechat-ios8@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat-ios8@2x.png"; sourceTree = "<group>"; };
+		04A4311B1CBB881A0020439C /* wechat-ios8@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat-ios8@2x~ipad.png"; sourceTree = "<group>"; };
+		04A4311C1CBB881A0020439C /* wechat-ios8~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat-ios8~ipad.png"; sourceTree = "<group>"; };
+		04A431211CBB888C0020439C /* wechat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wechat.png; sourceTree = "<group>"; };
+		04A431221CBB888C0020439C /* wechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat@2x.png"; sourceTree = "<group>"; };
+		04A431231CBB888C0020439C /* wechat@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat@2x~ipad.png"; sourceTree = "<group>"; };
+		04A431241CBB888C0020439C /* wechat~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat~ipad.png"; sourceTree = "<group>"; };
 		04AA0FA01CABD701008EB2AB /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		04AA0FA11CABD701008EB2AB /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		04D7ED8A1CAF970B005DC5E9 /* RequestVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestVideo.h; sourceTree = "<group>"; };
@@ -1396,6 +1419,16 @@
 		0436070B1CA90EF40008E496 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				045CA4571CBBE80C00E54EA9 /* list.png */,
+				045CA4581CBBE80C00E54EA9 /* list@2x.png */,
+				04A431191CBB881A0020439C /* wechat-ios8.png */,
+				04A431211CBB888C0020439C /* wechat.png */,
+				04A431221CBB888C0020439C /* wechat@2x.png */,
+				04A431231CBB888C0020439C /* wechat@2x~ipad.png */,
+				04A431241CBB888C0020439C /* wechat~ipad.png */,
+				04A4311A1CBB881A0020439C /* wechat-ios8@2x.png */,
+				04A4311B1CBB881A0020439C /* wechat-ios8@2x~ipad.png */,
+				04A4311C1CBB881A0020439C /* wechat-ios8~ipad.png */,
 				04E59CAA1CB8F96D00B1DF70 /* ar_0.png */,
 				04E59CAB1CB8F96D00B1DF70 /* ar_0@2x.png */,
 				04E59CAC1CB8F96D00B1DF70 /* ar_1.png */,
@@ -1954,6 +1987,8 @@
 		04360ACB1CA921560008E496 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				045CA4531CBBE35D00E54EA9 /* 阅读杂志 */,
+				04A431291CBBA58D0020439C /* 注册 */,
 				04F3DDC01CB7A5B0005252EA /* 搜索 */,
 				04E0A7071CB55C3D005115A0 /* 扫描二维码 */,
 				045A1EFB1CAD128E00CB2646 /* 类型页 */,
@@ -2097,6 +2132,22 @@
 				04360AF51CA96C1C0008E496 /* TypeViewController.m */,
 			);
 			name = "类型页";
+			sourceTree = "<group>";
+		};
+		045CA4531CBBE35D00E54EA9 /* 阅读杂志 */ = {
+			isa = PBXGroup;
+			children = (
+				045CA4541CBBE38E00E54EA9 /* ReadingMagazineViewController.h */,
+				045CA4551CBBE38E00E54EA9 /* ReadingMagazineViewController.m */,
+			);
+			name = "阅读杂志";
+			sourceTree = "<group>";
+		};
+		04A431291CBBA58D0020439C /* 注册 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "注册";
 			sourceTree = "<group>";
 		};
 		04D7ED8D1CAF9886005DC5E9 /* Video */ = {
@@ -2475,6 +2526,7 @@
 				043609881CA90EF60008E496 /* magazineDefaultHD.png in Resources */,
 				0436098A1CA90EF60008E496 /* magazineDefaultHD@3x.png in Resources */,
 				043609811CA90EF60008E496 /* logo_adidas@2x.png in Resources */,
+				04A431281CBB888C0020439C /* wechat~ipad.png in Resources */,
 				04360A6A1CA90EF60008E496 /* UIBarButtonItemArrowRight.png in Resources */,
 				043609851CA90EF60008E496 /* magazineDefault.png in Resources */,
 				043608F51CA90EF60008E496 /* AppIcon76x76~ipad.png in Resources */,
@@ -2596,6 +2648,7 @@
 				04360A361CA90EF60008E496 /* shared_prev_articleHD@3x.png in Resources */,
 				043609D61CA90EF60008E496 /* shared_backButtom_normal@2x.png in Resources */,
 				043609FD1CA90EF60008E496 /* shared_left_line.png in Resources */,
+				04A431251CBB888C0020439C /* wechat.png in Resources */,
 				04360A041CA90EF60008E496 /* shared_lineLong.png in Resources */,
 				04360A971CA90EF60008E496 /* window_close_normal@3x.png in Resources */,
 				04360A591CA90EF60008E496 /* source_loading_cancel.png in Resources */,
@@ -2684,6 +2737,7 @@
 				0436091D1CA90EF60008E496 /* common_camera_icon.png in Resources */,
 				04360A921CA90EF60008E496 /* webView_refresh_normal@2x.png in Resources */,
 				043609C11CA90EF60008E496 /* setting_aboutBackground~ipad.png in Resources */,
+				04A4311E1CBB881A0020439C /* wechat-ios8@2x.png in Resources */,
 				04360A661CA90EF60008E496 /* UIBarButtonItemArrowOutlineLeft.png in Resources */,
 				043609D21CA90EF60008E496 /* shared_back_whiteEMG@3x.png in Resources */,
 				043609611CA90EF60008E496 /* homepage_interIcon@2x.png in Resources */,
@@ -2702,6 +2756,7 @@
 				04360A071CA90EF60008E496 /* shared_lineLongHD.png in Resources */,
 				043609F71CA90EF60008E496 /* shared_email_normalHD@2x.png in Resources */,
 				043609FC1CA90EF60008E496 /* shared_featureTitle@3x.png in Resources */,
+				04A4311F1CBB881A0020439C /* wechat-ios8@2x~ipad.png in Resources */,
 				04360A4C1CA90EF60008E496 /* shared_yohoeTitleHD@3x.png in Resources */,
 				043609231CA90EF60008E496 /* common_header_background.png in Resources */,
 				04360A931CA90EF60008E496 /* webView_refresh_normal@3x.png in Resources */,
@@ -2709,6 +2764,7 @@
 				043609281CA90EF60008E496 /* common_message_icon.png in Resources */,
 				043609A31CA90EF60008E496 /* nav_icon@3x.png in Resources */,
 				043609AD1CA90EF60008E496 /* noviceguide_articleList@2x.png in Resources */,
+				04A431201CBB881A0020439C /* wechat-ios8~ipad.png in Resources */,
 				043609F61CA90EF60008E496 /* shared_email_normalHD.png in Resources */,
 				0436090B1CA90EF60008E496 /* button_home_ipad_u@3x.png in Resources */,
 				043609651CA90EF60008E496 /* ImageSelectedOff.png in Resources */,
@@ -2721,6 +2777,7 @@
 				043609671CA90EF60008E496 /* ImageSelectedOn.png in Resources */,
 				04360A7A1CA90EF60008E496 /* wallpaper_preview_lockScreen_iPhone6@2x.png in Resources */,
 				04360A2F1CA90EF60008E496 /* shared_placeholder_wallpaperList@2x.png in Resources */,
+				045CA4591CBBE80C00E54EA9 /* list.png in Resources */,
 				043609BB1CA90EF60008E496 /* setting_about.png in Resources */,
 				04360A771CA90EF60008E496 /* wallpaper_preview_lockScreen_iOS7-568h@2x.png in Resources */,
 				04360A281CA90EF60008E496 /* shared_placeholder_collection_iphone.png in Resources */,
@@ -2749,6 +2806,7 @@
 				043609EB1CA90EF60008E496 /* shared_download_normalEMG.png in Resources */,
 				043609B01CA90EF60008E496 /* play_icon@2x.png in Resources */,
 				04360A9C1CA90EF60008E496 /* yohobuy_logo@2x.png in Resources */,
+				04A4311D1CBB881A0020439C /* wechat-ios8.png in Resources */,
 				043609A81CA90EF60008E496 /* noviceguide_articleDetail-568h@2x.png in Resources */,
 				04360A8D1CA90EF60008E496 /* webView_forword_normal@3x.png in Resources */,
 				043609951CA90EF60008E496 /* magazineNavigationBackgroundTop.png in Resources */,
@@ -2777,6 +2835,7 @@
 				043609F51CA90EF60008E496 /* shared_emagtext@3x.png in Resources */,
 				043609C91CA90EF60008E496 /* share_publishButton_highlighted@2x.png in Resources */,
 				04360A861CA90EF60008E496 /* wallpaper_top_alpha@2x~ipad.png in Resources */,
+				04A431271CBB888C0020439C /* wechat@2x~ipad.png in Resources */,
 				04360A001CA90EF60008E496 /* shared_like_black@3x.png in Resources */,
 				043609151CA90EF60008E496 /* comment_voice_button@2x.png in Resources */,
 				0436094A1CA90EF60008E496 /* detail_title_icon_down.png in Resources */,
@@ -2837,6 +2896,7 @@
 				04360A081CA90EF60008E496 /* shared_lineLongHD@2x.png in Resources */,
 				04360A291CA90EF60008E496 /* shared_placeholder_collection_iphone@2x.png in Resources */,
 				043609BC1CA90EF60008E496 /* setting_about@2x.png in Resources */,
+				04A431261CBB888C0020439C /* wechat@2x.png in Resources */,
 				04360ABE1CA90EF60008E496 /* zine_webview_toolbar_forwardButtonItem_highlighted.png in Resources */,
 				043609081CA90EF60008E496 /* button_home_ipad_n@2x.png in Resources */,
 				04360A641CA90EF60008E496 /* UIBarButtonItemArrowLeft.png in Resources */,
@@ -2878,6 +2938,7 @@
 				043609FA1CA90EF60008E496 /* shared_featureTitle.png in Resources */,
 				04360A101CA90EF60008E496 /* shared_more_normal.png in Resources */,
 				04360A581CA90EF60008E496 /* sinaWeiboSelected@2x.png in Resources */,
+				045CA45A1CBBE80C00E54EA9 /* list@2x.png in Resources */,
 				0436096D1CA90EF60008E496 /* IQButtonBarArrowLeft@2x.png in Resources */,
 				04360A301CA90EF60008E496 /* shared_placeholder_wallpaperList@2x~ipad.png in Resources */,
 				043609DD1CA90EF60008E496 /* shared_background_normal.png in Resources */,
@@ -3047,6 +3108,7 @@
 				04F3DDD21CB7D242005252EA /* RequestSearch.m in Sources */,
 				04D7EDAC1CAFB2EA005DC5E9 /* MagazineMagChapter.m in Sources */,
 				04360ACE1CA922150008E496 /* SplashViewController.m in Sources */,
+				045CA4561CBBE38E00E54EA9 /* ReadingMagazineViewController.m in Sources */,
 				04D7EDBD1CAFB885005DC5E9 /* WallPapersSum.m in Sources */,
 				04F3DDBE1CB73F37005252EA /* RecommendData.m in Sources */,
 				04DFEF441CAE061B004C7F26 /* SquareCashStyleBehaviorDefiner.m in Sources */,

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @interface NSString (More)
++(BOOL)isValidateRegularExpression:(NSString *)strDestination byExpression:(NSString *)strExpression;
 +(NSString *)getToTmpWithFileName:(NSString *)fileName;
 +(CGSize)getFontSize:(NSString *)str;
 /**将文件保存到Documents路径*/

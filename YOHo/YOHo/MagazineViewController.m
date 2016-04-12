@@ -206,8 +206,8 @@ static NSString * const reuseIdentifier = @"Cell";
         [scrollView setContentOffset:CGPointZero animated:NO];
         
     }
-    if (y>=size.height-scrollView.frame.size.height) {
-        [scrollView setContentOffset:CGPointMake(0, size.height-scrollView.frame.size.height) animated:NO];
+    if (y>size.height-scrollView.frame.size.height+100) {
+        [scrollView setContentOffset:CGPointMake(0, size.height-scrollView.frame.size.height+100) animated:NO];
     }
     
 }
@@ -217,28 +217,39 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    
-    CGSize size = CGSizeMake(WIDTH, 20*HEIGHTMULTIPLE);
-    return size;
+    if (_type == 2) {
+        //
+        return CGSizeZero;
+    }else{
+        
+        CGSize size = CGSizeMake(WIDTH, 20*HEIGHTMULTIPLE);
+        return size;
+    }
 }
 
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
 
-    HeaderCollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header" forIndexPath:indexPath];
-    header = [header init];
-    if (indexPath.section == 0) {
-        if (_type !=2) {
-            header.type.text = types[_type];
-        }
+    if (_type == 2) {
+        //
+        return nil;
     }else{
-        header.type.text = types[2];
+        HeaderCollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header" forIndexPath:indexPath];
+        header = [header init];
+        if (indexPath.section == 0) {
+            if (_type !=2) {
+                header.type.text = types[_type];
+            }
+        }else{
+            header.type.text = types[2];
+        }
+        header.more.tag = indexPath.section;
+        [header.more addTarget:self action:@selector(seeMore:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return header;
+
     }
-    header.more.tag = indexPath.section;
-    [header.more addTarget:self action:@selector(seeMore:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return header;
     
 }
 
@@ -268,6 +279,7 @@ static NSString * const reuseIdentifier = @"Cell";
 {
 
     NSLog(@"阅读");
+    [self.delegate magazineViewCGoToReadingMagazineWithSavePath:aMagazine];
     
 }
 

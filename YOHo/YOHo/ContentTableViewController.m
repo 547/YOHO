@@ -7,7 +7,7 @@
 //
 
 #import "ContentTableViewController.h"
-
+#import <MJRefresh.h>
 @interface ContentTableViewController ()<SDCycleScrollViewDelegate>
 
 @end
@@ -41,8 +41,22 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[MainTableViewCell class] forCellReuseIdentifier:@"cell"];
 
+    //下拉刷新
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        //刷新
+        [self performSelector:@selector(getData) withObject:nil afterDelay:1];
+    }];
+
+    
 }
 
+
+/**假刷新**/
+-(void)getData
+{
+    [self.tableView.mj_header endRefreshing];
+    [self.delegate contentShouldRefrshWithChannelId:_channelId];
+}
 
 #pragma mark== 设置表头
 -(SDCycleScrollView *)setTableHeaderView

@@ -19,7 +19,10 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <WXApi.h>
 #import <WeiboSDK.h>
+//初始化的import参数注意要链接原生新浪微博SDK。
 
+//APP KEY 11531540a539a
+//App Secret c1bdab50e2b7ba0290ef30e0ccef9de4
 @interface AppDelegate ()
 
 @end
@@ -42,7 +45,31 @@
 /**分享ShareSDK*/
 -(void)shareSDK
 {
+    [ShareSDK registerApp:@"11531540a539a" activePlatforms:@[@(SSDKPlatformTypeSinaWeibo),@(SSDKPlatformTypeCopy),@(SSDKPlatformTypeMail),@(SSDKPlatformTypeSMS)] onImport:^(SSDKPlatformType platformType) {
+        switch (platformType) {
+                        case SSDKPlatformTypeSinaWeibo:
+                [ShareSDKConnector connectWeibo:[WeiboSDK class]];
+                break;
+                
+            default:
+                break;
+        }
+    } onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
+        switch (platformType) {
+            case SSDKPlatformTypeSinaWeibo:
+                //app key 3869885678
+                //App Secret：df6f3306721ae1d0daf78c07a7bd6aa6
+                //授权回调页：https://api.weibo.com/oauth2/default.html
+                //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
+                [appInfo SSDKSetupSinaWeiboByAppKey:@"3869885678" appSecret:@"df6f3306721ae1d0daf78c07a7bd6aa6" redirectUri:@"https://api.weibo.com/oauth2/default.html" authType:SSDKAuthTypeBoth];
 
+                break;
+                
+            default:
+                break;
+        }
+    }];
+    
 }
 
 

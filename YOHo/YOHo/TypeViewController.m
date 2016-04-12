@@ -17,6 +17,9 @@
 #import "SettingViewController.h"
 #import "ScanCodeViewController.h"
 #import "SearchViewController.h"
+#import "JudgeLoginClass.h"
+#import <UIButton+WebCache.h>
+#import <ShareSDKExtension/SSEThirdPartyLoginHelper.h>
 @interface TypeViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -26,9 +29,13 @@
     NSMutableDictionary *chanDic;
     NSArray *textArray;
     NSArray *channelArray;
+    BOOL isLogin;
+    NSString *titleString;
+    CustomizationNavBar *navBar;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isLogin = NO;
     textArray = @[@"NEW 最新",@"BOYS 男生资讯",@"GIRLS 女生资讯",@"VIDEO 视频",@"FEATURE 专题",@"MAGAZINE 杂志",@"WALLPAPER 壁纸"];
     channelArray = @[@"最新",@"男生资讯",@"女生资讯",@"视频",@"专题",@"杂志",@"壁纸"];
 //    chanDic = [[NSMutableDictionary alloc]init];
@@ -40,35 +47,43 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    isLogin = [JudgeLoginClass isLogin];
     [self initUI];
 }
 
 /**初试化UI*/
 -(void)initUI
 {
-   BOOL isLogin = [JudgeLoginClass isLogin];
     //创建假导航
 //    UIView *navView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 64)];
 //    navView.backgroundColor = [UIColor redColor];
 //    [self.view addSubview:navView];
-    NSString *titleString;
-    if (isLogin) {
-    titleString =@"";
-    }else{
-    titleString = @"您还未登陆账号，请点击登录";
     
-    }
     
-    CustomizationNavBar *navBar = [[CustomizationNavBar alloc]init];
+    navBar = [[CustomizationNavBar alloc]init];
     
     navBar.leftButton = [[UIButton alloc]init];
     [navBar.leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+   
+    
+    
+    if (isLogin) {
+        NSUserDefaults *us = [NSUserDefaults standardUserDefaults];
+        NSString *nickname = [us objectForKey:@"nickname"];
+        NSString *icon = [us objectForKey:@"icon"];
+       //        [navBar.leftButton setImage:image forState:UIControlStateNormal];
+        [navBar.leftButton sd_setImageWithURL:[NSURL URLWithString:icon] forState:UIControlStateNormal];
+        titleString =nickname;
+    }else{
+        titleString = @"您还未登陆账号，请点击登录";
+        [navBar.leftButton setImage:[UIImage imageNamed:@"userPic"] forState:UIControlStateNormal];
+    }
+
     [navBar.leftButton setTitle:titleString forState:UIControlStateNormal];
-    [navBar.leftButton setImage:[UIImage imageNamed:@"userPic"] forState:UIControlStateNormal];
     [navBar.leftButton addTarget:self action:@selector(leftButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     navBar.enableContentViewTap = YES;
     [self.view addSubview:navBar];
-    
+
     
     UITableView *table = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64) style:UITableViewStylePlain];
     table.rowHeight = 50;
@@ -184,13 +199,45 @@
 -(void)leftButtonClick:(UIButton *)button
 {
     NSLog(@"登录");
-    
-    LoginViewController *login = [[LoginViewController alloc]init];
+    if (isLogin) {
+        //
+        UIAlertController *alter = [UIAlertController alertControllerWithTitle:@"确定要退出YOHO！" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertAction *queDing = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //退出
+            SSEBaseUser *user = [SSEThirdPartyLoginHelper currentUser];
+            [SSEThirdPartyLoginHelper logout:user];
+            
+            
+                NSUserDefaults *us = [NSUserDefaults standardUserDefaults];
+                [us removeObjectForKey:@"token"];
+                [us removeObjectForKey:@"uid"];
+                [us removeObjectForKey:@"icon"];
+                [us removeObjectForKey:@"nickname"];
+                [us synchronize];
+                titleString = @"您还未登陆账号，请点击登录";
+                [navBar.leftButton setImage:[UIImage imageNamed:@"userPic"] forState:UIControlStateNormal];
+                [navBar.leftButton setTitle:titleString forState:UIControlStateNormal];
+                isLogin = NO;
 
-    [self presentViewController:login animated:YES completion:nil];
+            
+        }];
+        [alter addAction:cancel];
+        [alter addAction:queDing];
+        [self presentViewController:alter animated:YES completion:nil];
+        
+    }else{
+        LoginViewController *login = [[LoginViewController alloc]init];
+        
+        [self presentViewController:login animated:YES completion:nil];
+    }
+    
     
 //    [self backMianWitnChannel:@"最新"];
 }
+
+#pragma mark == 退出第三方
+
 
 
 #pragma mark == tableViewDelegate

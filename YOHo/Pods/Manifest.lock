@@ -43,6 +43,7 @@ PODS:
   - ShareSDK3/ShareSDKPlatforms/SinaWeibo (3.2.5)
   - ShareSDK3/ShareSDKPlatforms/WeChat (3.2.5)
   - ShareSDK3/ShareSDKUI (3.2.5)
+  - SSZipArchive (1.1)
   - YLGIFImage (0.11)
   - ZXingObjC (3.1.0):
     - ZXingObjC/All (= 3.1.0)
@@ -62,6 +63,7 @@ DEPENDENCIES:
   - ShareSDK3/ShareSDKPlatforms/SinaWeibo
   - ShareSDK3/ShareSDKPlatforms/WeChat
   - ShareSDK3/ShareSDKUI
+  - SSZipArchive (~> 1.1)
   - YLGIFImage (~> 0.11)
 
 SPEC CHECKSUMS:
@@ -76,6 +78,7 @@ SPEC CHECKSUMS:
   SDCycleScrollView: ae016cb4cc4036523917f146ede6f7b11d408f6a
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   ShareSDK3: ccdd8ec971044703e7722e19c2f3b38fb03775e2
+  SSZipArchive: de3d215ab73f87db627f81f2ce24f1731e3886c3
   YLGIFImage: c0ae132fe80e5282b2762a97d14e23ba71a748ae
   ZXingObjC: bf15b3814f7a105b6d99f47da2333c93a063650a
 

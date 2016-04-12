@@ -23,6 +23,7 @@
 #import "WallPapersViewController.h"
 #import "SingWallPaperViewController.h"
 #import "ContentdetailViewController.h"
+#import "ReadingMagazineViewController.h"
 @interface MainViewController ()<SDCycleScrollViewDelegate,UIScrollViewDelegate,ContentTableViewControllerDelegate,MagazineViewControllerDelegate,WallPapersViewControllerDelegate>
 @property(nonatomic,strong)ContentTableViewController *contentOther;
 @property(nonatomic,strong)UIView *topButtonView;
@@ -299,6 +300,7 @@
     [RequestVideo getVideoBannersWithChannelId:channId Success:^(NSArray *videoBanners) {
         if ([_selectChannel isEqualToString:@"最新"]||[_selectChannel isEqualToString:@"男生资讯"]||[_selectChannel isEqualToString:@"女生资讯"]) {
             ContentTableViewController *con = contentVCs[tag];
+            con.channelId = channId;
             con.banners = videoBanners;
         }
         if ([_selectChannel isEqualToString:@"视频"]||[_selectChannel isEqualToString:@"专题"]) {
@@ -329,11 +331,13 @@
         
         if ([_selectChannel isEqualToString:@"最新"]||[_selectChannel isEqualToString:@"男生资讯"]||[_selectChannel isEqualToString:@"女生资讯"]) {
             ContentTableViewController *con = contentVCs[tag];
+            con.channelId = channId;
             con.contents = videoSummeries;
             
         }
         
         if ([_selectChannel isEqualToString:@"视频"]||[_selectChannel isEqualToString:@"专题"]) {
+            self.contentOther.channelId = channId;
             self.contentOther.contents = videoSummeries;
         }
     }];
@@ -583,12 +587,22 @@
     
 }
 
+-(void)contentShouldRefrshWithChannelId:(NSString *)chanId
+{
+    [self getBannerDataWithChannelId:chanId];
+    [self getContentDataWithChannelId:chanId];
+}
+
 #pragma mark==MagazineViewControllerDelegate
--(void)magazineViewCGoToReadingMagazineWithSavePath:(NSString *)savePath
+-(void)magazineViewCGoToReadingMagazineWithSavePath:(MagazineData *)aMagazine
 {
 
     
-    NSLog(@"前往阅读页-====%@",savePath);
+//    NSLog(@"前往阅读页-====%@",aMagazine);
+
+    ReadingMagazineViewController *reading = [[ReadingMagazineViewController alloc]init];
+    reading.magazine = aMagazine;
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:reading] animated:YES];
     
 }
 

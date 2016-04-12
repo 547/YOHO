@@ -16,4 +16,6 @@
 +(void)getContentDetailWithCIdOrLinkForApp1:(NSString *)cId Success:(void(^)(ContentENSObject *detail))success;
 /**获取表情*/
 +(void)getExpressionWithCIdOrLink:(NSString *)cId app:(NSString *)app Success:(void(^)(CommentExpression *expre))success;
+/**获取相关推荐==*/
++(void)getRecommendSumWithCIdOrLink:(NSString *)cId app:(NSString *)app Success:(void(^)(RecommendSum *recommend))success;
 @end
